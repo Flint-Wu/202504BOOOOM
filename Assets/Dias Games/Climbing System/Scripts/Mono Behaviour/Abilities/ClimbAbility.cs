@@ -175,6 +175,9 @@ namespace DiasGames.Abilities
             DoTween(GetCharacterPositionOnLedge(), GetCharacterRotationOnLedge(), startClimbMatchTime, _currentCollider);
 
             SetAnimationState("Climb.Start Climb");
+            PlayerPhysicalStrength.Instance.ReducePhysicalStrength(PlayerPhysicalStrength.Instance.JumpStrength);
+            QTEUI.Instance.StartClick();
+
 
             _timeWithoutLedge = 0;
         }
@@ -190,6 +193,7 @@ namespace DiasGames.Abilities
                 if (_animationStateToWait.Contains("Drop"))
                 {
                     _mover.SetVelocity(Vector3.down * 3f);
+                    //Debug.Log("Drop");
                 }
 
                 if (_animationStateToWait.Contains("Jump"))
@@ -783,12 +787,15 @@ namespace DiasGames.Abilities
                 if(Mathf.Approximately(_localCoordMove.x, 0) || _localCoordMove.y > 0.5f)
                     ClimbUp();
 
+
                 if (_localCoordMove != Vector2.zero)
                     Jump();
+
             }
 
             if (_action.drop)
                 Drop();
+                //Debug.Log("Drop");
         }
 
         /// <summary>

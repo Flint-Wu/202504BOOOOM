@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4059,7 +4059,6 @@ MonoBehaviour:
   RunStrength: 5
   ClimbIdleStrength: 2
   StandRecoverStrength: 5
-  animator: {fileID: 0}
 --- !u!114 &232230084 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6420174360162918680, guid: 0eb00850aee8c2f4897ffadd53c40fb4, type: 3}
@@ -19347,10 +19346,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityPriority: 0
-  <IsAbilityRunning>k__BackingField: 0
-  _animator: {fileID: 0}
-  <StartTime>k__BackingField: 0
-  <StopTime>k__BackingField: 0
   BaseBar: {fileID: 1352330964}
   CorretBar: {fileID: 2042521777}
   Playerpoint: {fileID: 973036791}
