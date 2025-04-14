@@ -68,8 +68,9 @@ namespace DiasGames.Abilities
             // }
             if (isClick)
             {
-                _clicktime += Time.deltaTime;
                 WaitForJudge();
+                _clicktime += Time.deltaTime;
+
             }
         }
 
@@ -83,13 +84,19 @@ namespace DiasGames.Abilities
         }
         public void StartClick()
         {
+            if(_clicktime>0.1f&&_clicktime<PlayerPointPeiod)
+            {
+                //如果玩家还没有判断过（没触发QTE就继续跳跃），就直接触发失败
+                TriggerFail();
+            }
             isClick = true;
             isPlayerJudge = false;
-            _clicktime =0f;
+            
+           
         }
         void WaitForJudge()
         {
-            PlayerJudge();
+            
             if (isPlayerJudge)
             {
                 //如果玩家已经判断过了,就不再执行了
@@ -97,20 +104,23 @@ namespace DiasGames.Abilities
             }
             //指针的x坐标从QTEBaseBarWidth/2到-QTEBaseBarWidth/2之间移动
             float Speed = QTEBaseBarWidth / PlayerPointPeiod;
-            Playerpoint.rectTransform.anchoredPosition = new Vector2(QTEBaseBarWidth - Speed * _clicktime, Playerpoint.rectTransform.anchoredPosition.y);
-
+            Playerpoint.rectTransform.anchoredPosition = new Vector2(Speed * _clicktime, Playerpoint.rectTransform.anchoredPosition.y);
+            PlayerJudge();
         }
         void PlayerJudge()
         {
             //如果玩家按下E键,新输入系统的Interact
             //Debug.Log(_action);
             //如果Playerpoint.rectTransform.anchoredPosition.x小于0,
-            if (Playerpoint.rectTransform.anchoredPosition.x < 0)
+            if (Playerpoint.rectTransform.anchoredPosition.x > QTEBaseBarWidth)
             {
                 TriggerFail();
             }
+
+
             if (_action.interact)
             {
+
                 //如果指针在正确范围内
                 if (Playerpoint.rectTransform.anchoredPosition.x > QTECorretBarWidthRange[0] && Playerpoint.rectTransform.anchoredPosition.x < QTECorretBarWidthRange[1])
                 {
@@ -132,7 +142,7 @@ namespace DiasGames.Abilities
             CorretBar.DOColor(Color.green, 0.2f).SetLoops(2, LoopType.Yoyo);
             isPlayerJudge = true;  
             isClick = false;       
-
+            _clicktime =0f;
         }
         void TriggerFail()
         {
@@ -140,7 +150,8 @@ namespace DiasGames.Abilities
             Debug.Log("QTE失败");
             CorretBar.DOColor(Color.red, 0.2f).SetLoops(2, LoopType.Yoyo);
             isPlayerJudge = true;    
-            isClick = false;   
+            isClick = false;
+            _clicktime =0f;   
             PlayerPhysicalStrength.Instance.FailedOnQTE();  
         }
 
