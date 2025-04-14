@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DiasGames.Abilities;
 using UnityEngine;
 
 namespace DiasGames.Climbing
@@ -217,11 +218,15 @@ namespace DiasGames.Climbing
                 if (horizontal > 0)
                 {
                     context.animator.CrossFadeInFixedTime(hopRightState, 0.1f);
+                    PlayerPhysicalStrength.Instance.ReducePhysicalStrength(PlayerPhysicalStrength.Instance.JumpStrength);
+                    QTEUI.Instance.StartClick();
                     SetRightHandIK(context);
                 }
                 else
                 {
                     context.animator.CrossFadeInFixedTime(hopLeftState, 0.1f);
+                    PlayerPhysicalStrength.Instance.ReducePhysicalStrength(PlayerPhysicalStrength.Instance.JumpStrength);
+                    QTEUI.Instance.StartClick();
                     SetLefttHandIK(context);
                 }
 
@@ -232,12 +237,16 @@ namespace DiasGames.Climbing
                 if (vertical > 0)
                 {
                     context.animator.CrossFadeInFixedTime(hopUpState, 0.1f);
+                    PlayerPhysicalStrength.Instance.ReducePhysicalStrength(PlayerPhysicalStrength.Instance.JumpStrength);
+                    QTEUI.Instance.StartClick();
                     _targetDuration = HopUpDuration;
                     //SetRightHandIK(context);
                 }
                 else
                 {
                     context.animator.CrossFadeInFixedTime(hopDropState, 0.1f);
+                    PlayerPhysicalStrength.Instance.ReducePhysicalStrength(PlayerPhysicalStrength.Instance.JumpStrength);
+                    QTEUI.Instance.StartClick();
                     _targetDuration = HopDropDuration;
                     SetLefttHandIK(context);
                 }
@@ -445,8 +454,8 @@ namespace DiasGames.Climbing
         public override void ClimbUp(ClimbStateContext context)
         {
             if (_hasJump && Time.time - _startTime < horizontalHopDuration) return;
-
-            context.SetState(context.ClimbUp);
+            //Debug.Log("Climb Up State");
+             context.SetState(context.ClimbUp);
         }
 
         public override void Drop(ClimbStateContext context)
@@ -463,8 +472,11 @@ namespace DiasGames.Climbing
         public override void Jump(ClimbStateContext context)
         {
             if (_hasJump && Time.time - _startTime < _targetDuration + 0.1f) return;
+            //Debug.Log("Climb Up State");
 
             EnterState(context);
+            //Debug.Log("jump State");
+
         }
     }
 }
