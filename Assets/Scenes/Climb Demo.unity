@@ -4055,10 +4055,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxPhysicalStrength: 100
   currentPhysicalStrength: 100
-  JumpStrength: 20
-  RunStrength: 10
-  ClimbIdleStrength: 5
+  JumpStrength: 10
+  RunStrength: 5
+  ClimbIdleStrength: 2
   StandRecoverStrength: 5
+--- !u!114 &232230084 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6420174360162918680, guid: 0eb00850aee8c2f4897ffadd53c40fb4, type: 3}
+  m_PrefabInstance: {fileID: 491476088844994488}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232230059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dc4296cddaf58e4fba6e97a9d910125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &233083140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13634,9 +13645,9 @@ RectTransform:
   m_Father: {fileID: 1352330962}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -390, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 796, y: -0}
   m_SizeDelta: {x: 10, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &973036791
@@ -19334,6 +19345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b8815ae0edeec342857f96a6c603267, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityPriority: 0
   BaseBar: {fileID: 1352330964}
   CorretBar: {fileID: 2042521777}
   Playerpoint: {fileID: 973036791}
@@ -19343,7 +19355,11 @@ MonoBehaviour:
   QTECorretBarWidthRange:
   - 0
   - 0
+  scheduler: {fileID: 232230084}
   PlayerPointPeiod: 3
+  isPlayerJudge: 0
+  _clicktime: 0
+  isClick: 0
 --- !u!1001 &1359472202
 PrefabInstance:
   m_ObjectHideFlags: 0
