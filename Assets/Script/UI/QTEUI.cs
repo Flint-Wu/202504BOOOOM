@@ -91,11 +91,10 @@ namespace DiasGames.Abilities
             {
                 //如果玩家还没有判断过（没触发QTE就继续跳跃），就直接触发失败
                 TriggerFail();
+                return;
             }
             isClick = true;
             isPlayerJudge = false;
-            
-           
         }
         void WaitForJudge()
         {

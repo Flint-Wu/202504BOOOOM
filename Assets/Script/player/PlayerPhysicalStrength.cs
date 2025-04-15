@@ -81,12 +81,14 @@ public class PlayerPhysicalStrength : MonoBehaviour
         {
             //如果当前状态机的变量Motion Speed为0
             GetComponent<ClimbAbility>().OnStopAbility();
+            GetComponent<ClimbAbility>().Drop();
         }
     }
     public void FailedOnQTE()
     {
         //如果当前状态机的变量Motion Speed为0
         GetComponent<ClimbAbility>().OnStopAbility();
+        GetComponent<ClimbAbility>().Drop();
     }
 
 }
