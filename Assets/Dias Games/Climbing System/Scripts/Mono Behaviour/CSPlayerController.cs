@@ -152,6 +152,7 @@ namespace DiasGames.Controller
             _scheduler.characterActions.interact = Interact;
             _scheduler.characterActions.crawl = Crawl;
             _scheduler.characterActions.drop = Drop;
+            _scheduler.characterActions.fire = Fire;
 
             // weapon
             _scheduler.characterActions.zoom = Zoom;
@@ -170,6 +171,7 @@ namespace DiasGames.Controller
         public bool Crawl = false;
         public bool Zoom = false;
         public bool Drop = false;
+        public bool Fire = false;
 
         public void ResetActions()
         {
@@ -178,6 +180,7 @@ namespace DiasGames.Controller
             Crawl = false;
             Interact = false;
             Drop = false;
+            Fire = false;
         }
 
         public void LegacyInput()
@@ -198,6 +201,7 @@ namespace DiasGames.Controller
 
             // special actions for climbing
             Drop = Input.GetButtonDown("Drop");
+            Fire = Input.GetButtonDown("Fire");
 
             /*
             // special actions for shooter
@@ -247,6 +251,10 @@ namespace DiasGames.Controller
         public void OnDrop(bool value)
         {
             Drop = value;
+        }
+        public void OnFire(bool value)
+        {
+            Fire = value;
         }
 
 #if ENABLE_INPUT_SYSTEM
@@ -299,6 +307,10 @@ namespace DiasGames.Controller
         private void OnDrop(InputValue value)
         {
             OnDrop(value.isPressed);
+        }
+        private void OnFire(InputValue value)
+        {
+            OnFire(value.isPressed);
         }
 
 #endif

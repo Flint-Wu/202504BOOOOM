@@ -28,6 +28,9 @@ namespace DiasGames.Abilities
         public bool isPlayerJudge = false;
         public float _clicktime = 0f;
         public bool isClick = false;
+        //光标迟滞停止的时间
+        [Header("光标迟滞停止的时间,模拟结冰的效果")]
+        public float decayTime = 0.1f;
 
         void Awake()
         {
@@ -120,18 +123,33 @@ namespace DiasGames.Abilities
 
             if (_action.interact)
             {
+                //Dotween实现playerpoint迟滞停止的效果
+                isPlayerJudge = true; 
+                float Speed = QTEBaseBarWidth / PlayerPointPeiod;
+                //指针变为蓝模拟结冰的效果
+                if(decayTime!=0)
+                {
+                    Playerpoint.DOColor(Color.blue, decayTime).SetLoops(2, LoopType.Yoyo);
+                }
 
-                //如果指针在正确范围内
-                if (Playerpoint.rectTransform.anchoredPosition.x > QTECorretBarWidthRange[0] && Playerpoint.rectTransform.anchoredPosition.x < QTECorretBarWidthRange[1])
-                {
-                    TriggerSucess();
-                    //执行QTE成功，corretbar闪烁为绿色（Dotween）
-                }
-                else
-                {
-                    TriggerFail();    
-                    //执行QTE失败的逻辑
-                }
+                Playerpoint.rectTransform.DOLocalMoveX(Playerpoint.rectTransform.anchoredPosition.x+Speed * decayTime, decayTime).SetEase(Ease.OutSine)
+                    .SetEase(Ease.OutSine)
+                    .OnComplete(() => 
+                    {
+                        // 在动画完成后获取最终位置进行判断
+                        float currentX = Playerpoint.rectTransform.anchoredPosition.x;
+                        
+                        if (currentX > QTECorretBarWidthRange[0] && currentX < QTECorretBarWidthRange[1])
+                        {
+                            TriggerSucess();
+                            // 可以在这里添加绿色闪烁效果（如DOTween颜色动画）
+                        }
+                        else
+                        {
+                            TriggerFail();
+                            // 可以在这里添加红色闪烁效果或其他失败反馈
+                        }
+                    });
             }
         }
         
@@ -140,7 +158,6 @@ namespace DiasGames.Abilities
             //执行QTE成功的逻辑
             Debug.Log("QTE成功");
             CorretBar.DOColor(Color.green, 0.2f).SetLoops(2, LoopType.Yoyo);
-            isPlayerJudge = true;  
             isClick = false;       
             _clicktime =0f;
         }
@@ -149,7 +166,6 @@ namespace DiasGames.Abilities
             //执行QTE失败的逻辑
             Debug.Log("QTE失败");
             CorretBar.DOColor(Color.red, 0.2f).SetLoops(2, LoopType.Yoyo);
-            isPlayerJudge = true;    
             isClick = false;
             _clicktime =0f;   
             PlayerPhysicalStrength.Instance.FailedOnQTE();  
