@@ -3,6 +3,7 @@ using UnityEngine;
 using DiasGames.Components;
 using DiasGames.Climbing;
 using DiasGames.Debugging;
+using UnityEngine.Rendering;
 
 namespace DiasGames.Abilities
 {
@@ -44,6 +45,9 @@ namespace DiasGames.Abilities
 
         [Header("Debug")]
         [SerializeField] private Color debugColor;
+      
+      
+      
 
         // public getters
         public float CapsuleCastHeight { get { return capsuleHeight; } }

@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Rendering;
+
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -31,6 +33,9 @@ namespace DiasGames.Controller
         public Vector2 CameraTurnSpeed = new Vector2(300.0f, 200.0f);
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
+        [Header("Water System")]
+      
+
 
         // cinemachine
         private float _cinemachineTargetYaw;
@@ -39,7 +44,7 @@ namespace DiasGames.Controller
         // for shooter ui
         public float CurrentRecoil { get; private set; } = 0f;
         private float recoilReturnVel = 0;
-
+       
         private void Awake()
         {
             _scheduler = GetComponent<AbilityScheduler>();
