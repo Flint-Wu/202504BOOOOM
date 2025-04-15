@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class WaterSystemTest : MonoBehaviour
 {
     
-    
         [Header("组件引用")]
         [SerializeField] private PlayerWaterState waterState;
         [SerializeField] private Slider waterSlider;
