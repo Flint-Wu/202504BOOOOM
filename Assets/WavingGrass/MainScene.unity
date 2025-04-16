@@ -475,6 +475,12 @@ MonoBehaviour:
   grassAreaWidth: 10.5
   grassAreaHeight: 9.5
   interactionTag: Player
+  windSpeed:
+  - 5
+  - 5
+  - 5
+  - 5
+  grassMaterial: {fileID: 2100000, guid: 5f701b1428c275f48a446ea61424a8cc, type: 2}
 --- !u!1 &1815873662
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ TagManager:
   - Stone
   - Wood
   - Sand
+  - Grass
   layers:
   - Default
   - TransparentFX
