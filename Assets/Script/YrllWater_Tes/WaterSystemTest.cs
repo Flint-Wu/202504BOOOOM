@@ -29,8 +29,6 @@ public class WaterSystemTest : MonoBehaviour
         // 初始化UI
         UpdateWaterUI(waterState.CurrentWater / waterState.MaxWater);
        
-        gameOverPanel.SetActive(false);
-
         // 绑定事件
         waterState.OnWaterChanged.AddListener(UpdateWaterUI);
           waterState.OnWaterDepleted.AddListener(ShowGameOver);
@@ -49,6 +47,8 @@ public class WaterSystemTest : MonoBehaviour
         {
             waterState.ResetWater();
         });
+
+        gameOverPanel.SetActive(false);
     }
     
 

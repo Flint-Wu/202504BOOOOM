@@ -31,6 +31,11 @@ namespace DiasGames.Abilities
         //光标迟滞停止的时间
         [Header("光标迟滞停止的时间,模拟结冰的效果")]
         public float decayTime = 0.1f;
+        
+        [Header("玩家的水量状态")]
+        public PlayerWaterState playerWaterState;
+        [Header("玩家QTE失败水量流失量")]
+        public int lossWater = 10;
 
         void Awake()
         {
@@ -167,7 +172,9 @@ namespace DiasGames.Abilities
             CorretBar.DOColor(Color.red, 0.2f).SetLoops(2, LoopType.Yoyo);
             isClick = false;
             _clicktime =0f;   
-            PlayerPhysicalStrength.Instance.FailedOnQTE();  
+            PlayerPhysicalStrength.Instance.FailedOnQTE();
+            playerWaterState.ChangeWater();
+            Debug.Log(playerWaterState.CurrentWater);
         }
 
     }
