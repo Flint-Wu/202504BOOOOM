@@ -425,7 +425,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 423337741}
-  - component: {fileID: 423337743}
   - component: {fileID: 423337742}
   m_Layer: 0
   m_Name: CodeTrans
@@ -461,26 +460,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4e1d5be15facd3488776bdae9455d6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Text: {fileID: 1828363598}
-  inputtext: 
---- !u!114 &423337743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 423337740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04490502d6677a547a698f3af650f6cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ID: 
-  IDCountxt: 
-  PushID: 
-  IDCount: 0
-  TransTool: {fileID: 423337742}
-  IDInput: {fileID: 1828363598}
+  codetext: {fileID: 706318681}
+  code: 
+  inputText: {fileID: 1828363598}
 --- !u!1 &475344377
 GameObject:
   m_ObjectHideFlags: 0
@@ -869,9 +851,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: '2323
-
-'
+  m_Text: 11111
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -1774,9 +1754,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 423337743}
-        m_TargetAssemblyTypeName: IDMade, Assembly-CSharp
-        m_MethodName: IDTrans
+      - m_Target: {fileID: 423337742}
+        m_TargetAssemblyTypeName: CodeTrans, Assembly-CSharp
+        m_MethodName: StrTransCode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2055,7 +2035,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 423337742}
         m_TargetAssemblyTypeName: CodeTrans, Assembly-CSharp
         m_MethodName: BakTransCode
         m_Mode: 1
@@ -2565,9 +2545,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '2323
-
-'
+  m_Text: 11111
 --- !u!222 &1828363599
 CanvasRenderer:
   m_ObjectHideFlags: 0
