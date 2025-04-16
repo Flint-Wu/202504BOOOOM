@@ -152,8 +152,10 @@ namespace DiasGames.Controller
             _scheduler.characterActions.interact = Interact;
             _scheduler.characterActions.crawl = Crawl;
 
+
             // weapon
             _scheduler.characterActions.zoom = Zoom;
+            _scheduler.characterActions.fire = Fire;
         }
 
 #region Input receiver
@@ -168,6 +170,7 @@ namespace DiasGames.Controller
         public bool Interact = false;
         public bool Crawl = false;
         public bool Zoom = false;
+        public bool Fire = false;
 
         public void ResetActions()
         {
@@ -192,6 +195,7 @@ namespace DiasGames.Controller
             Crawl = Input.GetButtonDown("Crawl");
             Zoom = Input.GetButtonDown("Zoom");
             Interact = Input.GetButtonDown("Interact");
+            Fire = Input.GetButton("Fire");
 
             /*
             // special actions for climbing
@@ -241,6 +245,10 @@ namespace DiasGames.Controller
         {
             Interact = value;
         }
+        public void OnFire(bool value)
+        {
+            Fire = value;
+        }
 
 #if ENABLE_INPUT_SYSTEM
         private void OnMove(InputValue value)
@@ -288,6 +296,10 @@ namespace DiasGames.Controller
         private void OnInteract(InputValue value)
         {
             OnInteract(value.isPressed);
+        }
+        private void OnFire(InputValue value)
+        {
+            OnFire(value.isPressed);
         }
 
 #endif
