@@ -1,40 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Text;
-using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Windows;
 
 public class CodeTrans : MonoBehaviour
 {
-    public Text codetext;
-    public Text inputText;
-
-    public string code;
-
-    public string[] parts;
-    public char[]  chars;
-    public string[] rightCode;
+    public Text Text;
+    public string inputtext;
 
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (inputText.text != null)
-        {
-            code = inputText.text;
-        }
+        inputtext = Text.text;
     }
 
-    public void StrTransCode()
+    public string StrTransCode(string codetext)
     {
-        chars = inputText.text.ToCharArray();
-        parts = new string[chars.Length];
+        char[] chars = codetext.ToCharArray();
+        string[] parts = new string[chars.Length];
+        string[] rightCode;
 
         for (int i = 0; i < chars.Length; i++)
         {
@@ -113,17 +100,21 @@ public class CodeTrans : MonoBehaviour
         {
             sb.Append(rightCode[i]);
         }
-        if (codetext != null)
-        {
-            codetext.text = sb.ToString();
-        }
+
+        string codetxt = sb.ToString(); 
+
+        sb = null;chars = null;parts = null;rightCode = null;
+
+        return codetxt;
+
     }
     
     
-    public void BakTransCode()
+    public string BakTransCode(string codetext)
     {
-        chars = inputText.text.ToCharArray();
-        parts = new string[chars.Length];
+        char[] chars = codetext.ToCharArray();
+        string[] parts = new string[chars.Length];
+        string[] rightCode;
 
         for (int i = 0; i < chars.Length; i++)
         {
@@ -202,9 +193,9 @@ public class CodeTrans : MonoBehaviour
         {
             sb.Append(rightCode[i]);
         }
-        if (codetext != null)
-        {
-            codetext.text = sb.ToString();
-        }
+
+        string codetxt = sb.ToString();
+
+        return codetxt;
     }
 }
