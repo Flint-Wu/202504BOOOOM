@@ -32,23 +32,23 @@ public class WaterSystemTest : MonoBehaviour
         // 绑定事件
         waterState.OnWaterChanged.AddListener(UpdateWaterUI);
           waterState.OnWaterDepleted.AddListener(ShowGameOver);
-        QTEbutton.onClick.AddListener(() =>
-        {
-            Debug.Log("按钮被点击！", this);
-            waterState.ChangeWater(); // 调用默认流失量
+        // QTEbutton.onClick.AddListener(() =>
+        // {
+        //     Debug.Log("按钮被点击！", this);
+        //     waterState.ChangeWater(); // 调用默认流失量
 
-        });
-        WaterBottle.onClick.AddListener(() =>
-        {
-            waterState.ChangeWater(20f); // 增加20单位
+        // });
+        // WaterBottle.onClick.AddListener(() =>
+        // {
+        //     waterState.ChangeWater(20f); // 增加20单位
 
-        });
-        RestWater.onClick.AddListener(() =>
-        {
-            waterState.ResetWater();
-        });
+        // });
+        // RestWater.onClick.AddListener(() =>
+        // {
+        //     waterState.ResetWater();
+        // });
 
-        gameOverPanel.SetActive(false);
+        // gameOverPanel.SetActive(false);
     }
     
 

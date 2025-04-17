@@ -2,6 +2,7 @@
 // Had to change many details to make it work. This asset should help people to save their time
 // for debugging and experimenting. I also added some improvements like using an emission color.
 // This needs a ramp and a gradient texture to work.
+//进一步修正：https://zhuanlan.zhihu.com/p/592938734
 Shader "Custom/GrassWind" {
 	Properties {
 		_RampTex("Ramp", 2D) = "white" {} // 水平渐变纹理，用于光照

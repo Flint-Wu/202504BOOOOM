@@ -81,6 +81,10 @@ namespace DiasGames.Climbing
 
             if (_hasJump = FoundBestLedge(context))
             {
+                //如果玩家正在点击QTEUI,按空格不触发攀爬动作
+                if(QTEUI.Instance.isClicking)return;
+
+
                 SetAnimation(context);
                 context.climb.StartCoroutine(ResetIK(context));
 
@@ -212,6 +216,10 @@ namespace DiasGames.Climbing
 
                 return;
             }
+
+
+            //如果玩家正在点击QTEUI,按空格不触发攀爬动作
+            
 
             if (Mathf.Abs(horizontal) > 0.3f)
             {

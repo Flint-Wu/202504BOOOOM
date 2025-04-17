@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shape_1
   m_EditorClassIdentifier: 
   seed: 0
-  numDivisionsA: 5
+  numDivisionsA: 8
   numDivisionsB: 5
   numDivisionsC: 15
   persistence: 0.66
