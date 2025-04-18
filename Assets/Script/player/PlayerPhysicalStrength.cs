@@ -21,6 +21,7 @@ public class PlayerPhysicalStrength : MonoBehaviour
     [Header("平地站立时每秒恢复的体力")]
     public float StandRecoverStrength = 5f;
     private Animator animator;
+    public bool isRecovering = true;   
     void Start()
     {
         currentPhysicalStrength = maxPhysicalStrength;
@@ -41,8 +42,18 @@ public class PlayerPhysicalStrength : MonoBehaviour
             currentPhysicalStrength = 0;
         }
     }
+    public void stopRecovering()
+    {
+        isRecovering = false;
+    }
+    public void startRecovering()
+    {
+        isRecovering = true;
+    }
     public void RecoverPhysicalStrength(float amount)
     {
+        //在风吹区域内，体力恢复为0
+        if(!isRecovering) return;
         currentPhysicalStrength += amount;
         if (currentPhysicalStrength > maxPhysicalStrength)
         {
