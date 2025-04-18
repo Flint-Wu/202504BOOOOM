@@ -21,7 +21,7 @@ public class PlayerPhysicalStrength : MonoBehaviour
     [Header("平地站立时每秒恢复的体力")]
     public float StandRecoverStrength = 5f;
     private Animator animator;
-    public bool isRecovering = true;   
+    public bool isRecovering = false;   
     void Start()
     {
         currentPhysicalStrength = maxPhysicalStrength;
@@ -33,6 +33,7 @@ public class PlayerPhysicalStrength : MonoBehaviour
     {
         ActionChangePhysicalStrength();
         ExhaustPhysicalStrength();
+        RecoverPhysicalStrength(StandRecoverStrength * Time.deltaTime);
     }
     public void ReducePhysicalStrength(float amount)
     {
@@ -69,11 +70,11 @@ public class PlayerPhysicalStrength : MonoBehaviour
             //如果当前状态机的变量Motion Speed为0
             if (animator.GetFloat("Motion Speed") == 0)
             {
-                RecoverPhysicalStrength(StandRecoverStrength * Time.deltaTime);
+                //startRecovering();
             }
             else
             {
-                ReducePhysicalStrength(RunStrength * Time.deltaTime);
+                //ReducePhysicalStrength(RunStrength * Time.deltaTime);
             }
         }
         //如果当前状态机为Climb的状态 且 动画为idle

@@ -52,7 +52,7 @@ public class WindRegion : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.GetComponent<PlayerPhysicalStrength>().currentPhysicalStrength = PlayerEnterPhysicalStrength;
-            other.GetComponent<PlayerPhysicalStrength>().startRecovering();
+            //other.GetComponent<PlayerPhysicalStrength>().startRecovering();
         }
     }
 

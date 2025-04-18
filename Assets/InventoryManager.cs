@@ -19,18 +19,26 @@ public class InventoryManager : MonoBehaviour
     {
         // 初始化钉子数量
         currentNailCount = maxNailCout;
+        nailCountText.text = currentNailCount.ToString(); // 更新UI文本
 
     }
     public void CostNail()
     {
+
+        currentNailCount--;
+        nailCountText.text = currentNailCount.ToString(); // 更新UI文本
+
+    }
+    public bool CanBuild()
+    {
+        // 检查是否可以建造
         if (currentNailCount > 0)
         {
-            currentNailCount--;
-            Debug.Log("钉子数量减少，当前数量：" + currentNailCount);
+            return true;
         }
         else
         {
-            Debug.Log("没有足够的钉子！");
+            return false;
         }
     }
 
