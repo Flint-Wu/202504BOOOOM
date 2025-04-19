@@ -1,0 +1,35 @@
+  ActRecord挂载在会触发事件的场景对象上，作为读取场景对象上的  行为状态  和  场景地块  本身
+输入：请给挂载对象命名的时候，用三个字符+地形编号表示(P.S.:Loc1、Roc2、Wat4)
+
+Made 这类代码基本是加密生成代码的核心工具，建议创建一个空对象挂载
+  MadeID是生成作弊码中 ID 的部分
+输入：引用一个挂载了CodeTrans的对象(TransTool)
+          引用玩家最开始输入ID代码的文本框(IDInput)
+输出：PushID   就是最终其他代码要引用的数据，为加密了的ID代码
+
+  MadeAct是生成场景对象的行为状态加密的部分
+输入：引用挂载了ActRecord的场景对象进入数组(ActRecord)
+          引用一个挂载了CodeTrans的对象(TransTool)
+输出：AllLocCode  也是其他代码最终引用的数据
+
+  MadeAllcode是整合前两个Made的部分
+输入、输出：引用前面的MadeAct
+          引用前面的MadeID
+
+
+ReMade 这类代码是解密转译代码的核心工具
+  CodeRead是读取并分割好代码中不同部分的工具
+输入：引用玩家输入作弊码的输入框(PlayerFields)
+输出：NameUNRE 未解密的名字代码
+          LocUNRE 未解密的地点信息代码集合
+  
+  ReMadeID是解密代码中名字的部分
+输入：引用一个挂载了CodeTrans的对象(TransTool)
+          引用CodeRead挂载的对象(CheatName)
+输出：ID玩家游玩当前次数的ID
+
+  ReMadeLoc是解密代码中地点信息的部分
+输入：引用一个挂载了CodeTrans的对象(TransTool)
+          引用CodeRead挂载的对象(CheatLoc)
+输出：Loc 对应场景的编号
+          Act 对应场景的行为记录

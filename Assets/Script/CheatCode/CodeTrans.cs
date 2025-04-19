@@ -9,7 +9,6 @@ using UnityEngine.Windows;
 public class CodeTrans : MonoBehaviour
 {
     public Text codetext;
-    public Text inputText;
 
     public string code;
 
@@ -25,15 +24,11 @@ public class CodeTrans : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (inputText.text != null)
-        {
-            code = inputText.text;
-        }
     }
 
-    public void StrTransCode()
+    public string StrTransCode(string inputText)
     {
-        chars = inputText.text.ToCharArray();
+        chars = inputText.ToCharArray();
         parts = new string[chars.Length];
 
         for (int i = 0; i < chars.Length; i++)
@@ -113,16 +108,18 @@ public class CodeTrans : MonoBehaviour
         {
             sb.Append(rightCode[i]);
         }
-        if (codetext != null)
-        {
-            codetext.text = sb.ToString();
-        }
+
+        codetext.text = sb.ToString();
+
+        parts = null; chars = null; rightCode = null;
+
+        return sb.ToString();
     }
     
     
-    public void BakTransCode()
+    public string BakTransCode(string inputText)
     {
-        chars = inputText.text.ToCharArray();
+        chars = inputText.ToCharArray();
         parts = new string[chars.Length];
 
         for (int i = 0; i < chars.Length; i++)
@@ -202,9 +199,11 @@ public class CodeTrans : MonoBehaviour
         {
             sb.Append(rightCode[i]);
         }
-        if (codetext != null)
-        {
-            codetext.text = sb.ToString();
-        }
+
+        codetext.text = sb.ToString();
+
+        parts = null; chars = null; rightCode = null;
+
+        return sb.ToString();
     }
 }
