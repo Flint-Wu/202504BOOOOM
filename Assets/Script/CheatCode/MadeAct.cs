@@ -9,7 +9,8 @@ public class MadeAct : MonoBehaviour
     public ActRecord[] actRecords;
     public string[] LocStates;
     public string[] LocNums;
-    public string[] PushLoc;
+    public string[] TranedAll;
+    public string PushLoc;
 
     private string[] sign = { "$", "%", "^", "&", "*" };
 
@@ -22,7 +23,7 @@ public class MadeAct : MonoBehaviour
     {
         LocStates = new string[actRecords.Length];
         LocNums = new string[actRecords.Length];
-        PushLoc = new string[actRecords.Length];
+        TranedAll = new string[actRecords.Length];
 
         for (int i = 0; i < actRecords.Length; i++)
         {
@@ -41,7 +42,10 @@ public class MadeAct : MonoBehaviour
             int randomIndex = Random.Range(0, sign.Length);
             string randomElement = sign[randomIndex];
 
-            PushLoc[i] = TransTool.StrTransCode(LocNums[i]) + randomElement + TransTool.StrTransCode(LocStates[i]);
+            TranedAll[i] = TransTool.StrTransCode(LocNums[i]) + randomElement + TransTool.StrTransCode(LocStates[i]);
+
+            PushLoc = string.Join(":",TranedAll);
         }
+
     }
 }
