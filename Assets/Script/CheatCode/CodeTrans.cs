@@ -1,20 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Text;
-using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Windows;
 
 public class CodeTrans : MonoBehaviour
 {
-    public Text codetext;
-
-    public string code;
-
-    public string[] parts;
-    public char[]  chars;
-    public string[] rightCode;
+    private string[] parts;
+    private char[]  chars;
+    private string[] rightCode;
 
     void Start()
     {
@@ -109,8 +101,6 @@ public class CodeTrans : MonoBehaviour
             sb.Append(rightCode[i]);
         }
 
-        codetext.text = sb.ToString();
-
         parts = null; chars = null; rightCode = null;
 
         return sb.ToString();
@@ -199,8 +189,6 @@ public class CodeTrans : MonoBehaviour
         {
             sb.Append(rightCode[i]);
         }
-
-        codetext.text = sb.ToString();
 
         parts = null; chars = null; rightCode = null;
 

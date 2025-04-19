@@ -396,7 +396,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &423337742
 MonoBehaviour:
@@ -410,11 +410,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4e1d5be15facd3488776bdae9455d6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  codetext: {fileID: 706318681}
-  code: 
-  parts: []
-  chars: 
-  rightCode: []
 --- !u!114 &423337743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -856,7 +851,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 11111
+  m_Text: u!azdshz:wwtywt&w:wuy$r:wti%e
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -1320,7 +1315,7 @@ Transform:
   - {fileID: 1164030284}
   - {fileID: 1083735873}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1047895096
 GameObject:
@@ -2236,9 +2231,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 423337742}
-        m_TargetAssemblyTypeName: CodeTrans, Assembly-CSharp
-        m_MethodName: BakTransCode
+      - m_Target: {fileID: 1491020297}
+        m_TargetAssemblyTypeName: ReadCode, Assembly-CSharp
+        m_MethodName: SplitCC
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1491020300}
+        m_TargetAssemblyTypeName: ReMadeID, Assembly-CSharp
+        m_MethodName: ReTrans
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2286,6 +2293,86 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1371428115}
   m_CullTransparentMesh: 1
+--- !u!1 &1491020296
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1491020299}
+  - component: {fileID: 1491020298}
+  - component: {fileID: 1491020297}
+  - component: {fileID: 1491020300}
+  m_Layer: 0
+  m_Name: ReCodeTrans
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1491020297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491020296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01feeeb87326f934297886b8f1f8d075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InputField: {fileID: 609254783}
+  CheatCode: 
+  CheatCodeSplit: []
+  IDunRe: 
+  LocunRe: []
+--- !u!114 &1491020298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491020296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4e1d5be15facd3488776bdae9455d6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1491020299
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491020296}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1491020300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491020296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45faf35fe241c140b098c9e0f40953f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  readCode: {fileID: 1491020297}
+  TransTool: {fileID: 1491020298}
+  IDunRe: 
+  IDData: []
+  HelperID: 
 --- !u!1 &1518432186
 GameObject:
   m_ObjectHideFlags: 0
@@ -2746,7 +2833,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 11111
+  m_Text: u!azdshz:wwtywt&w:wuy$r:wti%e
 --- !u!222 &1828363599
 CanvasRenderer:
   m_ObjectHideFlags: 0
