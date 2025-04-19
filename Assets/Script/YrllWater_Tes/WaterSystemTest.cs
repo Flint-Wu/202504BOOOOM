@@ -42,7 +42,7 @@ public class WaterSystemTest : MonoBehaviour
         });
         WaterBottle.onClick.AddListener(() =>
         {
-            waterState.ChangeWater(20f); // 增加20单位
+            waterState.ChangeWater(20); // 增加20单位
 
         });
         RestWater.onClick.AddListener(() =>
