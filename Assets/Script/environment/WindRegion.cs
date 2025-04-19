@@ -17,7 +17,8 @@ public class WindRegion : MonoBehaviour
     void Start()
     {
         WindTime = 0;
-        
+        //设置vfx的边界和风区的大小一致
+        WindVfx.transform.localScale = this.GetComponent<BoxCollider>().size;
     }
 
     // Update is called once per frame

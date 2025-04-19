@@ -4166,6 +4166,44 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 224134579}
   m_Mesh: {fileID: 4300000, guid: c2a8f903826f1ca4a8165790c46adeda, type: 2}
+--- !u!84 &226753520
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ShapeNoise
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 132
+  m_Height: 132
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 0
+  m_ColorFormat: 24
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_Dimension: 3
+  m_VolumeDepth: 132
+  m_ShadowSamplingMode: 2
 --- !u!1001 &233083140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8574,6 +8612,44 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 581636310}
   m_Mesh: {fileID: 4300000, guid: c2a8f903826f1ca4a8165790c46adeda, type: 2}
+--- !u!84 &582209139
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DetailNoise
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 64
+  m_Height: 64
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 0
+  m_ColorFormat: 24
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_Dimension: 3
+  m_VolumeDepth: 64
+  m_ShadowSamplingMode: 2
 --- !u!1001 &582674194
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11718,6 +11794,44 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4491158196177669338, guid: fa1b35783beafad49a17127a4f749534, type: 3}
   m_PrefabInstance: {fileID: 801281919}
   m_PrefabAsset: {fileID: 0}
+--- !u!84 &806632339
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Weather Map
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 512
+  m_Height: 512
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 0
+  m_ColorFormat: 24
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 512
+  m_ShadowSamplingMode: 2
 --- !u!224 &813518800 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5056400039105644963, guid: 1722769cc584daf46b2549c6afd77cf9, type: 3}
@@ -12293,44 +12407,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4491158196177669338, guid: fa1b35783beafad49a17127a4f749534, type: 3}
   m_PrefabInstance: {fileID: 877374081}
   m_PrefabAsset: {fileID: 0}
---- !u!84 &882018579
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Weather Map
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 5
-  m_Width: 512
-  m_Height: 512
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 0
-  m_ColorFormat: 24
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_EnableRandomWrite: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 512
-  m_ShadowSamplingMode: 2
 --- !u!1 &889653990
 GameObject:
   m_ObjectHideFlags: 0
@@ -18042,44 +18118,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1230505271}
   m_Mesh: {fileID: 4300000, guid: c2a8f903826f1ca4a8165790c46adeda, type: 2}
---- !u!84 &1235975330
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: ShapeNoise
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 5
-  m_Width: 132
-  m_Height: 132
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 0
-  m_ColorFormat: 24
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_EnableRandomWrite: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_Dimension: 3
-  m_VolumeDepth: 132
-  m_ShadowSamplingMode: 2
 --- !u!1 &1241460715
 GameObject:
   m_ObjectHideFlags: 0
@@ -24458,44 +24496,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1732167929}
   m_Mesh: {fileID: 4300000, guid: c2a8f903826f1ca4a8165790c46adeda, type: 2}
---- !u!84 &1732365756
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: DetailNoise
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 5
-  m_Width: 64
-  m_Height: 64
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 0
-  m_ColorFormat: 24
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_EnableRandomWrite: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_Dimension: 3
-  m_VolumeDepth: 64
-  m_ShadowSamplingMode: 2
 --- !u!1 &1739273815
 GameObject:
   m_ObjectHideFlags: 0
@@ -29722,10 +29722,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 8.787427
       objectReference: {fileID: 0}
+    - target: {fileID: 5056400039707211882, guid: 1722769cc584daf46b2549c6afd77cf9, type: 3}
+      propertyPath: isRecovering
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5056400039707212238, guid: 1722769cc584daf46b2549c6afd77cf9, type: 3}
       propertyPath: BuildingPrefabs
       value: 
-      objectReference: {fileID: 6360076805468844018, guid: 2ade83eae240d1a4f885c366ca3e292a, type: 3}
+      objectReference: {fileID: 6360076805468844018, guid: 29a69cebdb5452746a17478c181dd6ff, type: 3}
     - target: {fileID: 5056400039707212238, guid: 1722769cc584daf46b2549c6afd77cf9, type: 3}
       propertyPath: NotBuildingLayerMask.m_Bits
       value: 1277952
@@ -29859,6 +29863,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1633957031}
     m_Modifications:
+    - target: {fileID: 6519535478743808146, guid: 28bc5474e1464a74da1d92a538fb1c8f, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8510169123075441386, guid: 28bc5474e1464a74da1d92a538fb1c8f, type: 3}
       propertyPath: m_Name
       value: Tree
@@ -29964,6 +29972,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SnowZone
       objectReference: {fileID: 0}
+    - target: {fileID: 7387856714056138906, guid: 0de5793eb8a3d2e4682680ab39074407, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0de5793eb8a3d2e4682680ab39074407, type: 3}
 --- !u!1001 &7659586499875863654
@@ -30032,7 +30044,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7702121355303812006, guid: e2a3d099ceb7f594a97c6cdcdc15f308, type: 3}
       propertyPath: fillAmount
-      value: 1.05
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 7702121355303812006, guid: e2a3d099ceb7f594a97c6cdcdc15f308, type: 3}
       propertyPath: updateMode
@@ -30119,9 +30131,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1633957031}
     m_Modifications:
+    - target: {fileID: 3110032973180283234, guid: 976acff246da4704390f1b4a47c3c645, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164128887019081025, guid: 976acff246da4704390f1b4a47c3c645, type: 3}
+      propertyPath: m_Size.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164128887019081025, guid: 976acff246da4704390f1b4a47c3c645, type: 3}
+      propertyPath: m_Size.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164128887019081025, guid: 976acff246da4704390f1b4a47c3c645, type: 3}
+      propertyPath: m_Size.z
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 8164128887019081028, guid: 976acff246da4704390f1b4a47c3c645, type: 3}
       propertyPath: m_Name
       value: WindZone
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164128887019081028, guid: 976acff246da4704390f1b4a47c3c645, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8164128887019081030, guid: 976acff246da4704390f1b4a47c3c645, type: 3}
       propertyPath: m_RootOrder
@@ -30137,7 +30169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8164128887019081030, guid: 976acff246da4704390f1b4a47c3c645, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 28.70803
+      value: 55.3
       objectReference: {fileID: 0}
     - target: {fileID: 8164128887019081030, guid: 976acff246da4704390f1b4a47c3c645, type: 3}
       propertyPath: m_LocalRotation.w

@@ -80,6 +80,7 @@ public class PlayerPhysicalStrength : MonoBehaviour
         //如果当前状态机为Climb的状态 且 动画为idle
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
+            if(isRecovering) return;
             //如果当前状态机的变量Motion Speed为0
             ReducePhysicalStrength(ClimbIdleStrength * Time.deltaTime);
         }
