@@ -71,6 +71,7 @@ namespace DiasGames
                 if (ability.ReadyToRun())
                 {
                     // If this ability has a greater priority, it should start executing
+                    //根据能力的优先级来判断是否要执行这个能力，如果readytorun返回true，说明这个能力可以执行
                     if (nextAbility == null || ability.AbilityPriority > nextAbility.AbilityPriority)
                     {
                         // check combat

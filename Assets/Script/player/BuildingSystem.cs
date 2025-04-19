@@ -13,6 +13,7 @@ public class BuildingSystem : AbstractAbility
     public GameObject CurrentBuildingPrefab;
     public AbilityScheduler scheduler;
     public LayerMask NotBuildingLayerMask; // Layer mask for the building layer
+    public bool isBuilding = false; // Flag to check if the building is being placed
 
     void Awake()
     {
@@ -32,6 +33,11 @@ public class BuildingSystem : AbstractAbility
     // Update is called once per frame
     void Update()
     {
+        if(_action.interact)
+        {
+            SwitchBuildingState(); // Toggle building state when interact is pressed
+        }
+        if(!isBuilding) return;
         PlaceBuildingPrefab();
     }
     public override bool ReadyToRun()
@@ -49,7 +55,14 @@ public class BuildingSystem : AbstractAbility
     {
         // Implement logic for updating the ability
     }
-
+    void SwitchBuildingState()
+    {
+        isBuilding = !isBuilding;
+        if(CurrentBuildingPrefab != null)
+        {
+            CurrentBuildingPrefab.SetActive(isBuilding); // Show or hide the building prefab
+        }
+    }
     public void PlaceBuildingPrefab()
     {
         //从屏幕中点发射射线(新输入系统)
@@ -67,7 +80,18 @@ public class BuildingSystem : AbstractAbility
             if(_action.fire)
             {
                 // Instantiate the building prefab at the hit point
-                
+                if(InventoryManager.Instance != null)
+                {
+                    if(InventoryManager.Instance.CanBuild())
+                    {
+                        InventoryManager.Instance.CostNail(); // 扣除钉子数量
+                    }
+                    else
+                    {
+                        Debug.Log("没有足够的钉子！");
+                        return;
+                    }
+                }
                 GameObject building = Instantiate(BuildingPrefabs, hit.point, Quaternion.LookRotation(hit.normal));
                 building.transform.rotation = Quaternion.LookRotation(hit.normal);
                 // Optionally, you can set the parent of the building to the character or another object

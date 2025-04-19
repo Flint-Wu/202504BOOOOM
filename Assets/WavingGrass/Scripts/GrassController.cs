@@ -13,6 +13,8 @@ public class GrassController : MonoBehaviour {
     private Vector4[] grassInteractionPositions = new Vector4[4];
     private Transform ground;
     private List<GameObject> grass = new List<GameObject>();
+    public float[] windSpeed = new float[4];
+    public Material grassMaterial;
 
     void Awake () {
         ground = transform;
@@ -30,10 +32,16 @@ public class GrassController : MonoBehaviour {
 
     private void Update() {
         int interactionObjIndex = 0;
+        Debug.Log(Shader.GetGlobalVector("_WindSpeed2"));
+
         foreach (GameObject interactionObj in GameObject.FindGameObjectsWithTag(interactionTag)) {
             grassInteractionPositions[interactionObjIndex++] = interactionObj.transform.position + new Vector3(0, 0.5f, 0);
         }
         Shader.SetGlobalFloat("_PositionArray", interactionObjIndex);
         Shader.SetGlobalVectorArray("_Positions", grassInteractionPositions);
+
+        grassMaterial.SetVector("_WindSpeed", new Vector4(windSpeed[0], windSpeed[1], windSpeed[2], windSpeed[3]));
+                //Debug.Log(Shader.GetGlobalVector("_WindSpeed"));
     }
+
 }

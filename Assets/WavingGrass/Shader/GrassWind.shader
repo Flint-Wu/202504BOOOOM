@@ -2,6 +2,7 @@
 // Had to change many details to make it work. This asset should help people to save their time
 // for debugging and experimenting. I also added some improvements like using an emission color.
 // This needs a ramp and a gradient texture to work.
+//进一步修正：https://zhuanlan.zhihu.com/p/592938734
 Shader "Custom/GrassWind" {
 	Properties {
 		_RampTex("Ramp", 2D) = "white" {} // 水平渐变纹理，用于光照
@@ -12,7 +13,7 @@ Shader "Custom/GrassWind" {
 		_HeightCutoff("Height Cutoff", float) = 0.3//草的高度阈值，低于这个高度的草丛不受风的影响，模拟扎根在地面上的效果
         _WindTex("Wind Texture", 2D) = "white" {} // 表示风向和强度的灰度纹理
         _WorldSize("World Size", vector) = (40, 40, 0, 0)   // Use only x and y (y is z in 3D space)
-        _WindSpeed("Wind Speed", vector) = (1.5, 1.5, 0, 0) // 风速
+        _WindSpeed("Wind Speed", vector) = (1.5, 1.5, 0, 0) // 风速,material的shader会覆盖shader下面的全局变量，所以这里的变量名不能和shader下面的变量名一样，不然就需要通过material来传递变量的值
         _YOffset("Y offset", float) = 0.0 // y offset, below this is no animation
         _MaxWidth("Max Displacement Width", Range(0, 2)) = 0.1 // width of the line around the dissolve
         _Radius("Radius", Range(0,5)) = 1 // width of the line around the dissolve
