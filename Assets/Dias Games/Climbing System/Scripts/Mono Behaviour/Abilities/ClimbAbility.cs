@@ -41,7 +41,7 @@ namespace DiasGames.Abilities
         [SerializeField] private AnimationCurve defaultMatchingCurve;
         [Space]
         // state machine
-        [SerializeField] private ClimbStateContext _context;
+        [SerializeField] public ClimbStateContext _context;
 
         [Header("Debug")]
         [SerializeField] private Color debugColor;
@@ -681,6 +681,9 @@ namespace DiasGames.Abilities
                     DrawSphere(hit.point, capsuleRadius, Color.red);
 
                     // set top start cast position
+                    //4. 顶部射线检测
+                    // 创建一系列从角色上方向下射出的射线，形成一个密集的检测网格
+                    // 这种方法允许更精确地定位顶部边缘，而不仅仅依赖于单个点
                     Vector3 initial = grabReference.position + Vector3.up;
                     int lineIterations = 20;
                     // loop raycast for top
@@ -691,9 +694,15 @@ namespace DiasGames.Abilities
                         foreach (var top in Physics.RaycastAll(topStart, Vector3.down, 3f, climbMask, QueryTriggerInteraction.Collide))
                         {
                             // is top hit valid?
+                            //5. 顶部碰撞点验证
+                            // 验证顶部碰撞是否有效
+                            // 确保顶部碰撞与水平碰撞属于同一物体
+                            // 检查攀爬位置是否被障碍物阻挡
+                            // 确保顶部表面足够水平（与上方向量的夹角小于60度）
                             if (top.distance == 0) continue;
 
                             // check if top hit is the same as horizontal hit
+
                             if (top.collider == hit.collider)
                             {
                                 // check if point is free to climb
@@ -704,6 +713,7 @@ namespace DiasGames.Abilities
                                     continue;
 
                                 // update current climb parameters
+                                //6. 更新攀爬参数
                                 _currentCollider = top.collider;
                                 _currentTopHit = top;
                                 _currentHorizontalHit = hit;
@@ -722,6 +732,11 @@ namespace DiasGames.Abilities
                                 
 
                                 // correct top point
+                                //6. 更新攀爬参数
+                                // 更新系统中的攀爬参数（当前碰撞体、水平碰撞点和顶部碰撞点）
+                                // 检查碰撞体的标签是否在忽略列表中
+                                // 修正顶部点的Y坐标，确保它与水平碰撞点在同一高度
+                                // 调用UpdateClimbHit更新攀爬目标变换
                                 Vector3 point = _currentHorizontalHit.point;
                                 point.y = top.point.y;
                                 _currentTopHit.point = point;
@@ -746,6 +761,10 @@ namespace DiasGames.Abilities
 
 
                 // closest precision cast if loose current collider
+                //7. 丢失当前碰撞体的恢复机制
+                // 当失去对当前攀爬表面的追踪时，系统会尝试重新找到可攀爬的表面
+                // 创建ClimbablePoint结构体存储潜在的攀爬点信息
+                // 对顶部点进行同样的验证
                 if (_currentCollider == null)
                 {
                     // set top start cast position
@@ -798,7 +817,10 @@ namespace DiasGames.Abilities
                         }
                     }
 
-
+                    //8. 选择最佳攀爬点
+                    //如果找到多个可能的攀爬点，根据"因子"排序
+                    // 选择最合适的点更新攀爬参数
+                    // 调用UpdateClimbHit更新攀爬目标变换
                     if (climbables.Count > 0)
                     {
                         // sort by closest distance
@@ -820,9 +842,14 @@ namespace DiasGames.Abilities
             ResetClimbVars();
             return false;
         }
-
+        /// <summary>
+        /// 功能: 更新攀爬目标变换，确保角色正确跟随可能移动的攀爬表面
+        /// </summary>
         private void UpdateClimbHit()
         {
+            //当角色横向移动超过一定阈值 (_localCoordMove.x > 0.4f)
+            // 当攀爬目标变换与当前碰撞体不同步时
+            // 当能力刚开始运行或尚未运行时
             if (Mathf.Abs(_localCoordMove.x) > 0.4f || _climbTargetHit.parent != _currentCollider.transform 
                 || !IsAbilityRunning || Time.time - StartTime < 0.1f)
             {
@@ -834,9 +861,17 @@ namespace DiasGames.Abilities
             _targetClimbCharPos.parent = _currentCollider.transform;
             _targetClimbCharPos.position = GetCharacterPositionOnLedge();
         }
-
+        /// <summary>
+        /// 检测角色脚部是否有墙面支撑
+        /// </summary>
+        /// <returns></returns>
         private bool HasWall()
         {
+            //计算胶囊体的起始位置(基于攀爬目标位置或当前位置)
+            // 确定检测方向(沿着攀爬表面法线的反方向或角色前方)
+            // 使用 Physics.CapsuleCast 检测脚部前方是否有墙体
+            // 通过调试绘制函数可视化胶囊体及其碰撞情况
+            // 如果检测到墙体，返回 true，表示角色脚有支撑；否则返回 false，表示角色处于悬挂状态。这个结果会影响角色的悬挂动画权重。
             Vector3 targetPos = _currentHorizontalHit.collider != null && !_isDoingTween ? GetCharacterPositionOnLedge() : transform.position;
             Vector3 direction = _currentHorizontalHit.collider != null && !_isDoingTween ? -_currentHorizontalHit.normal : transform.forward;
 
@@ -868,7 +903,9 @@ namespace DiasGames.Abilities
             _context.input = _localCoordMove;
         }
 
-
+        /// <summary>
+        /// 设置攀爬能力在特定动画完成后结束。
+        /// </summary>
         public void FinishAfterAnimation(string animationState, Vector3 targetMatchPosition, Quaternion targetMatchRotation, float targetNormalizedTime = 0.9f)
         {
             _animationStateToWait = animationState;
@@ -886,7 +923,9 @@ namespace DiasGames.Abilities
             FinishAfterAnimation(animationState, Vector3.zero, Quaternion.identity, targetNormalizedTime);
             _matchTarget = false;
         }
-                
+        /// <summary>
+        /// 将摄像机空间的输入转换为角色本地空间的移动方向
+        /// </summary>
         private void ProccesMovement()
         {
             Vector3 CamForward = Vector3.Scale(_mainCamera.transform.forward, new Vector3(1, 0, 1));
@@ -896,9 +935,15 @@ namespace DiasGames.Abilities
             _localCoordMove.x = Vector3.Dot(cameraRelativeMove, transform.right);
             _localCoordMove.y = Vector3.Dot(cameraRelativeMove, transform.forward);
         }
-
+        /// <summary>
+        /// 处理玩家攀爬状态下的输入命令
+        /// </summary>
         private void ProccessInput()
         {
+            // 当按下跳跃键时:
+            // 如果没有水平移动或有明显的向上输入，触发攀爬上爬 (ClimbUp())
+            // 如果有任何方向的输入，触发跳跃 (Jump())
+            // 当按下下降键时，触发下落 (Drop())
             if (_action.jump)
             {
                 if(Mathf.Approximately(_localCoordMove.x, 0) || _localCoordMove.y > 0.5f)
@@ -1087,7 +1132,14 @@ namespace DiasGames.Abilities
             _currentTopHit = new RaycastHit();
             _currentCollider = null;
         }
-
+        // 添加到ClimbAbility类中
+        public void ForceDrop()
+        {
+            if (IsAbilityRunning && _context != null && _context.CurrentClimbState != null)
+            {
+                _context.CurrentClimbState.Drop(_context);
+            }
+        }
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.blue;

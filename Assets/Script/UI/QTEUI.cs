@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DiasGames.Components;
 using DG.Tweening;
+using DiasGames.Climbing;
 namespace DiasGames.Abilities
 {
     public class QTEUI : AbstractAbility
@@ -28,6 +29,7 @@ namespace DiasGames.Abilities
         public bool isPlayerJudge = false;
         public float _clicktime = 0f;
         public bool isClicking = false;
+        public bool isQTEfail = false;
         //光标迟滞停止的时间
         [Header("光标迟滞停止的时间,模拟结冰的效果")]
         public float decayTime = 0.1f;
@@ -170,6 +172,7 @@ namespace DiasGames.Abilities
             CorretBar.DOColor(Color.green, 0.2f).SetLoops(2, LoopType.Yoyo);
             isClicking = false;       
             _clicktime =0f;
+            isQTEfail = false;
         }
         void TriggerFail()
         {
@@ -178,7 +181,11 @@ namespace DiasGames.Abilities
             CorretBar.DOColor(Color.red, 0.2f).SetLoops(2, LoopType.Yoyo);
             isClicking = false;
             _clicktime =0f;   
-            PlayerPhysicalStrength.Instance.FailedOnQTE();
+            
+            // PlayerPhysicalStrength.Instance.FailedOnQTE();
+            ClimbAbility climbAbility = GameObject.FindGameObjectWithTag("Player").GetComponent<ClimbAbility>();
+            climbAbility.ForceDrop();
+    
             playerWaterState.ChangeWater();
             Debug.Log(playerWaterState.CurrentWater);
         }
