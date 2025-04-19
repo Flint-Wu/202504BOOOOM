@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.XR.Oculus.Input;
 using UnityEngine;
 using UnityEngine.UI;
 
