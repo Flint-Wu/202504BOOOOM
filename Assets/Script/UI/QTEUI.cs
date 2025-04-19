@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DiasGames.Components;
 using DG.Tweening;
+using DiasGames.Climbing;
 namespace DiasGames.Abilities
 {
     public class QTEUI : AbstractAbility
@@ -27,10 +28,16 @@ namespace DiasGames.Abilities
         public float PlayerPointPeiod = 3f;
         public bool isPlayerJudge = false;
         public float _clicktime = 0f;
-        public bool isClick = false;
+        public bool isClicking = false;
+        public bool isQTEfail = false;
         //光标迟滞停止的时间
         [Header("光标迟滞停止的时间,模拟结冰的效果")]
         public float decayTime = 0.1f;
+        
+        [Header("玩家的水量状态")]
+        public PlayerWaterState playerWaterState;
+        [Header("玩家QTE失败水量流失量")]
+        public int lossWater = 10;
 
         void Awake()
         {
@@ -69,7 +76,7 @@ namespace DiasGames.Abilities
             // {
             //     Debug.Log("test F key");
             // }
-            if (isClick)
+            if (isClicking)
             {
                 WaitForJudge();
                 _clicktime += Time.deltaTime;
@@ -79,21 +86,27 @@ namespace DiasGames.Abilities
 
         void SetQTEAccuracy()
         {
-            QTEAccuracy = characterStrength.currentPhysicalStrength / characterStrength.maxPhysicalStrength + 0.1f;
-            QTEAccuracy = Mathf.Clamp(QTEAccuracy, 0.1f, 0.8f);
-            QTECorretBarWidthRange[0] = QTEBaseBarWidth * (1 - QTEAccuracy) / 2;
-            QTECorretBarWidthRange[1] = QTEBaseBarWidth * (1 + QTEAccuracy) / 2;
-            CorretBar.rectTransform.sizeDelta = new Vector2(QTEAccuracy*QTEBaseBarWidth, CorretBar.rectTransform.sizeDelta.y);
+            //BaseBar的宽度根据体力值的变化而变化，判断条的宽度为BaseBar的宽度*QTEAccuracy
+            float newBaseBarWidthPercentage = characterStrength.currentPhysicalStrength / characterStrength.maxPhysicalStrength+0.1f;
+            BaseBar.rectTransform.sizeDelta = new Vector2(QTEBaseBarWidth*newBaseBarWidthPercentage, BaseBar.rectTransform.sizeDelta.y);
+
+
+            //QTEAccuracy = characterStrength.currentPhysicalStrength / characterStrength.maxPhysicalStrength + 0.1f;
+            //QTEAccuracy = Mathf.Clamp(QTEAccuracy, 0.1f, 0.8f);
+
+            QTECorretBarWidthRange[0] = BaseBar.rectTransform.sizeDelta.x * (1 - QTEAccuracy) / 2;
+            QTECorretBarWidthRange[1] = BaseBar.rectTransform.sizeDelta.x * (1 + QTEAccuracy) / 2;
+            CorretBar.rectTransform.sizeDelta = new Vector2(QTEAccuracy*BaseBar.rectTransform.sizeDelta.x, CorretBar.rectTransform.sizeDelta.y);
         }
         public void StartClick()
         {
-            if(_clicktime>0.1f&&_clicktime<PlayerPointPeiod)
-            {
-                //如果玩家还没有判断过（没触发QTE就继续跳跃），就直接触发失败
-                TriggerFail();
-                return;
-            }
-            isClick = true;
+            // if(_clicktime>0.1f&&_clicktime<PlayerPointPeiod)
+            // {
+            //     //如果玩家还没有判断过（没触发QTE就继续跳跃），就直接触发失败
+            //     TriggerFail();
+            //     return;
+            // }
+            isClicking = true;
             isPlayerJudge = false;
         }
         void WaitForJudge()
@@ -120,7 +133,7 @@ namespace DiasGames.Abilities
             }
 
 
-            if (_action.interact)
+            if (_action.jump)
             {
                 //Dotween实现playerpoint迟滞停止的效果
                 isPlayerJudge = true; 
@@ -157,17 +170,24 @@ namespace DiasGames.Abilities
             //执行QTE成功的逻辑
             Debug.Log("QTE成功");
             CorretBar.DOColor(Color.green, 0.2f).SetLoops(2, LoopType.Yoyo);
-            isClick = false;       
+            isClicking = false;       
             _clicktime =0f;
+            isQTEfail = false;
         }
         void TriggerFail()
         {
             //执行QTE失败的逻辑
             Debug.Log("QTE失败");
             CorretBar.DOColor(Color.red, 0.2f).SetLoops(2, LoopType.Yoyo);
-            isClick = false;
+            isClicking = false;
             _clicktime =0f;   
-            PlayerPhysicalStrength.Instance.FailedOnQTE();  
+            
+            // PlayerPhysicalStrength.Instance.FailedOnQTE();
+            ClimbAbility climbAbility = GameObject.FindGameObjectWithTag("Player").GetComponent<ClimbAbility>();
+            climbAbility.ForceDrop();
+    
+            playerWaterState.ChangeWater();
+            Debug.Log(playerWaterState.CurrentWater);
         }
 
     }

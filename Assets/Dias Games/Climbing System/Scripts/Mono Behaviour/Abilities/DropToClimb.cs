@@ -50,11 +50,12 @@ namespace DiasGames.Climbing
         public override bool ReadyToRun()
         {
             if (!_mover.IsGrounded()) return false;
-
+            
             if (holdWalkButtonToDrop && !_action.walk) return false;
 
             if (_action.move != Vector2.zero && CanDrop())
                 return true;
+
 
             return false;
         }

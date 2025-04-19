@@ -11,6 +11,8 @@ TagManager:
   - Stone
   - Wood
   - Sand
+  - Grass
+  - Nail
   layers:
   - Default
   - TransparentFX
