@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DiasGames.Abilities;
 using UnityEngine;
 
 namespace DiasGames.Climbing
@@ -18,14 +19,17 @@ namespace DiasGames.Climbing
         private Vector3 _targetPosition;
         private Quaternion _targetRotation;
         private float _startTime;
+        //private BuildingSystem _buildingSystem;
 
         private RaycastHit _targetHorizontalHit;
         private RaycastHit _targetVerticalHit;
         private PlayerWaterState _playerWaterState;
+        private bool isUseNail = false;
 
         public override void EnterState(ClimbStateContext context)
         {
             _playerWaterState = context.climb.GetComponent<PlayerWaterState>();
+            //_buildingSystem = context.climb.GetComponent<BuildingSystem>();
             // 判断是跳跃下降还是自由下落
             if(context.animator.GetFloat("HangWeight") < 0.6f && FoundLedgeToDrop(context) && 
             !_playerWaterState.IsInCritical)
@@ -48,8 +52,34 @@ namespace DiasGames.Climbing
         public override void ExitState(ClimbStateContext context)
         {
             _startTime = 0;
+            isUseNail = false;
         }
+        public override void Update(ClimbStateContext context)
+        {
 
+            // 如果已经使用了钉子，不继续检查
+            // if(isUseNail) return;
+            // // 检查是否在下落时间窗口内（0.6 * dropDuration）
+            // if( Time.time - _startTime < dropDuration * 0.8f&&
+            //     Time.time - _startTime > dropDuration*0.3f)
+            // {
+            //     // 尝试放置建筑物（钉子）
+            //     BuildingSystem buildingSystem = context.climb.GetComponent<BuildingSystem>();
+            //     if (buildingSystem != null)
+            //     {
+            //         Transform nailTransform = buildingSystem.PlaceBuildingPrefab(true);
+            //         if(nailTransform != null)
+            //         {
+            //             // 设置急刹车状态的目标并切换状态
+            //             context.Brake.SetTarget(nailTransform);
+            //             context.SetState(context.Brake);
+            //             return;
+            //         }
+            //     }
+                
+            // }
+
+        }
         private void SetLefttHandIK(ClimbStateContext context)
         {
             context.ik.SetLeftHandJumpEffector(_targetVerticalHit.point);
@@ -155,5 +185,7 @@ namespace DiasGames.Climbing
 
             return false;
         }
+
+        //来自ClimbAbility.cs
     }
 }

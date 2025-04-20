@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using DiasGames.Components;
 using DG.Tweening;
 using DiasGames.Climbing;
+using System.Collections;
 namespace DiasGames.Abilities
 {
     public class QTEUI : AbstractAbility
@@ -19,7 +20,7 @@ namespace DiasGames.Abilities
         
         //QTE的正确率为当前体力值与最大体力值的比值+10%,其取值为0.1-0.8之间
         [Header("QTE的正确率为当前体力值与最大体力值的比值+10%,其取值为0.1-0.8之间")]
-        [Range(0.1f, 0.8f)] public float QTEAccuracy = 0.1f;
+        [Range(0.1f, 0.8f)] public float BaseQTEAccuracy = 0.1f;
         public float QTEBaseBarWidth;
         public float[] QTECorretBarWidthRange = new float[2];
         public AbilityScheduler scheduler;
@@ -38,6 +39,7 @@ namespace DiasGames.Abilities
         public PlayerWaterState playerWaterState;
         [Header("玩家QTE失败水量流失量")]
         public int lossWater = 10;
+        private float newBaseBarWidthPercentage = 1f;
 
         void Awake()
         {
@@ -52,6 +54,8 @@ namespace DiasGames.Abilities
             }
             Instance = this;
             QTEBaseBarWidth = BaseBar.rectTransform.sizeDelta.x;
+
+            StartCoroutine(DisableBar());
         }
         public override bool ReadyToRun()
         {
@@ -71,7 +75,7 @@ namespace DiasGames.Abilities
         // Update is called once per frame
         void Update()
         {
-            SetQTEAccuracy();
+            
             // if (Input.GetKeyDown(KeyCode.F))
             // {
             //     Debug.Log("test F key");
@@ -80,22 +84,42 @@ namespace DiasGames.Abilities
             {
                 WaitForJudge();
                 _clicktime += Time.deltaTime;
+                //SetQTEAccuracy();
 
             }
         }
 
+        void EnableBar()
+        {
+            BaseBar.gameObject.SetActive(true);
+            CorretBar.gameObject.SetActive(true);
+            Playerpoint.gameObject.SetActive(true);
+            //Dotween淡入效果
+            BaseBar.DOFade(1, 0.2f).SetEase(Ease.OutSine);
+            CorretBar.DOFade(1, 0.2f).SetEase(Ease.OutSine);
+            Playerpoint.DOFade(1, 0.2f).SetEase(Ease.OutSine);
+        }
+        IEnumerator DisableBar()
+        {
+            //Dotween淡出效果
+            yield return new WaitForSeconds(0.5f);
+            BaseBar.DOFade(0, 0.5f).SetEase(Ease.OutSine).OnComplete(() => BaseBar.gameObject.SetActive(false));
+            CorretBar.DOFade(0, 0.5f).SetEase(Ease.OutSine).OnComplete(() => CorretBar.gameObject.SetActive(false));
+            Playerpoint.DOFade(0, 0.5f).SetEase(Ease.OutSine).OnComplete(() => Playerpoint.gameObject.SetActive(false));
+        }
         void SetQTEAccuracy()
         {
             //BaseBar的宽度根据体力值的变化而变化，判断条的宽度为BaseBar的宽度*QTEAccuracy
-            float newBaseBarWidthPercentage = characterStrength.currentPhysicalStrength / characterStrength.maxPhysicalStrength+0.1f;
+            //float newBaseBarWidthPercentage = characterStrength.currentPhysicalStrength / characterStrength.maxPhysicalStrength+0.1f;
             BaseBar.rectTransform.sizeDelta = new Vector2(QTEBaseBarWidth*newBaseBarWidthPercentage, BaseBar.rectTransform.sizeDelta.y);
 
 
-            //QTEAccuracy = characterStrength.currentPhysicalStrength / characterStrength.maxPhysicalStrength + 0.1f;
-            //QTEAccuracy = Mathf.Clamp(QTEAccuracy, 0.1f, 0.8f);
+            float QTEAccuracy = characterStrength.currentPhysicalStrength / characterStrength.maxPhysicalStrength*BaseQTEAccuracy;
+            QTEAccuracy = Mathf.Clamp(QTEAccuracy, 0.1f, BaseQTEAccuracy);
 
-            QTECorretBarWidthRange[0] = BaseBar.rectTransform.sizeDelta.x * (1 - QTEAccuracy) / 2;
-            QTECorretBarWidthRange[1] = BaseBar.rectTransform.sizeDelta.x * (1 + QTEAccuracy) / 2;
+            QTECorretBarWidthRange[0] = Random.Range(0, QTEBaseBarWidth * (1 - QTEAccuracy));
+            QTECorretBarWidthRange[1] = QTECorretBarWidthRange[0] + QTEBaseBarWidth * QTEAccuracy;
+            CorretBar.rectTransform.anchoredPosition = new Vector2(QTECorretBarWidthRange[0], CorretBar.rectTransform.anchoredPosition.y);
             CorretBar.rectTransform.sizeDelta = new Vector2(QTEAccuracy*BaseBar.rectTransform.sizeDelta.x, CorretBar.rectTransform.sizeDelta.y);
         }
         public void StartClick()
@@ -108,6 +132,8 @@ namespace DiasGames.Abilities
             // }
             isClicking = true;
             isPlayerJudge = false;
+            EnableBar();
+            SetQTEAccuracy();
         }
         void WaitForJudge()
         {
@@ -127,7 +153,8 @@ namespace DiasGames.Abilities
             //如果玩家按下E键,新输入系统的Interact
             //Debug.Log(_action);
             //如果Playerpoint.rectTransform.anchoredPosition.x小于0,
-            if (Playerpoint.rectTransform.anchoredPosition.x > QTEBaseBarWidth)
+            //float newBaseBarWidthPercentage = characterStrength.currentPhysicalStrength / characterStrength.maxPhysicalStrength+0.1f;
+            if (Playerpoint.rectTransform.anchoredPosition.x > QTEBaseBarWidth*newBaseBarWidthPercentage)
             {
                 TriggerFail();
             }
@@ -161,6 +188,7 @@ namespace DiasGames.Abilities
                             TriggerFail();
                             // 可以在这里添加红色闪烁效果或其他失败反馈
                         }
+                        StartCoroutine(DisableBar());
                     });
             }
         }

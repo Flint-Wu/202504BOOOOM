@@ -16,7 +16,7 @@ namespace DiasGames.Abilities
         [Space]
         [SerializeField] private Transform grabReference;
         [SerializeField] private float globalRadiusDetection = 0.5f;
-        [SerializeField] private Vector2 offsetOnLedge;
+        [SerializeField] public Vector2 offsetOnLedge;
         [Header("Capsule Cast Parameters")]
         [SerializeField] private float capsuleCastDistance = 0.75f;
         [SerializeField] private float capsuleHeight = 1f;
@@ -221,12 +221,8 @@ namespace DiasGames.Abilities
 
             UpdateFootWall();
             UpdateTween();
-            
-            //如果当前State为ClimDropState，打印时间
-            // if (_context.CurrentClimbState.ToString() == "DiasGames.Climbing.ClimbDropState")
-            // {
-            //     GetComponent<BuildingSystem>().PlaceBuildingPrefab();
-            // }
+            if (_context.CurrentClimbState != null)
+            _context.CurrentClimbState.Update(_context);
 
             //Debug.Log("ClimbState: " + _context.CurrentClimbState.ToString());
 
@@ -966,6 +962,10 @@ namespace DiasGames.Abilities
             if (_action.drop)
                 Drop();
                 //Debug.Log("Drop");
+                //如果当前角色状态为ClimbDrop
+            //Debug.Log(_context.CurrentClimbState.ToString());
+
+
         }
 
         /// <summary>
