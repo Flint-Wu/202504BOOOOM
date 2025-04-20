@@ -185,7 +185,7 @@ namespace DiasGames.Abilities
             // PlayerPhysicalStrength.Instance.FailedOnQTE();
             ClimbAbility climbAbility = GameObject.FindGameObjectWithTag("Player").GetComponent<ClimbAbility>();
             climbAbility.ForceDrop();
-    
+            
             playerWaterState.ChangeWater();
             Debug.Log(playerWaterState.CurrentWater);
         }

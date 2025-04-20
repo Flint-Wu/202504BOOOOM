@@ -21,10 +21,14 @@ namespace DiasGames.Climbing
 
         private RaycastHit _targetHorizontalHit;
         private RaycastHit _targetVerticalHit;
+        private PlayerWaterState _playerWaterState;
 
         public override void EnterState(ClimbStateContext context)
         {
-            if(context.animator.GetFloat("HangWeight") < 0.6f && FoundLedgeToDrop(context))
+            _playerWaterState = context.climb.GetComponent<PlayerWaterState>();
+            // 判断是跳跃下降还是自由下落
+            if(context.animator.GetFloat("HangWeight") < 0.6f && FoundLedgeToDrop(context) && 
+            !_playerWaterState.IsInCritical)
             {
                 context.animator.CrossFadeInFixedTime(dropHop, 0.1f);
                 context.climb.DoTween(_targetPosition, _targetRotation, dropDuration, _targetVerticalHit.collider);
@@ -60,6 +64,8 @@ namespace DiasGames.Climbing
 
         public override void Idle(ClimbStateContext context)
         {
+            //// 等待下降动作完成
+            //此方法控制状态转换，在下降动作完成后将角色状态切换回攀爬空闲状态。
             if (Time.time - _startTime < dropDuration) return;
 
             context.SetState(context.Idle);
@@ -67,6 +73,13 @@ namespace DiasGames.Climbing
 
         private bool FoundLedgeToDrop(ClimbStateContext context)
         {
+            // 此方法使用复杂的物理投射来找到下方可攀爬的点，具体步骤：
+            // 在角色前方下方创建胶囊体
+            // 向前投射胶囊体寻找可能的垂直表面
+            // 从水平碰撞点向下投射球体寻找顶部表面
+            // 应用多种条件过滤，确保找到的点是合适的攀爬位置
+            // 计算每个点的"下降因素"，优先选择最符合向下方向的点
+
             Vector3 capsuleTop = context.grabReference.position + Vector3.down * castRadius - context.transform.forward * maxCastingDistance;
             Vector3 capsuleBot = context.grabReference.position + Vector3.down * (maxHeightBelow + castRadius) - context.transform.forward * maxCastingDistance;
             List<ClimbablePoint> _availablePoints = new List<ClimbablePoint>();

@@ -100,5 +100,8 @@ public class BuildingSystem : AbstractAbility
             }
         }
     }
+    /// <summary>
+    /// 在QTE失败时调用，执行紧急建筑操作
+    /// </summary>
 }
 }

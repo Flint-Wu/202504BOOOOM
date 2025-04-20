@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DiasGames.Abilities;
 using UnityEngine;
-
+using DG.Tweening;
 public class PlayerPhysicalStrength : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -96,12 +96,6 @@ public class PlayerPhysicalStrength : MonoBehaviour
             GetComponent<ClimbAbility>().OnStopAbility();
             GetComponent<ClimbAbility>().Drop();
         }
-    }
-    public void FailedOnQTE()
-    {
-        //如果当前状态机的变量Motion Speed为0
-        GetComponent<ClimbAbility>().OnStopAbility();
-        GetComponent<ClimbAbility>().Drop();
     }
 
 }

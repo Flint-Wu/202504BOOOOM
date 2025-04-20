@@ -221,6 +221,14 @@ namespace DiasGames.Abilities
 
             UpdateFootWall();
             UpdateTween();
+            
+            //如果当前State为ClimDropState，打印时间
+            // if (_context.CurrentClimbState.ToString() == "DiasGames.Climbing.ClimbDropState")
+            // {
+            //     GetComponent<BuildingSystem>().PlaceBuildingPrefab();
+            // }
+
+            //Debug.Log("ClimbState: " + _context.CurrentClimbState.ToString());
 
             // 检查是否正等待特定动画完成（如攀爬上沿、跳跃或下落）
             // 监控动画进度，当达到指定进度(_targetNormalizedTime)时，停止攀爬能力
