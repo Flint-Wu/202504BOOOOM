@@ -40,7 +40,8 @@ namespace DiasGames.Abilities
         [Header("玩家QTE失败水量流失量")]
         public int lossWater = 10;
         private float newBaseBarWidthPercentage = 1f;
-
+    // 在类的顶部，和其他实例变量一起定义
+        private bool isBarVisible = false;
         void Awake()
         {
             if (scheduler != null)
@@ -89,23 +90,54 @@ namespace DiasGames.Abilities
             }
         }
 
-        void EnableBar()
+       void EnableBar()
         {
+            // 停止所有协程（包括正在运行的DisableBar协程）
+            StopAllCoroutines();
+            
+            // 杀死所有相关DOTween动画以防止冲突
+            BaseBar.DOKill(true); // true参数表示完成当前动画
+            CorretBar.DOKill(true);
+            Playerpoint.DOKill(true);
+            
+            // 确保对象处于活动状态
             BaseBar.gameObject.SetActive(true);
             CorretBar.gameObject.SetActive(true);
             Playerpoint.gameObject.SetActive(true);
-            //Dotween淡入效果
-            BaseBar.DOFade(1, 0.2f).SetEase(Ease.OutSine);
-            CorretBar.DOFade(1, 0.2f).SetEase(Ease.OutSine);
-            Playerpoint.DOFade(1, 0.2f).SetEase(Ease.OutSine);
+            
+            // 重置颜色（如果之前可能改变了颜色）
+            BaseBar.color = new Color(BaseBar.color.r, BaseBar.color.g, BaseBar.color.b, 0);
+            CorretBar.color = new Color(CorretBar.color.r, CorretBar.color.g, CorretBar.color.b, 0);
+            Playerpoint.color = new Color(Playerpoint.color.r, Playerpoint.color.g, Playerpoint.color.b, 0);
+            
+            // 应用淡入效果
+            BaseBar.DOFade(1, 0.2f).SetEase(Ease.OutSine).SetUpdate(true);
+            CorretBar.DOFade(1, 0.2f).SetEase(Ease.OutSine).SetUpdate(true);
+            Playerpoint.DOFade(1, 0.2f).SetEase(Ease.OutSine).SetUpdate(true);
+            
+            // 记录状态，表示UI现在是可见的
+            isBarVisible = true;
         }
         IEnumerator DisableBar()
         {
-            //Dotween淡出效果
+            // 如果UI已经被隐藏，直接退出
+            if (!isBarVisible) yield break;
+            
+            // 等待延迟
             yield return new WaitForSeconds(0.5f);
+            
+            // 如果在等待期间UI被重新激活，退出协程
+            if (!isBarVisible) yield break;
+            
+            // 应用淡出效果
             BaseBar.DOFade(0, 0.5f).SetEase(Ease.OutSine).OnComplete(() => BaseBar.gameObject.SetActive(false));
             CorretBar.DOFade(0, 0.5f).SetEase(Ease.OutSine).OnComplete(() => CorretBar.gameObject.SetActive(false));
-            Playerpoint.DOFade(0, 0.5f).SetEase(Ease.OutSine).OnComplete(() => Playerpoint.gameObject.SetActive(false));
+            Playerpoint.DOFade(0, 0.5f).SetEase(Ease.OutSine).OnComplete(() => 
+            {
+                Playerpoint.gameObject.SetActive(false);
+                isBarVisible = false; // 更新状态
+                ResetClicking(); // 重置点击状态
+            });
         }
         void SetQTEAccuracy()
         {
@@ -134,6 +166,7 @@ namespace DiasGames.Abilities
             isPlayerJudge = false;
             EnableBar();
             SetQTEAccuracy();
+
         }
         void WaitForJudge()
         {
@@ -193,22 +226,19 @@ namespace DiasGames.Abilities
             }
         }
         
-        void TriggerSucess()
+        public void TriggerSucess()
         {
             //执行QTE成功的逻辑
             Debug.Log("QTE成功");
-            CorretBar.DOColor(Color.green, 0.2f).SetLoops(2, LoopType.Yoyo);
-            isClicking = false;       
-            _clicktime =0f;
+            BaseBar.DOColor(Color.green, 0.2f).SetLoops(2, LoopType.Yoyo);
             isQTEfail = false;
         }
         void TriggerFail()
         {
             //执行QTE失败的逻辑
             Debug.Log("QTE失败");
-            CorretBar.DOColor(Color.red, 0.2f).SetLoops(2, LoopType.Yoyo);
-            isClicking = false;
-            _clicktime =0f;   
+            BaseBar.DOColor(Color.red, 0.2f).SetLoops(2, LoopType.Yoyo);
+ 
             
             // PlayerPhysicalStrength.Instance.FailedOnQTE();
             ClimbAbility climbAbility = GameObject.FindGameObjectWithTag("Player").GetComponent<ClimbAbility>();
@@ -216,6 +246,12 @@ namespace DiasGames.Abilities
             
             playerWaterState.ChangeWater();
             Debug.Log(playerWaterState.CurrentWater);
+        }
+
+        void ResetClicking()
+        {
+            isClicking = false;
+            _clicktime =0f;  
         }
 
     }
