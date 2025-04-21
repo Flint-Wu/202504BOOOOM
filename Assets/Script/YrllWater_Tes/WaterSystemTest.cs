@@ -28,34 +28,22 @@ public class WaterSystemTest : MonoBehaviour
     {
         // 初始化UI
         UpdateWaterUI(waterState.CurrentWater / waterState.MaxWater);
-       
+
         // 绑定事件
         waterState.OnWaterChanged.AddListener(UpdateWaterUI);
-          waterState.OnWaterDepleted.AddListener(ShowGameOver);
-        // QTEbutton.onClick.AddListener(() =>
-        // {
-        //     Debug.Log("按钮被点击！", this);
-        //     waterState.ChangeWater(); // 调用默认流失量
+        waterState.OnWaterDepleted.AddListener(ShowGameOver);
+        //QTEbutton.onClick.AddListener(() =>
+        //{
+        //    Debug.Log("按钮被点击！", this);
+        //    waterState.ChangeWater(); // 调用默认流失量
 
-<<<<<<< HEAD
-        });
-        WaterBottle.onClick.AddListener(() =>
-        {
-            waterState.ChangeWater(20); // 增加20单位
-=======
-        // });
-        // WaterBottle.onClick.AddListener(() =>
-        // {
-        //     waterState.ChangeWater(20f); // 增加20单位
->>>>>>> origin/Hajima
 
-        // });
-        // RestWater.onClick.AddListener(() =>
-        // {
-        //     waterState.ResetWater();
-        // });
+        //});
+        //WaterBottle.onClick.AddListener(() =>
+        //{
+        //    waterState.ChangeWater(20); // 增加20单位
 
-        // gameOverPanel.SetActive(false);
+        //});
     }
     
 
