@@ -189,7 +189,10 @@ namespace DiasGames.Abilities
             //float newBaseBarWidthPercentage = characterStrength.currentPhysicalStrength / characterStrength.maxPhysicalStrength+0.1f;
             if (Playerpoint.rectTransform.anchoredPosition.x > QTEBaseBarWidth*newBaseBarWidthPercentage)
             {
+                isPlayerJudge = true;
                 TriggerFail();
+                StartCoroutine(DisableBar());
+                return;
             }
 
 
