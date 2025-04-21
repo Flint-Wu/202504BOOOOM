@@ -6,6 +6,7 @@ public class WaterBottleFruit : MonoBehaviour
 {
     // Start is called before the first frame update
     public float waterAmount = 20f; // 水果的水量
+    public string PlayerID = "Player"; // 玩家ID
     void Start()
     {
         

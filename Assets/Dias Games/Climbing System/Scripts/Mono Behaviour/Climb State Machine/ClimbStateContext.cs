@@ -12,6 +12,7 @@ namespace DiasGames.Climbing
         public ClimbUpState ClimbUp = new ClimbUpState();
         public ClimbJumpState ClimbJump = new ClimbJumpState();
         public ClimbDropState ClimbDrop = new ClimbDropState();
+        public ClimbBrakeDropState Brake = new ClimbBrakeDropState();
         public CornerOutState CornerOut = new CornerOutState();
         public CornerInState CornerIn = new CornerInState();
 

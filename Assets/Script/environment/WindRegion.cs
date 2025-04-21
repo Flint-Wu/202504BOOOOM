@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-
+using DG.Tweening;
 public class WindRegion : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -22,7 +22,7 @@ public class WindRegion : MonoBehaviour
     {
         WindTime = 0;
         //设置vfx的边界和风区的大小一致
-        WindVfx.transform.localScale = this.GetComponent<BoxCollider>().size;
+        //WindVfx.transform.localScale = this.GetComponent<BoxCollider>().size;
         player = GameObject.FindGameObjectWithTag("Player");
     }
 

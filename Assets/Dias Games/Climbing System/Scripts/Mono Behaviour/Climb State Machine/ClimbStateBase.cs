@@ -13,8 +13,9 @@ namespace DiasGames.Climbing
         public virtual void Jump(ClimbStateContext context) { }
         public virtual void CornerOut(ClimbStateContext context) { }
         public virtual void CornerIn(ClimbStateContext context) { }
-
+        public virtual void Brake(ClimbStateContext context) { }
         public abstract void EnterState(ClimbStateContext context);
         public abstract void ExitState(ClimbStateContext context);
+        public virtual void Update(ClimbStateContext context) { }
     }
 }
