@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8164128887019081030}
   - component: {fileID: 8164128887019081031}
   - component: {fileID: 8164128887019081025}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WindZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,10 +48,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WindVfx: {fileID: 3110032973180283234}
   PlayerEnterPhysicalStrength: 0
-  WindPeiod: 4
+  WindPeiod: 10
   IsWindBegin: 0
   PlayerEnterWindStrengthPer: 0.2
   WindTime: 0
+  grassMaterial:
+  - {fileID: 2100000, guid: 354677666884e4242bc617ac805c805f, type: 2}
+  - {fileID: 2100000, guid: f42289bb2e558234ab077014cffca16e, type: 2}
+  grassRenderer: {fileID: 0}
+  isPlayerIn: 0
 --- !u!65 &8164128887019081025
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -63,7 +68,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
+  m_Size: {x: 100, y: 30, z: 70}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &8164128887236658017
 PrefabInstance:
@@ -75,6 +80,10 @@ PrefabInstance:
     - target: {fileID: 6513825145895168515, guid: 7cc55a616d813dc44b0ef6651981a55b, type: 3}
       propertyPath: m_Name
       value: Heavy_Wind
+      objectReference: {fileID: 0}
+    - target: {fileID: 6513825145895168515, guid: 7cc55a616d813dc44b0ef6651981a55b, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6513825145895168515, guid: 7cc55a616d813dc44b0ef6651981a55b, type: 3}
       propertyPath: m_IsActive

@@ -35,7 +35,14 @@ public class BuildingSystem : AbstractAbility
     {
         if(_action.interact)
         {
-            SwitchBuildingState(); // Toggle building state when interact is pressed
+            if(isBuilding)
+            {
+                StopBuilding(); // Stop building when interact is pressed again
+            }
+            else
+            {
+                StartBuilding(); // Start building when interact is pressed
+            }
         }
         if(!isBuilding) return;
         PlaceBuildingPrefab();
@@ -55,16 +62,26 @@ public class BuildingSystem : AbstractAbility
     {
         // Implement logic for updating the ability
     }
-    void SwitchBuildingState()
+    void StartBuilding()
     {
-        isBuilding = !isBuilding;
+        isBuilding = true;
         if(CurrentBuildingPrefab != null)
         {
             CurrentBuildingPrefab.SetActive(isBuilding); // Show or hide the building prefab
         }
     }
-    public void PlaceBuildingPrefab()
+
+    void StopBuilding()
     {
+        isBuilding = false;
+        if(CurrentBuildingPrefab != null)
+        {
+            CurrentBuildingPrefab.SetActive(false); // Hide the building prefab
+        }
+    }
+    public Transform PlaceBuildingPrefab(bool isOffsetY = false)
+    {
+        
         //从屏幕中点发射射线(新输入系统)
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         RaycastHit hit;
@@ -75,6 +92,10 @@ public class BuildingSystem : AbstractAbility
             //Debug.Log("Hit: " + hit.collider.name);
             //在射线碰撞点生成建筑物
             CurrentBuildingPrefab.transform.position = hit.point;
+            if(isOffsetY)
+            {
+                CurrentBuildingPrefab.transform.position += Vector3.down * 1f; // 在下落时偏移建筑物位置，放置与原攀附点冲突
+            }
             //根据碰撞点的法线设置建筑物的旋转
             CurrentBuildingPrefab.transform.rotation = Quaternion.LookRotation(hit.normal);
             if(_action.fire)
@@ -85,20 +106,26 @@ public class BuildingSystem : AbstractAbility
                     if(InventoryManager.Instance.CanBuild())
                     {
                         InventoryManager.Instance.CostNail(); // 扣除钉子数量
+                        GameObject building = Instantiate(BuildingPrefabs, hit.point, Quaternion.LookRotation(hit.normal));
+                        building.transform.rotation = Quaternion.LookRotation(hit.normal);
+                        // Optionally, you can set the parent of the building to the character or another object
+                        // building.transform.SetParent(transform); // Uncomment if needed
+                        StopBuilding();
+                        return building.transform; // Return the transform of the instantiated building
                     }
                     else
                     {
                         Debug.Log("没有足够的钉子！");
-                        return;
                     }
                 }
-                GameObject building = Instantiate(BuildingPrefabs, hit.point, Quaternion.LookRotation(hit.normal));
-                building.transform.rotation = Quaternion.LookRotation(hit.normal);
-                // Optionally, you can set the parent of the building to the character or another object
-                // building.transform.SetParent(transform); // Uncomment if needed
-                _action.fire = false;
             }
+            _action.fire = false;
+
         }
+        return null;
     }
+    /// <summary>
+    /// 在QTE失败时调用，执行紧急建筑操作
+    /// </summary>
 }
 }

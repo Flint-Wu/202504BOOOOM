@@ -16,7 +16,7 @@ namespace DiasGames.Abilities
         [Space]
         [SerializeField] private Transform grabReference;
         [SerializeField] private float globalRadiusDetection = 0.5f;
-        [SerializeField] private Vector2 offsetOnLedge;
+        [SerializeField] public Vector2 offsetOnLedge;
         [Header("Capsule Cast Parameters")]
         [SerializeField] private float capsuleCastDistance = 0.75f;
         [SerializeField] private float capsuleHeight = 1f;
@@ -221,6 +221,10 @@ namespace DiasGames.Abilities
 
             UpdateFootWall();
             UpdateTween();
+            if (_context.CurrentClimbState != null)
+            _context.CurrentClimbState.Update(_context);
+
+            //Debug.Log("ClimbState: " + _context.CurrentClimbState.ToString());
 
             // 检查是否正等待特定动画完成（如攀爬上沿、跳跃或下落）
             // 监控动画进度，当达到指定进度(_targetNormalizedTime)时，停止攀爬能力
@@ -958,6 +962,10 @@ namespace DiasGames.Abilities
             if (_action.drop)
                 Drop();
                 //Debug.Log("Drop");
+                //如果当前角色状态为ClimbDrop
+            //Debug.Log(_context.CurrentClimbState.ToString());
+
+
         }
 
         /// <summary>
