@@ -27,6 +27,8 @@ namespace DiasGames.Abilities
 
         [Header("QTE条的移动速度 (几秒跑完整个进度条)")]
         public float PlayerPointPeiod = 3f;
+        [Header("QTE条出现的初始位置限制")]
+        public float StartPercentage = 0.2f;
         public bool isPlayerJudge = false;
         public float _clicktime = 0f;
         public bool isClicking = false;
@@ -149,7 +151,7 @@ namespace DiasGames.Abilities
             float QTEAccuracy = characterStrength.currentPhysicalStrength / characterStrength.maxPhysicalStrength*BaseQTEAccuracy;
             QTEAccuracy = Mathf.Clamp(QTEAccuracy, 0.1f, BaseQTEAccuracy);
 
-            QTECorretBarWidthRange[0] = Random.Range(0, QTEBaseBarWidth * (1 - QTEAccuracy));
+            QTECorretBarWidthRange[0] = Random.Range(QTEBaseBarWidth*StartPercentage, QTEBaseBarWidth * (1 - QTEAccuracy));
             QTECorretBarWidthRange[1] = QTECorretBarWidthRange[0] + QTEBaseBarWidth * QTEAccuracy;
             CorretBar.rectTransform.anchoredPosition = new Vector2(QTECorretBarWidthRange[0], CorretBar.rectTransform.anchoredPosition.y);
             CorretBar.rectTransform.sizeDelta = new Vector2(QTEAccuracy*BaseBar.rectTransform.sizeDelta.x, CorretBar.rectTransform.sizeDelta.y);

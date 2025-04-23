@@ -83,7 +83,11 @@ public class Liquid : MonoBehaviour
     {
         GetMeshAndRend();
     }
- 
+    public void SetFillAmount(float amount)
+    {
+        fillAmount = Mathf.Clamp01(amount);
+        //更新位置
+    }
     void GetMeshAndRend()
     {
         //得到Mesh和Renderer组件
@@ -233,51 +237,7 @@ public class Liquid : MonoBehaviour
         return lowestVert.y;
     }
 
-    float CalculateBottomHeight()
-    {
-        // 根据Mesh计算出最低点和最高点的高度差
-        if (mesh == null)
-        {
-            Debug.LogWarning("无法计算高度：网格引用为空");
-            return 0f;
-        }
-        
-        float lowestY = float.MaxValue;
-        float highestY = float.MinValue;
-        Vector3[] vertices = mesh.vertices;
-        
-        // 遍历所有顶点找出最高和最低点
-        for (int i = 0; i < vertices.Length; i++)
-        {
-            // 将本地坐标转换为世界坐标
-            Vector3 worldPosition = transform.TransformPoint(vertices[i]);
-            
-            // 更新最低点
-            if (worldPosition.y < lowestY)
-            {
-                lowestY = worldPosition.y;
-            }
-            
-            // 更新最高点
-            if (worldPosition.y > highestY)
-            {
-                highestY = worldPosition.y;
-            }
-        }
-        
-        // 计算高度差
-        float heightDifference = highestY - lowestY;
-        
-        // 确保结果有效
-        if (heightDifference < 0 || float.IsNaN(heightDifference))
-        {
-            Debug.LogWarning("计算的高度差无效：" + heightDifference);
-            return 0f;
-        }
-        
-        return heightDifference;
-    }
-    void OnDrawGizmos()
+        void OnDrawGizmos()
     {
         Vector3 worldPos = transform.TransformPoint(new Vector3(mesh.bounds.center.x, mesh.bounds.center.y, mesh.bounds.center.z));
         //绘制world坐标系的xyz轴
