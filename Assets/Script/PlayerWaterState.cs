@@ -29,7 +29,7 @@ public class PlayerWaterState : MonoBehaviour
     /// <summary>
     /// ????????
     /// </summary>
-    public float CurrentWater { get; private set; }
+    public float CurrentWater;
     public bool IsInCritical { get; private set; }
     private bool _isDepleted = false;
     //?????????

@@ -43,7 +43,7 @@ namespace DiasGames.Abilities
         public int lossWater = 10;
         private float newBaseBarWidthPercentage = 1f;
     // 在类的顶部，和其他实例变量一起定义
-        private bool isBarVisible = false;
+        private bool isBarVisible = true;
         void Awake()
         {
             if (scheduler != null)
@@ -250,6 +250,11 @@ namespace DiasGames.Abilities
             climbAbility.ForceDrop();
             
             playerWaterState.ChangeWater();
+            if(playerWaterState.IsInCritical)
+            {
+                this.transform.root.GetComponentInChildren<Health>().Damage(200);
+                //通过Health组件来判断死亡
+            }
             Debug.Log(playerWaterState.CurrentWater);
         }
 

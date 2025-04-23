@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DiasGames.Abilities;
 namespace DiasGames.Climbing
 {
     [System.Serializable]
@@ -20,6 +20,8 @@ namespace DiasGames.Climbing
 
         public override void EnterState(ClimbStateContext context)
         {
+            //如果玩家正在点击QTEUI,按空格不触发攀爬动作
+            if(QTEUI.Instance.isClicking)return;
             if (_hasClimb = FreeToClimb(context))
             {
                 string animation = context.animator.GetFloat("HangWeight") > 0.6f ? hangClimbUpState : braceClimbUpState;
