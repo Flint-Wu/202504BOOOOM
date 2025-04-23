@@ -155,8 +155,6 @@ namespace DiasGames.Abilities
         public override bool ReadyToRun()
         {
             if (_mover.IsGrounded()) return false;
-            //如果当前动画机为"Falling",则返回false，表示角色处于下落状态，不能执行攀爬动作。
-            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Falling")) return false;
 
             return HasLedge();
         }
@@ -185,7 +183,7 @@ namespace DiasGames.Abilities
             SetAnimationState("Climb.Start Climb");
             PlayerPhysicalStrength.Instance.ReducePhysicalStrength(PlayerPhysicalStrength.Instance.JumpStrength);
             QTEUI.Instance.StartClick();
-
+            QTEUI.Instance.isGapTime = true;
             _timeWithoutLedge = 0;
         }
 

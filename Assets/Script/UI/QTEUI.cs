@@ -44,6 +44,8 @@ namespace DiasGames.Abilities
         private float newBaseBarWidthPercentage = 1f;
     // 在类的顶部，和其他实例变量一起定义
         private bool isBarVisible = true;
+        [Header("是否是玩家跳跃和QTE出现的Gaptime（gaptime禁用跳跃操作以防bug）")]
+        public bool isGapTime = false;
         void Awake()
         {
             if (scheduler != null)
@@ -158,18 +160,25 @@ namespace DiasGames.Abilities
         }
         public void StartClick()
         {
-            // if(_clicktime>0.1f&&_clicktime<PlayerPointPeiod)
-            // {
-            //     //如果玩家还没有判断过（没触发QTE就继续跳跃），就直接触发失败
-            //     TriggerFail();
-            //     return;
-            // }
+            // 防止重复触发
+            if (isClicking) return;
+            
+            // 使用协程代替Invoke
+            StartCoroutine(DelayedClickingStart());
+        }
+
+        private IEnumerator DelayedClickingStart()
+        {
+            // 使用WaitForSeconds而非Invoke
+            yield return new WaitForSeconds(0.6f);
+            
             isClicking = true;
             isPlayerJudge = false;
             EnableBar();
             SetQTEAccuracy();
-
+            isGapTime = false;
         }
+
         void WaitForJudge()
         {
             
@@ -247,6 +256,7 @@ namespace DiasGames.Abilities
             
             // PlayerPhysicalStrength.Instance.FailedOnQTE();
             ClimbAbility climbAbility = GameObject.FindGameObjectWithTag("Player").GetComponent<ClimbAbility>();
+            //climbAbility.StopAbility();
             climbAbility.ForceDrop();
             
             playerWaterState.ChangeWater();
