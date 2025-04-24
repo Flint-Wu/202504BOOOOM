@@ -183,7 +183,7 @@ namespace DiasGames.Abilities
             SetAnimationState("Climb.Start Climb");
             PlayerPhysicalStrength.Instance.ReducePhysicalStrength(PlayerPhysicalStrength.Instance.JumpStrength);
             QTEUI.Instance.StartClick();
-
+            QTEUI.Instance.isGapTime = true;
             _timeWithoutLedge = 0;
         }
 
