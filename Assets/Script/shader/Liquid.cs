@@ -16,6 +16,7 @@ public class Liquid : MonoBehaviour
     [SerializeField]
     float WobbleSpeedMove = 1f;
     [SerializeField]
+    [Range(0, 1)]
     float fillAmount = 0.5f;
     [SerializeField]
     float Recovery = 1f;
@@ -40,20 +41,56 @@ public class Liquid : MonoBehaviour
     float sinewave;
     float time = 0.5f;
     Vector3 comp;
- 
+    private float modelHeight;
+    private float bottomY;
+    private float topY;
     // Use this for initialization
     void Start()
     {
         GetMeshAndRend();
+        CalculateModelDimensions();
+        //计算容器Mesh的高度
+
     }
- 
+    void CalculateModelDimensions()
+    {
+        if (mesh == null) return;
+        
+        // 获取模型的边界框
+        Bounds bounds = mesh.bounds;
+        
+        // 在本地坐标系中计算
+        float localMinY = bounds.min.y;
+        float localMaxY = bounds.max.y;
+        
+        // 转换为世界坐标(相对于模型原点)
+        Vector3 worldMin = transform.TransformPoint(new Vector3(0, localMinY, 0));
+        Vector3 worldMax = transform.TransformPoint(new Vector3(0, localMaxY, 0));
+        
+        // 计算高度和位置
+        bottomY = worldMin.y - transform.position.y;
+        topY = worldMax.y - transform.position.y;
+        modelHeight = topY - bottomY;
+        
+        // 将计算结果传递给着色器
+        rend.sharedMaterial.SetFloat("_ModelHeight", modelHeight);
+        rend.sharedMaterial.SetFloat("_TopY", topY);
+        
+        Debug.Log($"模型高度: {modelHeight}, 底部Y: {bottomY}, 顶部Y: {topY}");
+    }
+
     private void OnValidate()
     {
         GetMeshAndRend();
     }
- 
+    public void SetFillAmount(float amount)
+    {
+        fillAmount = Mathf.Clamp01(amount);
+        //更新位置
+    }
     void GetMeshAndRend()
     {
+        //得到Mesh和Renderer组件
         if (mesh == null)
         {
             mesh = GetComponent<MeshFilter>().sharedMesh;
@@ -82,14 +119,15 @@ public class Liquid : MonoBehaviour
         if (deltaTime != 0)
         {
  
- 
             // decrease wobble over time
+            //随着时间的推移，减少波动
             wobbleAmountToAddX = Mathf.Lerp(wobbleAmountToAddX, 0, (deltaTime * Recovery));
             wobbleAmountToAddZ = Mathf.Lerp(wobbleAmountToAddZ, 0, (deltaTime * Recovery));
  
  
  
             // make a sine wave of the decreasing wobble
+            //波动沿着正弦波下降
             pulse = 2 * Mathf.PI * WobbleSpeedMove;
             sinewave = Mathf.Lerp(sinewave, Mathf.Sin(pulse * time), deltaTime * Mathf.Clamp(velocity.magnitude + angularVelocity.magnitude, Thickness, 10));
  
@@ -107,7 +145,7 @@ public class Liquid : MonoBehaviour
             wobbleAmountToAddX += Mathf.Clamp((velocity.x + (velocity.y * 0.2f) + angularVelocity.z + angularVelocity.y) * MaxWobble, -MaxWobble, MaxWobble);
             wobbleAmountToAddZ += Mathf.Clamp((velocity.z + (velocity.y * 0.2f) + angularVelocity.x + angularVelocity.y) * MaxWobble, -MaxWobble, MaxWobble);
         }
- 
+        
         // send it to the shader
         rend.sharedMaterial.SetFloat("_WobbleX", wobbleAmountX);
         rend.sharedMaterial.SetFloat("_WobbleZ", wobbleAmountZ);
@@ -120,9 +158,13 @@ public class Liquid : MonoBehaviour
         lastRot = transform.rotation;
     }
  
+    /// <summary>
+    /// 更新位置
+    /// </summary>
+    /// <param name="deltaTime"></param>
     void UpdatePos(float deltaTime)
     {
- 
+        //得到几何体形状的重心
         Vector3 worldPos = transform.TransformPoint(new Vector3(mesh.bounds.center.x, mesh.bounds.center.y, mesh.bounds.center.z));
         if (CompensateShapeAmount > 0)
         {
@@ -193,5 +235,17 @@ public class Liquid : MonoBehaviour
             }
         }
         return lowestVert.y;
+    }
+
+        void OnDrawGizmos()
+    {
+        Vector3 worldPos = transform.TransformPoint(new Vector3(mesh.bounds.center.x, mesh.bounds.center.y, mesh.bounds.center.z));
+        //绘制world坐标系的xyz轴
+        Gizmos.color = Color.red; // X轴为红色
+        Gizmos.DrawLine(worldPos, worldPos + transform.right * 2f); // X轴长度为2
+        Gizmos.color = Color.green; // Y轴为绿色
+        Gizmos.DrawLine(worldPos, worldPos + transform.up * 2f); // Y轴长度为2
+        Gizmos.color = Color.blue; // Z轴为蓝色
+        Gizmos.DrawLine(worldPos, worldPos + transform.forward * 2f); // Z轴长度为2
     }
 }
