@@ -2686,9 +2686,9 @@ MonoBehaviour:
     brushes:
     - name: 4 unique Points Ledge Variant
       settings:
-        brushRadius: 0.5
-        brushSpacing: 1.2
-        brushOverlapCheckMode: 0
+        brushRadius: 0.01
+        brushSpacing: 1.5
+        brushOverlapCheckMode: 1
         brushOverlapDistance: 0.5
         brushOverlapCheckObjects: 1
         brushOverlapCheckLayers:
@@ -2963,8 +2963,8 @@ MonoBehaviour:
         gridNormal: {x: 0, y: 1, z: 0}
         gridAngle: 0
       prefabSlots:
-      - gameObject: {fileID: 6360076805468844018, guid: 2ade83eae240d1a4f885c366ca3e292a, type: 3}
-      - gameObject: {fileID: 4643051448312681677, guid: 167537ee4c701714abd2ae021f4c4e4d, type: 3}
+      - gameObject: {fileID: 0}
+      - gameObject: {fileID: 0}
       - gameObject: {fileID: 4491158196177669340, guid: fa1b35783beafad49a17127a4f749534, type: 3}
       - gameObject: {fileID: 0}
       - gameObject: {fileID: 0}

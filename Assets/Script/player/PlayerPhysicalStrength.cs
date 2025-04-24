@@ -12,6 +12,7 @@ public class PlayerPhysicalStrength : MonoBehaviour
         Instance = this;
     }
     public int maxPhysicalStrength = 100;
+    public int minPhysicalStrength = 5;
     public float currentPhysicalStrength = 100;
     [Header("攀爬中跳跃、平地奔跑所需的体力消耗")]
     public float JumpStrength = 20f;
@@ -38,9 +39,9 @@ public class PlayerPhysicalStrength : MonoBehaviour
     public void ReducePhysicalStrength(float amount)
     {
         currentPhysicalStrength -= amount;
-        if (currentPhysicalStrength < 0)
+        if (currentPhysicalStrength <= minPhysicalStrength)
         {
-            currentPhysicalStrength = 0;
+            currentPhysicalStrength = minPhysicalStrength;
         }
     }
     public void stopRecovering()
