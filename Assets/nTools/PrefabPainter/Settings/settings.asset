@@ -2687,8 +2687,8 @@ MonoBehaviour:
     - name: 4 unique Points Ledge Variant
       settings:
         brushRadius: 0.01
-        brushSpacing: 1.2
-        brushOverlapCheckMode: 0
+        brushSpacing: 1.5
+        brushOverlapCheckMode: 1
         brushOverlapDistance: 0.5
         brushOverlapCheckObjects: 1
         brushOverlapCheckLayers:
@@ -2995,7 +2995,7 @@ MonoBehaviour:
       - gameObject: {fileID: 0}
       - gameObject: {fileID: 0}
       - gameObject: {fileID: 0}
-      selectedSlot: 0
+      selectedSlot: 2
       selected: 1
       colorTag: 0
       customPreviewImage: {fileID: 0}
