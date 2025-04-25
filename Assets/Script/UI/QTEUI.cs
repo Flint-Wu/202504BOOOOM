@@ -260,11 +260,11 @@ namespace DiasGames.Abilities
             climbAbility.ForceDrop();
             
             playerWaterState.ChangeWater();
-            if(playerWaterState.IsInCritical)
-            {
-                this.transform.root.GetComponentInChildren<Health>().Damage(200);
-                //通过Health组件来判断死亡
-            }
+            // if(playerWaterState.IsInCritical)
+            // {
+            //     this.transform.root.GetComponentInChildren<Health>().Damage(200);
+            //     //通过Health组件来判断死亡
+            // }
             Debug.Log(playerWaterState.CurrentWater);
         }
 

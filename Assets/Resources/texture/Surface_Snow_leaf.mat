@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Surface_Snow_leaf
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 2f44f8374f335b840a42049575307afb, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -81,16 +81,16 @@ Material:
     - _b_influence: 1
     - _branches_disp: 0.3
     - _leaves_wiggle_disp: 0.07
-    - _leaves_wiggle_speed: 0.01
+    - _leaves_wiggle_speed: 0.002
     - _r_influence: 1
     - _tree_sway_disp: 0.3
     - _tree_sway_speed: 1
     - _tree_sway_stutter: 1.5
     - _tree_sway_stutter_influence: 0.2
-    - _wind_size: 15
+    - _wind_size: 5
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Tint: {r: 1, g: 1, b: 1, a: 1}
+    - _Tint: {r: 0.990566, g: 0.990566, b: 0.990566, a: 1}
     - _wind_dir: {r: 0.5, g: 0.05, b: 0.5, a: 0}
   m_BuildTextureStacks: []

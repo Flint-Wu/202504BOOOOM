@@ -108,14 +108,14 @@ Material:
     - __dirty: 1
     - _b_influence: 1
     - _branches_disp: 0.3
-    - _leaves_wiggle_disp: 0.07
-    - _leaves_wiggle_speed: 0.01
+    - _leaves_wiggle_disp: 0.02
+    - _leaves_wiggle_speed: 0.002
     - _r_influence: 1
-    - _tree_sway_disp: 0.453
+    - _tree_sway_disp: 0.3
     - _tree_sway_speed: 1
     - _tree_sway_stutter: 1.5
     - _tree_sway_stutter_influence: 0.2
-    - _wind_size: 15
+    - _wind_size: 5
     m_Colors:
     - _Color: {r: 0.5377358, g: 0.43786153, b: 0.37793696, a: 1}
     - _Color1: {r: 0.42452827, g: 0.3635293, b: 0.2983713, a: 1}
