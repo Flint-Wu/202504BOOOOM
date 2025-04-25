@@ -39,7 +39,7 @@ public class BottleOutLine : MonoBehaviour
     {
         Debug.Log("水量危机，开始轮廓效果");
         //Dotween实现_OutlineWidth在0.02-0.1循环变化
-        renderer.material.DOFloat(0.1f, "_OutlineWidth", 0.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.Linear);
+        renderer.material.DOFloat(0.05f, "_OutlineWidth", 0.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.Linear);
         // 在这里添加您想要在水量危机时执行的代码
         // 例如，激活水瓶轮廓效果
     }
