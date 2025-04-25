@@ -952,6 +952,7 @@ namespace DiasGames.Abilities
             {
                 if(Mathf.Approximately(_localCoordMove.x, 0) || _localCoordMove.y > 0.5f)
                     ClimbUp();
+                    PlayerPhysicalStrength.Instance.stopRecovering();
 
 
                 if (_localCoordMove != Vector2.zero)
