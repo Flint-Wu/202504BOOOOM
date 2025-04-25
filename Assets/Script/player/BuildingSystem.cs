@@ -35,17 +35,18 @@ public class BuildingSystem : AbstractAbility
     {
         if(_action.interact)
         {
-            if(isBuilding)
-            {
-                StopBuilding(); // Stop building when interact is pressed again
-            }
-            else
-            {
-                StartBuilding(); // Start building when interact is pressed
-            }
+            // if(isBuilding)
+            // {
+            //     StopBuilding(); // Stop building when interact is pressed again
+            // }
+            // else
+            UsedNail(); // Use a nail when interact is pressed
+            // {
+            //     StartBuilding(); // Start building when interact is pressed
+            // }
         }
-        if(!isBuilding) return;
-        PlaceBuildingPrefab();
+        // if(!isBuilding) return;
+        // PlaceBuildingPrefab();
     }
     public override bool ReadyToRun()
     {
@@ -78,6 +79,13 @@ public class BuildingSystem : AbstractAbility
         {
             CurrentBuildingPrefab.SetActive(false); // Hide the building prefab
         }
+    }
+    public void UsedNail()
+    {
+        if(!InventoryManager.Instance.CanBuild())return; // 检查是否可以建造
+        InventoryManager.Instance.CostNail(); // 扣除钉子数量
+        PlayerPhysicalStrength.Instance.startRecovering(); // 开始恢复体力
+
     }
     public Transform PlaceBuildingPrefab(bool isOffsetY = false)
     {

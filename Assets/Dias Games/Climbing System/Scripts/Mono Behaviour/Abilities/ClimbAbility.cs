@@ -722,14 +722,14 @@ namespace DiasGames.Abilities
                                 _currentTopHit = top;
                                 _currentHorizontalHit = hit;
 
-                                if(_currentCollider.tag == "Nail")
-                                {
-                                    PlayerPhysicalStrength.Instance.startRecovering();
-                                }
-                                else
-                                {
-                                    PlayerPhysicalStrength.Instance.stopRecovering();
-                                }
+                                // if(_currentCollider.tag == "Nail")
+                                // {
+                                //     PlayerPhysicalStrength.Instance.startRecovering();
+                                // }
+                                // else
+                                // {
+                                //     PlayerPhysicalStrength.Instance.stopRecovering();
+                                // }
 
                                 if(ignoreTags.Contains(_currentCollider.tag))
                                     return false;

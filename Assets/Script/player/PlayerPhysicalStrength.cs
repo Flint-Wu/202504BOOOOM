@@ -60,6 +60,7 @@ public class PlayerPhysicalStrength : MonoBehaviour
         if (currentPhysicalStrength > maxPhysicalStrength)
         {
             currentPhysicalStrength = maxPhysicalStrength;
+            stopRecovering();
         }
     }
 
