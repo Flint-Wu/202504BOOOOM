@@ -12,7 +12,7 @@ public class MadeID : MonoBehaviour
 
     public void TransID()
     {
-        ID = IdInput.text;
+        ID = IdInput.text;                      
         IDCount = ID.Length.ToString();
 
         int randomIndex = Random.Range(0, sign.Length);

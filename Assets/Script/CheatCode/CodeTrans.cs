@@ -109,6 +109,7 @@ public class CodeTrans : MonoBehaviour
     
     public string BakTransCode(string inputText)
     {
+        if (inputText == "") return null;
         chars = inputText.ToCharArray();
         parts = new string[chars.Length];
 
