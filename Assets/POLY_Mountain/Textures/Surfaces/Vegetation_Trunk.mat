@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Vegetation_Trunk
-  m_Shader: {fileID: 4800000, guid: 2f44f8374f335b840a42049575307afb, type: 3}
+  m_Shader: {fileID: 4800000, guid: 67e09efbb61468142b4b0c23b26e4d49, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -108,9 +108,12 @@ Material:
     - __dirty: 1
     - _b_influence: 1
     - _branches_disp: 0.3
+    - _grow: 0
+    - _growIntensity: 1
     - _leaves_wiggle_disp: 0.02
     - _leaves_wiggle_speed: 0.002
     - _r_influence: 1
+    - _sliceOffset: 0
     - _tree_sway_disp: 0.3
     - _tree_sway_speed: 1
     - _tree_sway_stutter: 1.5
