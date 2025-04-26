@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class WaterSystemTest : MonoBehaviour
 {
     
-        [Header("×é¼þÒýÓÃ")]
+        [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
         [SerializeField] private PlayerWaterState waterState;
         [SerializeField] private Slider waterSlider;
         [SerializeField] private Text percentText;
@@ -19,28 +19,28 @@ public class WaterSystemTest : MonoBehaviour
     [SerializeField] private Button RestWater;
 
 
-    [Header("µ÷ÊÔÉèÖÃ")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
         [SerializeField] private Color normalColor = Color.cyan;
         [SerializeField] private Color criticalColor = Color.red;
         [SerializeField] private int maxLogEntries = 5;
 
     private void Start()
     {
-        // ³õÊ¼»¯UI
+        // ï¿½ï¿½Ê¼ï¿½ï¿½UI
         UpdateWaterUI(waterState.CurrentWater / waterState.MaxWater);
        
-        // °ó¶¨ÊÂ¼þ
+        // ï¿½ï¿½ï¿½Â¼ï¿½
         waterState.OnWaterChanged.AddListener(UpdateWaterUI);
           waterState.OnWaterDepleted.AddListener(ShowGameOver);
         // QTEbutton.onClick.AddListener(() =>
         // {
-        //     Debug.Log("°´Å¥±»µã»÷£¡", this);
-        //     waterState.ChangeWater(); // µ÷ÓÃÄ¬ÈÏÁ÷Ê§Á¿
+        //     Debug.Log("ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", this);
+        //     waterState.ChangeWater(); // ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½
 
         // });
         // WaterBottle.onClick.AddListener(() =>
         // {
-        //     waterState.ChangeWater(20f); // Ôö¼Ó20µ¥Î»
+        //     waterState.ChangeWater(20f); // ï¿½ï¿½ï¿½ï¿½20ï¿½ï¿½Î»
 
         // });
         // RestWater.onClick.AddListener(() =>
@@ -52,14 +52,14 @@ public class WaterSystemTest : MonoBehaviour
     }
     
 
-    // ====== UI¸üÐÂ·½·¨ ======
+    // ====== UIï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ ======
     private void UpdateWaterUI(float percent)
         {
-            // ¸üÐÂ½ø¶ÈÌõ
+            // ï¿½ï¿½ï¿½Â½ï¿½ï¿½ï¿½ï¿½ï¿½
             waterSlider.value = percent;
             percentText.text = $"{(percent * 100):F1}%";
 
-            // ÑÕÉ«½¥±ä
+            // ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½
             waterSlider.fillRect.GetComponent<Image>().color =
                 Color.Lerp(criticalColor, normalColor, percent);
         }
@@ -68,7 +68,7 @@ public class WaterSystemTest : MonoBehaviour
 
         private void ShowGameOver()
         {
-            gameOverPanel.SetActive(true);
+            //gameOverPanel.SetActive(true);
         
         }
 
@@ -76,7 +76,7 @@ public class WaterSystemTest : MonoBehaviour
     private void OnDestroy()
 {
     waterState.OnWaterChanged.RemoveListener(UpdateWaterUI);
-    // Ó¦½â°óËùÓÐ¼àÌýÆ÷
+    // Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¼ï¿½ï¿½ï¿½ï¿½ï¿½
 }
     
 }

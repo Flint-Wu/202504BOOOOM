@@ -722,14 +722,14 @@ namespace DiasGames.Abilities
                                 _currentTopHit = top;
                                 _currentHorizontalHit = hit;
 
-                                if(_currentCollider.tag == "Nail")
-                                {
-                                    PlayerPhysicalStrength.Instance.startRecovering();
-                                }
-                                else
-                                {
-                                    PlayerPhysicalStrength.Instance.stopRecovering();
-                                }
+                                // if(_currentCollider.tag == "Nail")
+                                // {
+                                //     PlayerPhysicalStrength.Instance.startRecovering();
+                                // }
+                                // else
+                                // {
+                                //     PlayerPhysicalStrength.Instance.stopRecovering();
+                                // }
 
                                 if(ignoreTags.Contains(_currentCollider.tag))
                                     return false;
@@ -952,6 +952,7 @@ namespace DiasGames.Abilities
             {
                 if(Mathf.Approximately(_localCoordMove.x, 0) || _localCoordMove.y > 0.5f)
                     ClimbUp();
+                    
 
 
                 if (_localCoordMove != Vector2.zero)
