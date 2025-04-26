@@ -14,15 +14,21 @@ namespace DiasGames.Abilities
         [Header("QTE条的基础条")]
         [SerializeField] private Image BaseBar;
         [Header("QTE条的正确条")]
+        [SerializeField] private Image[] OtherImage;
         [SerializeField] private Image CorretBar;
+        [Header("正确QTE跳出的精灵")]
+        [SerializeField] private Image CorrectSprite;
+        [Header("错误QTE跳出的精灵")]
+        [SerializeField] private Image WrongSprite;
+        [Header("QTE条的指针")]
         public Image Playerpoint;
         [SerializeField] private PlayerPhysicalStrength characterStrength;
         
         //QTE的正确率为当前体力值与最大体力值的比值+10%,其取值为0.1-0.8之间
         [Header("QTE的正确率为当前体力值与最大体力值的比值+10%,其取值为0.1-0.8之间")]
         [Range(0.1f, 0.8f)] public float BaseQTEAccuracy = 0.1f;
-        public float QTEBaseBarWidth;
-        public float[] QTECorretBarWidthRange = new float[2];
+        public float QTEBaseBarHeight;
+        public float[] QTECorretBarHeightRange = new float[2];
         public AbilityScheduler scheduler;
 
         [Header("QTE条的移动速度 (几秒跑完整个进度条)")]
@@ -58,7 +64,7 @@ namespace DiasGames.Abilities
                 Debug.LogError("找不到 AbilityScheduler 组件，无法获取输入动作！");
             }
             Instance = this;
-            QTEBaseBarWidth = BaseBar.rectTransform.sizeDelta.x;
+            QTEBaseBarHeight = BaseBar.rectTransform.sizeDelta.y;
 
             StartCoroutine(DisableBar());
         }
@@ -97,28 +103,22 @@ namespace DiasGames.Abilities
        void EnableBar()
         {
             // 停止所有协程（包括正在运行的DisableBar协程）
-            StopAllCoroutines();
+        StopAllCoroutines();
+
+        Image[] uiElements = { BaseBar, CorretBar, Playerpoint, OtherImage[0], OtherImage[1]};
             
-            // 杀死所有相关DOTween动画以防止冲突
-            BaseBar.DOKill(true); // true参数表示完成当前动画
-            CorretBar.DOKill(true);
-            Playerpoint.DOKill(true);
-            
-            // 确保对象处于活动状态
-            BaseBar.gameObject.SetActive(true);
-            CorretBar.gameObject.SetActive(true);
-            Playerpoint.gameObject.SetActive(true);
-            
-            // 重置颜色（如果之前可能改变了颜色）
-            BaseBar.color = new Color(BaseBar.color.r, BaseBar.color.g, BaseBar.color.b, 0);
-            CorretBar.color = new Color(CorretBar.color.r, CorretBar.color.g, CorretBar.color.b, 0);
-            Playerpoint.color = new Color(Playerpoint.color.r, Playerpoint.color.g, Playerpoint.color.b, 0);
-            
-            // 应用淡入效果
-            BaseBar.DOFade(1, 0.2f).SetEase(Ease.OutSine).SetUpdate(true);
-            CorretBar.DOFade(1, 0.2f).SetEase(Ease.OutSine).SetUpdate(true);
-            Playerpoint.DOFade(1, 0.2f).SetEase(Ease.OutSine).SetUpdate(true);
-            
+            foreach (Image uiElement in uiElements)
+            {
+                // 杀死动画
+                uiElement.DOKill(true);
+                
+                // 确保激活
+                uiElement.gameObject.SetActive(true);
+                
+                // 重置并应用淡入效果
+                uiElement.color = new Color(uiElement.color.r, uiElement.color.g, uiElement.color.b, 0);
+                uiElement.DOFade(1, 0.2f).SetEase(Ease.OutSine).SetUpdate(true);
+            }
             // 记录状态，表示UI现在是可见的
             isBarVisible = true;
         }
@@ -134,8 +134,20 @@ namespace DiasGames.Abilities
             if (!isBarVisible) yield break;
             
             // 应用淡出效果
+            OtherImage[0].DOFade(0, 0.5f).SetEase(Ease.OutSine).OnComplete(() => OtherImage[0].gameObject.SetActive(false));
+            OtherImage[1].DOFade(0, 0.5f).SetEase(Ease.OutSine).OnComplete(() => OtherImage[1].gameObject.SetActive(false));
             BaseBar.DOFade(0, 0.5f).SetEase(Ease.OutSine).OnComplete(() => BaseBar.gameObject.SetActive(false));
             CorretBar.DOFade(0, 0.5f).SetEase(Ease.OutSine).OnComplete(() => CorretBar.gameObject.SetActive(false));
+            //如果CorrectSprite active,就隐藏
+            if (CorrectSprite.gameObject.activeSelf)
+            {
+                CorrectSprite.DOFade(0, 0.5f).SetEase(Ease.OutSine).OnComplete(() => CorrectSprite.gameObject.SetActive(false));
+            }
+            //如果WrongSprite active,就隐藏
+            if (WrongSprite.gameObject.activeSelf)
+            {
+                WrongSprite.DOFade(0, 0.5f).SetEase(Ease.OutSine).OnComplete(() => WrongSprite.gameObject.SetActive(false));
+            }
             Playerpoint.DOFade(0, 0.5f).SetEase(Ease.OutSine).OnComplete(() => 
             {
                 Playerpoint.gameObject.SetActive(false);
@@ -147,16 +159,16 @@ namespace DiasGames.Abilities
         {
             //BaseBar的宽度根据体力值的变化而变化，判断条的宽度为BaseBar的宽度*QTEAccuracy
             //float newBaseBarWidthPercentage = characterStrength.currentPhysicalStrength / characterStrength.maxPhysicalStrength+0.1f;
-            BaseBar.rectTransform.sizeDelta = new Vector2(QTEBaseBarWidth*newBaseBarWidthPercentage, BaseBar.rectTransform.sizeDelta.y);
+            BaseBar.rectTransform.sizeDelta = new Vector2(BaseBar.rectTransform.sizeDelta.x,QTEBaseBarHeight*newBaseBarWidthPercentage);
 
 
             float QTEAccuracy = characterStrength.currentPhysicalStrength / characterStrength.maxPhysicalStrength*BaseQTEAccuracy;
             QTEAccuracy = Mathf.Clamp(QTEAccuracy, 0.1f, BaseQTEAccuracy);
 
-            QTECorretBarWidthRange[0] = Random.Range(QTEBaseBarWidth*StartPercentage, QTEBaseBarWidth * (1 - QTEAccuracy));
-            QTECorretBarWidthRange[1] = QTECorretBarWidthRange[0] + QTEBaseBarWidth * QTEAccuracy;
-            CorretBar.rectTransform.anchoredPosition = new Vector2(QTECorretBarWidthRange[0], CorretBar.rectTransform.anchoredPosition.y);
-            CorretBar.rectTransform.sizeDelta = new Vector2(QTEAccuracy*BaseBar.rectTransform.sizeDelta.x, CorretBar.rectTransform.sizeDelta.y);
+            QTECorretBarHeightRange[0] = Random.Range(QTEBaseBarHeight*StartPercentage, QTEBaseBarHeight * (1 - QTEAccuracy));
+            QTECorretBarHeightRange[1] = QTECorretBarHeightRange[0] + QTEBaseBarHeight * QTEAccuracy;
+            CorretBar.rectTransform.anchoredPosition = new Vector2(CorretBar.rectTransform.anchoredPosition.x,QTECorretBarHeightRange[0]);
+            CorretBar.rectTransform.sizeDelta = new Vector2(CorretBar.rectTransform.sizeDelta.x,QTEAccuracy*BaseBar.rectTransform.sizeDelta.y);
         }
         public void StartClick()
         {
@@ -188,8 +200,8 @@ namespace DiasGames.Abilities
                 return;
             }
             //指针的x坐标从QTEBaseBarWidth/2到-QTEBaseBarWidth/2之间移动
-            float Speed = QTEBaseBarWidth / PlayerPointPeiod;
-            Playerpoint.rectTransform.anchoredPosition = new Vector2(Speed * _clicktime, Playerpoint.rectTransform.anchoredPosition.y);
+            float Speed = QTEBaseBarHeight / PlayerPointPeiod;
+            Playerpoint.rectTransform.anchoredPosition = new Vector2(Playerpoint.rectTransform.anchoredPosition.x,Speed * _clicktime);
             PlayerJudge();
         }
         void PlayerJudge()
@@ -198,7 +210,7 @@ namespace DiasGames.Abilities
             //Debug.Log(_action);
             //如果Playerpoint.rectTransform.anchoredPosition.x小于0,
             //float newBaseBarWidthPercentage = characterStrength.currentPhysicalStrength / characterStrength.maxPhysicalStrength+0.1f;
-            if (Playerpoint.rectTransform.anchoredPosition.x > QTEBaseBarWidth*newBaseBarWidthPercentage)
+            if (Playerpoint.rectTransform.anchoredPosition.y > QTEBaseBarHeight*newBaseBarWidthPercentage)
             {
                 isPlayerJudge = true;
                 TriggerFail();
@@ -211,21 +223,21 @@ namespace DiasGames.Abilities
             {
                 //Dotween实现playerpoint迟滞停止的效果
                 isPlayerJudge = true; 
-                float Speed = QTEBaseBarWidth / PlayerPointPeiod;
+                float Speed = QTEBaseBarHeight / PlayerPointPeiod;
                 //指针变为蓝模拟结冰的效果
                 if(decayTime!=0)
                 {
                     Playerpoint.DOColor(Color.blue, decayTime).SetLoops(2, LoopType.Yoyo);
                 }
 
-                Playerpoint.rectTransform.DOLocalMoveX(Playerpoint.rectTransform.anchoredPosition.x+Speed * decayTime, decayTime).SetEase(Ease.OutSine)
+                Playerpoint.rectTransform.DOLocalMoveY(Playerpoint.rectTransform.anchoredPosition.y+Speed * decayTime, decayTime).SetEase(Ease.OutSine)
                     .SetEase(Ease.OutSine)
                     .OnComplete(() => 
                     {
                         // 在动画完成后获取最终位置进行判断
-                        float currentX = Playerpoint.rectTransform.anchoredPosition.x;
+                        float currenty = Playerpoint.rectTransform.anchoredPosition.y;
                         
-                        if (currentX > QTECorretBarWidthRange[0] && currentX < QTECorretBarWidthRange[1])
+                        if (currenty > QTECorretBarHeightRange[0] && currenty < QTECorretBarHeightRange[1])
                         {
                             TriggerSucess();
                             // 可以在这里添加绿色闪烁效果（如DOTween颜色动画）
@@ -245,6 +257,10 @@ namespace DiasGames.Abilities
             //执行QTE成功的逻辑
             Debug.Log("QTE成功");
             BaseBar.DOColor(Color.green, 0.2f).SetLoops(2, LoopType.Yoyo);
+            CorrectSprite.gameObject.SetActive(true);
+            CorrectSprite.DOKill(true);
+            CorrectSprite.color = new Color(CorrectSprite.color.r, CorrectSprite.color.g, CorrectSprite.color.b, 1);
+            CorrectSprite.transform.DOShakeScale(0.5f, 0.2f, 10, 0, false).SetEase(Ease.OutSine);
             isQTEfail = false;
         }
         void TriggerFail()
@@ -252,8 +268,10 @@ namespace DiasGames.Abilities
             //执行QTE失败的逻辑
             Debug.Log("QTE失败");
             BaseBar.DOColor(Color.red, 0.2f).SetLoops(2, LoopType.Yoyo);
- 
-            
+            WrongSprite.gameObject.SetActive(true);
+            WrongSprite.DOKill(true);
+            WrongSprite.color = new Color(WrongSprite.color.r, WrongSprite.color.g, WrongSprite.color.b, 1);
+            WrongSprite.rectTransform.DOShakeAnchorPos(0.5f, 10f).SetEase(Ease.OutSine);
             // PlayerPhysicalStrength.Instance.FailedOnQTE();
             ClimbAbility climbAbility = GameObject.FindGameObjectWithTag("Player").GetComponent<ClimbAbility>();
             //climbAbility.StopAbility();

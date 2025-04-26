@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DiasGames.Abilities;
 using TMPro;
 using UnityEngine;
 
@@ -14,6 +15,11 @@ public class InventoryManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        InteractionManger.UseNail += CostNail; // 取消事件订阅
+    }
+    private void OnDestroy()
+    {
+        InteractionManger.UseNail -= CostNail; // 取消事件订阅
     }
     void Start()
     {
@@ -24,9 +30,29 @@ public class InventoryManager : MonoBehaviour
     }
     public void CostNail()
     {
+        if(currentNailCount <= 0)
+        {
+            Debug.Log("没有钉子了！");
+            return;
+        }
 
+        //本人transform.position加上本人transform.right位置
+        Ray ray = new Ray( transform.position + transform.right+ Vector3.up, transform.forward); // 射线从玩家位置发出
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 100f)) // 射线检测
+        {
+            GameObject nail = Instantiate(nailPrefab, hit.point+hit.normal*0.2f, Quaternion.identity); // 在碰撞点生成钉子
+            nail.transform.rotation = Quaternion.LookRotation(hit.normal); // 根据碰撞点的法线设置钉子的旋转
+            Debug.Log("射线检测到物体: " + hit.collider.name); // 输出射线检测到的物体名称
+        }
+        else
+        {
+            Debug.Log("射线没有检测到任何物体"); // 输出射线没有检测到任何物体
+            return;
+        }
         currentNailCount--;
         nailCountText.text = currentNailCount.ToString(); // 更新UI文本
+        PlayerPhysicalStrength.Instance.startRecovering(); // 开始恢复体力
 
     }
     public bool CanBuild()
