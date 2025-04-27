@@ -12,10 +12,18 @@ public class InventoryManager : MonoBehaviour
     public int maxNailCout = 3; // 最大钉子数量
     private int currentNailCount = 0; // 当前钉子数量
     public TextMeshProUGUI nailCountText; // 显示钉子数量的UI文本
+    public GameObject nailUI; // 钉子UI
+    public GameObject nailUIIconPrefab; // 钉子图标UI
     private void Awake()
     {
         Instance = this;
         InteractionManger.UseNail += CostNail; // 取消事件订阅
+        for (int i = 0; i < maxNailCout; i++)
+        {
+            GameObject nailUIIcon = Instantiate(nailUIIconPrefab, nailUI.transform.position, Quaternion.identity); // 在钉子UI图标位置生成钉子
+            nailUIIcon.transform.SetParent(nailUI.transform); // 设置钉子为钉子UI图标的子物体
+            nailUIIcon.transform.localScale = new Vector3(1f, 1f, 1f); // 设置钉子的缩放
+        }
     }
     private void OnDestroy()
     {
@@ -52,6 +60,8 @@ public class InventoryManager : MonoBehaviour
         }
         currentNailCount--;
         nailCountText.text = currentNailCount.ToString(); // 更新UI文本
+
+        nailUI.transform.GetChild(currentNailCount).gameObject.transform.GetChild(0).gameObject.SetActive(false); // 隐藏钉子UI图标
         PlayerPhysicalStrength.Instance.startRecovering(); // 开始恢复体力
 
     }

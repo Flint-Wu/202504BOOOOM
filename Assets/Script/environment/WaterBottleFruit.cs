@@ -36,13 +36,17 @@ public class WaterBottleFruit : MonoBehaviour
             playerWaterState.ChangeWater(waterAmount);
             Debug.Log("Player water increased by " + waterAmount);
             // 销毁水果对象
-            Destroy(gameObject);
+            Destroy(gameObject); // 销毁水果对象
         }
-        Annotation.Instance.Reset(); // 重置注释
-        InteractionManger.GetFruit -= GetFruit;
         
     }
     void OnTriggerExit(Collider other)
+    {
+        InteractionManger.GetFruit -= GetFruit; // 取消订阅事件
+        Annotation.Instance.Reset(); // 重置注释
+    }
+
+    void OnDestroy()
     {
         InteractionManger.GetFruit -= GetFruit; // 取消订阅事件
         Annotation.Instance.Reset(); // 重置注释
