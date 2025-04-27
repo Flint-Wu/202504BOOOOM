@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DiasGames.Abilities;
 using TMPro;
 using UnityEngine;
+using DG.Tweening;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -60,8 +61,11 @@ public class InventoryManager : MonoBehaviour
         }
         currentNailCount--;
         nailCountText.text = currentNailCount.ToString(); // 更新UI文本
-
-        nailUI.transform.GetChild(currentNailCount).gameObject.transform.GetChild(0).gameObject.SetActive(false); // 隐藏钉子UI图标
+    
+        nailUI.transform.GetChild(currentNailCount).gameObject.transform.GetChild(0).gameObject.transform.DOScale(new Vector3(0f, 0f, 0f), 0.5f).OnComplete(() =>
+        {
+            nailUI.transform.GetChild(currentNailCount).gameObject.transform.GetChild(0).gameObject.SetActive(false); // 隐藏钉子图标
+        }); // 动画缩放钉子图标
         PlayerPhysicalStrength.Instance.startRecovering(); // 开始恢复体力
 
     }

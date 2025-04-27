@@ -32,7 +32,7 @@ public class WaterBottleFruit : MonoBehaviour
     void GetFruit()
     {
         // 获取玩家的 PlayerWaterState 组件
-        PlayerWaterState playerWaterState = GameObject.FindGameObjectWithTag(PlayerID).GetComponent<PlayerWaterState>();
+        PlayerWaterState playerWaterState = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerWaterState>();
         if (playerWaterState != null)
         {
             // 增加水量
@@ -43,6 +43,8 @@ public class WaterBottleFruit : MonoBehaviour
             fruitPrefab.SetActive(false); // 隐藏水果对象
             InteractionManger.GetFruit -= GetFruit; // 订阅事件
             Annotation.Instance.Reset(); // 显示注释 
+            Annotation.Instance.waterFruitContributorJumpOut(PlayerID); // 显示水果注释
+            this.GetComponent<Collider>().enabled = false; // 禁用碰撞器
         }
         
     }
@@ -51,7 +53,6 @@ public class WaterBottleFruit : MonoBehaviour
         if (isGet) return; // 如果已经被获取，则不再执行
         InteractionManger.GetFruit -= GetFruit; // 取消订阅事件
         Annotation.Instance.Reset(); // 重置注释
-        this.GetComponent<Collider>().enabled = false; // 禁用碰撞器
     }
 
     void OnDestroy()
