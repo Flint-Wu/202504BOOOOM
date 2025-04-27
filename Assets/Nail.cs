@@ -65,6 +65,7 @@ public class Nail : MonoBehaviour
             //取消订阅事件
             if(nailType == NailType.OnlyVines)
             {
+                Debug.Log("触发水果生长");
                 FruitGrowUp(); // 触发藤蔓生长
                 nailType = NailType.immatureFruit; // 修改钉子类型
             }
