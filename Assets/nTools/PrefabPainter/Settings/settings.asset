@@ -2690,10 +2690,10 @@ MonoBehaviour:
         brushSpacing: 1.5
         brushOverlapCheckMode: 1
         brushOverlapDistance: 0.5
-        brushOverlapCheckObjects: 1
+        brushOverlapCheckObjects: 0
         brushOverlapCheckLayers:
           serializedVersion: 2
-          m_Bits: 0
+          m_Bits: 1
         surfaceOffset: 0
         orientationTransformMode: 0
         orientationMode: 0
@@ -2739,7 +2739,7 @@ MonoBehaviour:
         - enabled: 1
           raiting: 1
           position: {x: 0, y: 0, z: 0}
-          rotation: {x: -90, y: 0, z: 0}
+          rotation: {x: -90, y: 0, z: 90}
           scale: {x: 1, y: 1, z: 1}
           pivotMode: 0
           pivotOffset: {x: 1, y: 1, z: 1}
@@ -3008,7 +3008,7 @@ MonoBehaviour:
   paintOnSelected: 0
   paintLayers:
     serializedVersion: 2
-    m_Bits: 2064439
+    m_Bits: 1015859
   ignoreLayers:
     serializedVersion: 2
     m_Bits: 4
