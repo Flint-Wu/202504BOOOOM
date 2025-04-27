@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Demo_PlanarReflections4_Water_Advanced (Tessellation)
+  m_Shader: {fileID: 4800000, guid: d9f8ddb01e2f3a3438eeed42b8c45ee6, type: 3}
+  m_ShaderKeywords: _STATICFOAM_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3000
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _DisplacementGuide:
+        m_Texture: {fileID: 2800000, guid: ace06fca0a38e9f42b12f5755987685f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FoamTexture:
+        m_Texture: {fileID: 2800000, guid: cfa5a2106223add4487f9e7e69e0cc73, type: 3}
+        m_Scale: {x: 0.5, y: 0.5}
+        m_Offset: {x: 0, y: 0}
+    - _GradientMap:
+        m_Texture: {fileID: 2800000, guid: 5b55c69206e460349b7a0b97d6e07d6e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTextureA:
+        m_Texture: {fileID: 2800000, guid: ace06fca0a38e9f42b12f5755987685f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTextureB:
+        m_Texture: {fileID: 2800000, guid: ace06fca0a38e9f42b12f5755987685f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ReflectionTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RefletionTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WaterColors:
+        m_Texture: {fileID: 2800000, guid: 9f3d43c8d75062f4bb420270ea892aad, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WavesPattern:
+        m_Texture: {fileID: 2800000, guid: 4910e02118dc64947b2b69b4b4dd3cef, type: 3}
+        m_Scale: {x: 0.1, y: 0.15}
+        m_Offset: {x: 0.5, y: 0.5}
+    - _WavesPettern:
+        m_Texture: {fileID: 2800000, guid: ace06fca0a38e9f42b12f5755987685f, type: 3}
+        m_Scale: {x: 0.5, y: 0.5}
+        m_Offset: {x: 0.25, y: 0.25}
+    m_Floats:
+    - _DispStrength: 2.46
+    - _EdgeLength: 13.3
+    - _FoamWidth: 0.162
+    - _FogDistance: 634
+    - _Glossiness: 0.837
+    - _MaxTessellationDistance: 100
+    - _MinOffset: 0.065
+    - _OffsetAmount: 0.329
+    - _ShoreColorThreshold: 0
+    - _ShoreIntersectionThreshold: 0
+    - _Smoothness: 0.5
+    - _StaticFoam: 1
+    - _Tess: 4
+    - _Tessellation: 5.8
+    - _TransparencyIntersectionThresholdMax: 12
+    - _TransparencyIntersectionThresholdMin: 3
+    - _VectorLength: 0.0884
+    - _WaterBottomLevel: 4.45
+    - _WaterClarity: 0.034
+    - _WavesDistortion: 0.0469
+    m_Colors:
+    - _DisplacementProperties: {r: 2, g: 3, b: 4, a: 4}
+    - _Emission: {r: 0, g: 0.27611563, b: 0.72794116, a: 1}
+    - _FinalTint: {r: 0.78617, g: 0.9632353, b: 0.9632353, a: 1}
+    - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FoamIntersectionProperties: {r: 12, g: 12, b: 12, a: 4}
+    - _FoamProperties: {r: 12, g: 12, b: 12, a: 4}
+    - _NoiseAProperties: {r: 3, g: 2, b: 1, a: 1}
+    - _NoiseBProperties: {r: 1, g: 2, b: 1, a: 1}
+    - _ReflectionTint: {r: 0.24586153, g: 0.6132076, b: 0.59577006, a: 1}
+    - _ShoreColor: {r: 0.39716026, g: 0.64705884, b: 0, a: 1}
+    - _SpecColor: {r: 0.28676468, g: 0.28676468, b: 0.28676468, a: 1}
+    - _SurfaceColor: {r: 0, g: 0.16927001, b: 0.254717, a: 1}
+    - _WavesSpeed: {r: 0.3, g: 0.2, b: -0.25, a: -0.25}
