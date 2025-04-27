@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using DiasGames.Abilities;
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 public class GrowUpController : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -14,6 +14,7 @@ public class GrowUpController : MonoBehaviour
     public int PouNumMax = 0;
     public int PouNum = 0;
     public string[] PlayerIDs ;
+    public float InitGrow = 5f;
     void Start()
     {
         //得到所有子物体的材质球
@@ -28,12 +29,20 @@ public class GrowUpController : MonoBehaviour
                 if (!materials.Contains(mat))
                 {
                     materials.Add(mat);
-                    mat.SetFloat("_grow", 0f); // 初始化GrowUp属性
+                    mat.SetFloat("_grow", InitGrow); // 初始化GrowUp属性
                 }
             }
         }
         //遍历所有材质球
         
+    }
+
+    void Awake()
+    {
+        for (int i = 0; i < materials.Count; i++)
+        {
+            materials[i].SetFloat("_grow", InitGrow+ PouNum * 5f); // 初始化GrowUp属性
+        }
     }
 
     // Update is called once per frame
@@ -53,18 +62,16 @@ public class GrowUpController : MonoBehaviour
 
     void JudgeIsGrowUp()
     {
-        if (PouNum >= PouNumMax)
-        {
-            //如果浇水次数大于等于最大浇水次数，则调用树木生长方法
-            TreeGrowUp();
-        }
+
+        TreeGrowUp(InitGrow + PouNum * 5f); // 设置材质球的GrowUp属性
+        
     }
-    public void TreeGrowUp()
+    public void TreeGrowUp(float grow)
     {
         foreach (Material mat in materials)
         {
             //设置材质球的GrowUp属性
-            mat.DOFloat(20f, "_grow", 8f);
+            mat.DOFloat(grow, "_grow", 8f);
         }
     }
 
