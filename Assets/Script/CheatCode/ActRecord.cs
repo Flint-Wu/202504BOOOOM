@@ -7,9 +7,11 @@ public class ActRecord : MonoBehaviour
     public string LocState;
     public string LocNum;
 
+    public string[] givenNames;
+    public string[] givenValues;
+
     void Start()
     {
-        //LocNum = int.Parse(gameObject.name.Substring(3));
         LocNum = gameObject.name.Substring(3);
     }
 
