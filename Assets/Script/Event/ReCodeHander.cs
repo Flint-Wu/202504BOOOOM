@@ -36,7 +36,7 @@ public struct LocationData
 
     //private ReMadeID targetReMadeID;
     //private ReMadeLoc targetReMadeLoc;
-    private Dictionary<string, LocationData> idToLocationMap = new Dictionary<string, LocationData>();
+   public Dictionary<string, LocationData> idToLocationMap = new Dictionary<string, LocationData>();
 
         void Awake()
         {
@@ -104,7 +104,7 @@ public struct LocationData
         }
 
         // 外部调用：通过 helperID 获取地块数据
-        public LocationData GetLocationDataByID(string helperID)
+        private LocationData GetLocationDataByID(string helperID)
         {
             if (idToLocationMap.TryGetValue(helperID, out var data))
             {
@@ -113,5 +113,10 @@ public struct LocationData
             Debug.LogWarning($"未找到对应 helperID 的数据：{helperID}");
             return new LocationData(); // 返回空数据（默认长度为 0）
         }
+    public (string[] locunNums, string[] locunStates) GetLocationInfoByID(string helperID)
+    {
+        LocationData data = GetLocationDataByID(helperID);
+        return (data.locunNums, data.locunStates);
     }
+}
 

@@ -4357,6 +4357,7 @@ GameObject:
   - component: {fileID: 7996881705089545836}
   - component: {fileID: 7996881705089545838}
   - component: {fileID: 7996881705089545839}
+  - component: {fileID: 7996881705089545840}
   m_Layer: 0
   m_Name: ReCodeTrans
   m_TagString: Untagged
@@ -4452,7 +4453,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ad79b7935c73946a5593eb89d3cc68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rec: {fileID: 0}
+--- !u!114 &7996881705089545840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7996881705089545833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2bca99a0cbde3e4b925ddd7672fc801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  locStates: []
+  locNums: []
+  locZbID: []
+  isUpID: 0
+  isUpLoc: 0
 --- !u!114 &9046716409004965260
 MonoBehaviour:
   m_ObjectHideFlags: 0
