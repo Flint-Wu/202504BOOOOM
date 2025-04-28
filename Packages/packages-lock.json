@@ -1,7 +1,11 @@
 {
   "dependencies": {
     "com.unity.2d.animation": {
+<<<<<<< HEAD
       "version": "7.1.1",
+=======
+      "version": "7.1.0",
+>>>>>>> main
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -42,12 +46,20 @@
       "dependencies": {}
     },
     "com.unity.burst": {
+<<<<<<< HEAD
       "version": "1.8.17",
       "depth": 2,
       "source": "registry",
       "dependencies": {
         "com.unity.mathematics": "1.2.1",
         "com.unity.modules.jsonserialize": "1.0.0"
+=======
+      "version": "1.6.6",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.mathematics": "1.2.1"
+>>>>>>> main
       },
       "url": "https://packages.unity.cn"
     },

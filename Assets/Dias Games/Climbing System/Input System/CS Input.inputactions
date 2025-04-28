@@ -249,45 +249,12 @@
                 },
                 {
                     "name": "",
-                    "id": "94e03c0c-5ae4-4659-a4c0-e337d80dc178",
-                    "path": "<Keyboard>/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard Scheme",
-                    "action": "Roll",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "752bc205-15dc-4556-9faf-05fd823adf94",
                     "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard Scheme",
                     "action": "Walk",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8edb77f8-f5e9-4a2c-b6c1-b50ab786d301",
-                    "path": "<Keyboard>/c",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard Scheme",
-                    "action": "Crouch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c4e62559-6e0e-4987-a82c-4e7454d04ef9",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard Scheme",
-                    "action": "Crawl",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

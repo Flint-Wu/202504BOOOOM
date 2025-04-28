@@ -83,6 +83,7 @@ namespace DiasGames.Climbing
             {
                 //如果玩家正在点击QTEUI,按空格不触发攀爬动作
                 if(QTEUI.Instance.isClicking)return;
+                if(QTEUI.Instance.isGapTime)return;
 
 
                 SetAnimation(context);
@@ -228,6 +229,7 @@ namespace DiasGames.Climbing
                     context.animator.CrossFadeInFixedTime(hopRightState, 0.1f);
                     PlayerPhysicalStrength.Instance.ReducePhysicalStrength(PlayerPhysicalStrength.Instance.JumpStrength);
                     QTEUI.Instance.StartClick();
+                    QTEUI.Instance.isGapTime = true;
                     SetRightHandIK(context);
                 }
                 else
@@ -235,6 +237,7 @@ namespace DiasGames.Climbing
                     context.animator.CrossFadeInFixedTime(hopLeftState, 0.1f);
                     PlayerPhysicalStrength.Instance.ReducePhysicalStrength(PlayerPhysicalStrength.Instance.JumpStrength);
                     QTEUI.Instance.StartClick();
+                    QTEUI.Instance.isGapTime = true;
                     SetLefttHandIK(context);
                 }
 
@@ -247,6 +250,7 @@ namespace DiasGames.Climbing
                     context.animator.CrossFadeInFixedTime(hopUpState, 0.1f);
                     PlayerPhysicalStrength.Instance.ReducePhysicalStrength(PlayerPhysicalStrength.Instance.JumpStrength);
                     QTEUI.Instance.StartClick();
+                    QTEUI.Instance.isGapTime = true;
                     _targetDuration = HopUpDuration;
                     //SetRightHandIK(context);
                 }
@@ -255,6 +259,7 @@ namespace DiasGames.Climbing
                     context.animator.CrossFadeInFixedTime(hopDropState, 0.1f);
                     PlayerPhysicalStrength.Instance.ReducePhysicalStrength(PlayerPhysicalStrength.Instance.JumpStrength);
                     QTEUI.Instance.StartClick();
+                    QTEUI.Instance.isGapTime = true;
                     _targetDuration = HopDropDuration;
                     SetLefttHandIK(context);
                 }

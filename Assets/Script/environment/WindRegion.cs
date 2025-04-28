@@ -88,7 +88,8 @@ public class WindRegion : MonoBehaviour
                 {
                     grassMaterial[i].SetFloat("_WindSpeed", 2);
                 }
-                grassRenderer.ForceRefresh();
+                if(grassRenderer != null)
+                    grassRenderer.ForceRefresh();
                 if(!isPlayerIn)return;
                 RecoverPlayerPhysical();
             }
@@ -101,7 +102,8 @@ public class WindRegion : MonoBehaviour
                 {
                     grassMaterial[i].SetFloat("_WindSpeed", 12);
                 }
-                grassRenderer.ForceRefresh();
+                if(grassRenderer != null)
+                    grassRenderer.ForceRefresh();
                 if(!isPlayerIn)return;
                 ReducePlayerPhysical();
             }
