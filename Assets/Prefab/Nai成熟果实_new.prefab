@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3979644922630979930}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.00016737197, y: -0.0040984172, z: 0.277}
+  m_LocalPosition: {x: -0.00016737197, y: -0.0040984172, z: 0.05392114}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -110,7 +110,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5692595574648535296}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00026577056, y: -0.01021542, z: 0.24767996}
+  m_LocalPosition: {x: 0.00026577056, y: -0.01021542, z: 0.024601102}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 5353777956144736145}
   - component: {fileID: 7581260605201674755}
   m_Layer: 0
-  m_Name: "Nail\u7B2C\u4E00\u9636\u6BB5_new"
+  m_Name: "Nai\u6210\u719F\u679C\u5B9E_new"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,7 +223,7 @@ MonoBehaviour:
   fruitAppearVfx: {fileID: 2353600328335836179, guid: ceec7516237b4104b94300043ca39784, type: 3}
   immatureFruit: {fileID: 5692595574648535296}
   matureFruit: {fileID: 6155411515122530945}
-  nailType: 0
+  nailType: 2
 --- !u!65 &7581260605201674755
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -263,7 +263,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8553804509548291038}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.00028845316, y: 0.0048822146, z: 0.22832946}
+  m_LocalPosition: {x: -0.00028845316, y: 0.0048822146, z: 0.005250603}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -341,7 +341,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2459606058720642167, guid: daf96c1df7e9efe4b986f0013f6e623c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.2226498
+      value: 0.186
       objectReference: {fileID: 0}
     - target: {fileID: 2459606058720642167, guid: daf96c1df7e9efe4b986f0013f6e623c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -374,10 +374,6 @@ PrefabInstance:
     - target: {fileID: 2984081160553963213, guid: daf96c1df7e9efe4b986f0013f6e623c, type: 3}
       propertyPath: m_Name
       value: WaterBottleFruit (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2984081160553963213, guid: daf96c1df7e9efe4b986f0013f6e623c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: daf96c1df7e9efe4b986f0013f6e623c, type: 3}

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Vine
+  m_Name: Vine_tree
   m_Shader: {fileID: 4800000, guid: 67e09efbb61468142b4b0c23b26e4d49, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -80,8 +80,10 @@ Material:
     - _ZWrite: 1
     - _b_influence: 1
     - _branches_disp: 0.3
-    - _grow: 10
-    - _growIntensity: 0.7
+    - _expandScale: 0.7
+    - _grow: 10.78
+    - _growAxis: 2
+    - _growIntensity: 0.24
     - _growOffset: 0
     - _growVariation: 0
     - _leaves_wiggle_disp: 0.07

@@ -11,10 +11,13 @@ public class GrowUpController : MonoBehaviour
     
     //[Range(0, 20)] public float GrowUp;
     public bool isPour;
-    public int PouNumMax = 0;
+    public bool CanBeUsed;
+    public int PourNumMax = 0;
     public int PouNum = 0;
     public string[] PlayerIDs ;
     public float InitGrow = 5f;
+    public bool isTrigerEffect = false;
+    public GameObject HealEffectPrefab;
     void Start()
     {
         //得到所有子物体的材质球
@@ -43,6 +46,11 @@ public class GrowUpController : MonoBehaviour
         {
             materials[i].SetFloat("_grow", InitGrow+ PouNum * 5f); // 初始化GrowUp属性
         }
+        if(PouNum == PourNumMax)
+        {
+            CanBeUsed = true; // 可以使用
+        }
+
     }
 
     // Update is called once per frame
@@ -57,6 +65,17 @@ public class GrowUpController : MonoBehaviour
         InteractionManger.PourWater -= PourWater; // 取消事件订阅
         Annotation.Instance.Reset(); // 显示注释
         Annotation.Instance.TreePouContributorJumpOut(PlayerIDs); // 显示注释
+
+    }
+
+    public void RecoverAllPhysicalStrength()
+    {
+
+        if(isTrigerEffect) return;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject healEffect = Instantiate(HealEffectPrefab, player.transform.position, Quaternion.identity);
+        player.GetComponent<PlayerPhysicalStrength>().currentPhysicalStrength = player.GetComponent<PlayerPhysicalStrength>().maxPhysicalStrength;
+        isTrigerEffect = true;
 
     }
 
@@ -77,14 +96,27 @@ public class GrowUpController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if(CanBeUsed) 
+        {    // 其他逻辑
+            Annotation.Instance.AnnotationRecoverOnTree();
+            InteractionManger.RecoverPhysicalStrength += RecoverAllPhysicalStrength; // 订阅事件
+            return;
+        }
         if(isPour) return;
         InteractionManger.PourWater += PourWater; // 订阅事件
         Annotation.Instance.AnnotationPourWater(); // 显示注释
         Debug.Log("可以浇水了！");
+
     }
 
     void OnTriggerExit(Collider other)
     {
+        try
+        {
+            InteractionManger.RecoverPhysicalStrength -= RecoverAllPhysicalStrength; // 取消事件订阅
+        }
+        catch {}
+        
         InteractionManger.PourWater -= PourWater; // 取消事件订阅
         Annotation.Instance.Reset(); // 显示注释
 

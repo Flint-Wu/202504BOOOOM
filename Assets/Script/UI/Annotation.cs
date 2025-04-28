@@ -75,4 +75,10 @@ public class Annotation : MonoBehaviour
         //遍历所有材质球
         annotationText.text = "press E to pour water"; // 更新UI文本
     }
+
+    public void AnnotationRecoverOnTree()
+    {
+        //遍历所有材质球
+        annotationText.text = "press E to Recover On Tree"; // 更新UI文本
+    }
 }
