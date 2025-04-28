@@ -1,9 +1,7 @@
 
 using UnityEngine;
 using UnityEngine.UI;
-using DiasGames.Components;
 using DG.Tweening;
-using DiasGames.Climbing;
 using System.Collections;
 namespace DiasGames.Abilities
 {

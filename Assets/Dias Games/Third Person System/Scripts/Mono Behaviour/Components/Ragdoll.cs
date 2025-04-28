@@ -23,13 +23,13 @@ namespace DiasGames.Components
 
         private void OnEnable()
         {
-            if (_health)
-                _health.OnDead += ActivateRagdoll;
+            // if (_health)
+            //     _health.OnDead += ActivateRagdoll;
         }
         private void OnDisable()
         {
-            if (_health)
-                _health.OnDead -= ActivateRagdoll;
+            // if (_health)
+            //     _health.OnDead -= ActivateRagdoll;
         }
 
         private void GetRagdollReferences()
