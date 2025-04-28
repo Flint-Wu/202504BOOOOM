@@ -1,119 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7277887857696600054
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40b924e2dad56384a8df2a1e111bb675, type: 3}
-  m_Name: Vignette
-  m_EditorClassIdentifier: 
-  active: 1
-  enabled:
-    overrideState: 1
-    value: 0
-  mode:
-    overrideState: 1
-    value: 0
-  color:
-    overrideState: 0
-    value: {r: 0, g: 0, b: 0, a: 1}
-  center:
-    overrideState: 0
-    value: {x: 0.5, y: 0.5}
-  intensity:
-    overrideState: 1
-    value: 0.467
-  smoothness:
-    overrideState: 1
-    value: 0.36
-  roundness:
-    overrideState: 0
-    value: 1
-  rounded:
-    overrideState: 0
-    value: 0
-  mask:
-    overrideState: 0
-    value: {fileID: 0}
-    defaultState: 1
-  opacity:
-    overrideState: 0
-    value: 1
---- !u!114 &-874951035387586660
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5369720dfee3bfd4ea30a9e16a96bcd1, type: 3}
-  m_Name: StochasticReflections
-  m_EditorClassIdentifier: 
-  active: 1
-  enabled:
-    overrideState: 1
-    value: 1
-  intensity:
-    overrideState: 1
-    value: 1
-  raycastDownsample:
-    overrideState: 0
-    value: 0
-  resolveDownsample:
-    overrideState: 0
-    value: 0
-  rayDistance:
-    overrideState: 0
-    value: 70
-  thickness:
-    overrideState: 0
-    value: 0.2
-  screenFadeSize:
-    overrideState: 1
-    value: 0
-  useFresnel:
-    overrideState: 0
-    value: 1
-  BRDFBias:
-    overrideState: 0
-    value: 0.7
-  useMipMap:
-    overrideState: 0
-    value: 1
-  normalization:
-    overrideState: 0
-    value: 1
-  blurring:
-    overrideState: 0
-    value: 1
-  highQualityBlur:
-    overrideState: 0
-    value: 1
-  useTemporal:
-    overrideState: 0
-    value: 1
-  multipleBounces:
-    overrideState: 0
-    value: 1
-  temporalResponseMin:
-    overrideState: 0
-    value: 0.85
-  temporalResponseMax:
-    overrideState: 0
-    value: 1
-  smoothnessRange:
-    overrideState: 0
-    value: 1
-  debugPass:
-    overrideState: 0
-    value: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e6292b2c06870d4495f009f912b9600, type: 3}
-  m_Name: Post-process Volume Profile
+  m_Name: Cold Profile
   m_EditorClassIdentifier: 
   settings:
-  - {fileID: 4785795863884330842}
-  - {fileID: -7277887857696600054}
---- !u!114 &4785795863884330842
+  - {fileID: 7760762721021770032}
+--- !u!114 &7760762721021770032
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,7 +67,7 @@ MonoBehaviour:
     value: 1
   temperature:
     overrideState: 1
-    value: 30
+    value: -60
   tint:
     overrideState: 0
     value: 0
@@ -194,7 +79,7 @@ MonoBehaviour:
     value: 0
   saturation:
     overrideState: 0
-    value: -25
+    value: 0
   brightness:
     overrideState: 0
     value: 0
@@ -203,7 +88,7 @@ MonoBehaviour:
     value: 0
   contrast:
     overrideState: 0
-    value: -25
+    value: 0
   mixerRedOutRedIn:
     overrideState: 0
     value: 100
