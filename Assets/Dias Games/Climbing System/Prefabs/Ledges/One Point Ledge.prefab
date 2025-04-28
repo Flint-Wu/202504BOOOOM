@@ -13,6 +13,9 @@ GameObject:
   - component: {fileID: 4491158196177669337}
   - component: {fileID: 4491158196177669342}
   - component: {fileID: 4491158196177669343}
+  - component: {fileID: 8887579454565242633}
+  - component: {fileID: 937755664713590279}
+  - component: {fileID: 4826209698230923503}
   m_Layer: 16
   m_Name: One Point Ledge
   m_TagString: Untagged
@@ -30,6 +33,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 44, y: 3, z: -19.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4491158197477270002}
   m_Father: {fileID: 0}
@@ -46,6 +50,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -111,11 +116,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grabPoints:
   - {fileID: 4491158197477270002}
+  canFreelyJump: 0
   invisible: 0
+  alwaysKeepRotation: 0
   grabPointColor: {r: 1, g: 0, b: 1, a: 1}
   arrowColor: {r: 0.990566, g: 0.7738709, b: 0, a: 1}
   grabPointRadius: 0.1
   arrowSize: 0.4
+--- !u!114 &8887579454565242633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4491158196177669340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7627f1d49fe1ad142a3d18748f1ac8f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActRecord: {fileID: 0}
+  GivenValues: []
+  NowState: 
+  tmp: 0
+--- !u!114 &937755664713590279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4491158196177669340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 215b30fa59f2db943a1c21d058aeafff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LocState: 
+  LocNum: 
+  givenNames: []
+  givenValues: []
+--- !u!114 &4826209698230923503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4491158196177669340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63f2509073cf83f40838a34ecd9c6f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actRcord: {fileID: 0}
+  gameObjects: []
 --- !u!1 &4491158197477270003
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,6 +195,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4491158196177669338}
   m_RootOrder: 0

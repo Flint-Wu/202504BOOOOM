@@ -334,6 +334,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8510169123075441391}
   - component: {fileID: 5483038112202160951}
+  - component: {fileID: 6661021453442569037}
+  - component: {fileID: 5605608487233135399}
+  - component: {fileID: 9099163515415999676}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Untagged
@@ -390,6 +393,54 @@ MonoBehaviour:
   InitGrow: 5
   isTrigerEffect: 0
   HealEffectPrefab: {fileID: 4425129568585013132, guid: bbeeb0ddc21369746aaaae5c5c1c09cf, type: 3}
+--- !u!114 &6661021453442569037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510169123075441386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7627f1d49fe1ad142a3d18748f1ac8f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActRecord: {fileID: 0}
+  GivenValues: []
+  NowState: 
+  tmp: 0
+--- !u!114 &5605608487233135399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510169123075441386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 215b30fa59f2db943a1c21d058aeafff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LocState: 
+  LocNum: 
+  givenNames: []
+  givenValues: []
+--- !u!114 &9099163515415999676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510169123075441386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 135170cdfef334648be9b2fe9247f91e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActRecord: {fileID: 0}
+  GivenValues: []
+  NowState: 
+  tmp: 0
 --- !u!1001 &5299996065430021913
 PrefabInstance:
   m_ObjectHideFlags: 0
