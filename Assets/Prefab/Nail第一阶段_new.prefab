@@ -223,6 +223,7 @@ MonoBehaviour:
   fruitAppearVfx: {fileID: 2353600328335836179, guid: ceec7516237b4104b94300043ca39784, type: 3}
   immatureFruit: {fileID: 5692595574648535296}
   matureFruit: {fileID: 6155411515122530945}
+  playerID: Dtorm
   nailType: 0
 --- !u!65 &7581260605201674755
 BoxCollider:
