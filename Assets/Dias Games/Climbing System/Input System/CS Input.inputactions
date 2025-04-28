@@ -282,28 +282,6 @@
                 },
                 {
                     "name": "",
-                    "id": "f680ca40-ee00-497f-b283-7d94592fbbb1",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8156ec94-db91-4407-80f9-8d924cfedbd3",
-                    "path": "<Keyboard>/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard Scheme",
-                    "action": "Drop",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "18361068-dd42-4b67-9267-fde051496376",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",

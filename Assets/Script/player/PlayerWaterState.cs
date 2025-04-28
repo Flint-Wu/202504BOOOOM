@@ -31,7 +31,7 @@ public class PlayerWaterState : MonoBehaviour
     /// </summary>
     public float CurrentWater;
     public bool IsInCritical { get; private set; }
-    private bool _isDepleted = false;
+    public bool _isDepleted = false;
     //?????????
     private void Awake()
     {

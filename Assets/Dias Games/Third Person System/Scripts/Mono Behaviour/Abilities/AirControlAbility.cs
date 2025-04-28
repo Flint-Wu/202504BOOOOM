@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.Events;
 using DiasGames.Components;
+using DiasGames.Controller;
+using Unity.VisualScripting;
 
 namespace DiasGames.Abilities
 {
@@ -25,6 +27,7 @@ namespace DiasGames.Abilities
 
         private IMover _mover = null;
         private IDamage _damage;
+        private PlayerWaterState _waterState;
         private CharacterAudioPlayer _audioPlayer;
 
         private float _startSpeed;
@@ -39,6 +42,7 @@ namespace DiasGames.Abilities
         // vars to control landing
         private float _highestPosition = 0;
         private bool _hardLanding = false;
+        private LevelController _levelController;
 
         private void Awake()
         {
@@ -46,10 +50,15 @@ namespace DiasGames.Abilities
             _damage = GetComponent<IDamage>();
             _audioPlayer = GetComponent<CharacterAudioPlayer>();
             _camera = Camera.main.transform;
+            _waterState = GetComponent<PlayerWaterState>();
+            _levelController = this.transform.root.GetComponentInChildren<LevelController>();
         }
 
         public override bool ReadyToRun()
         {
+            //水枯竭时触发跳跃
+            if(_waterState._isDepleted && !_mover.IsGrounded())
+                return true;
             return !_mover.IsGrounded() || _action.jump;
         }
 
@@ -104,19 +113,25 @@ namespace DiasGames.Abilities
                     if(_audioPlayer)
                         _audioPlayer.PlayVoice(hardLandClip);
 
-                    // cause damage
-                    if(_damage != null)
-                    {
-                        // calculate damage
-                        float currentHeight = _highestPosition - transform.position.y - heightForHardLand;
-                        float ratio = currentHeight / (heightForKillOnLand - heightForHardLand);
 
-                        _damage.Damage((int)(200 * ratio));
-                    }
+                    // cause damage
+                    // if(_damage != null)
+                    // {
+                    //     // calculate damage
+                    //     float currentHeight = _highestPosition - transform.position.y - heightForHardLand;
+                    //     float ratio = currentHeight / (heightForKillOnLand - heightForHardLand);
+
+                    //     _damage.Damage((int)(200 * ratio));
+                    // }
 
                     return;
                 }
-
+                if(_waterState._isDepleted)
+                {
+                    // apply root motion
+                    Debug.Log("restart level");
+                    _levelController.RestartLevel();
+                }
                 StopAbility();
             }
 

@@ -2,6 +2,8 @@ using UnityEngine;
 using DiasGames.Components;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using DG.Tweening;
 
 namespace DiasGames.Controller
 {
@@ -9,6 +11,8 @@ namespace DiasGames.Controller
     {
         [SerializeField] private GameObject player = null;
         [SerializeField] private float delayToRestartLevel = 3f;
+        [SerializeField] private Image fadeImage = null;
+        [SerializeField] private Light directionalLight = null;
 
         // player components
         private Health _playerHealth;
@@ -22,6 +26,11 @@ namespace DiasGames.Controller
                 player = GameObject.FindGameObjectWithTag("Player");
 
             _playerHealth = player.GetComponent<Health>();
+            fadeImage.gameObject.SetActive(true);
+            fadeImage.DOColor(new Color(0, 0, 0, 0), 1f).SetEase(Ease.Linear).OnComplete(() =>
+            {
+                fadeImage.gameObject.SetActive(false);
+            });
         }
 
         private void OnEnable()
@@ -34,7 +43,7 @@ namespace DiasGames.Controller
         }
 
         // Restarts the current level
-        private void RestartLevel()
+        public void RestartLevel()
         {
             if (!_isRestartingLevel)
                 StartCoroutine(OnRestart());
@@ -48,12 +57,19 @@ namespace DiasGames.Controller
         private IEnumerator OnRestart()
         {
             _isRestartingLevel = true;
+            fadeImage.gameObject.SetActive(true);
+            DOTween.To(() => directionalLight.intensity, x => directionalLight.intensity = x, 0, 1f).SetEase(Ease.Linear).OnComplete(() =>
+            {
+                fadeImage.DOColor(new Color(0, 0, 0, 1), delayToRestartLevel-1f).SetEase(Ease.Linear);
+            });
+
 
             yield return new WaitForSeconds(delayToRestartLevel);
 
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
             _isRestartingLevel = false;
+
         }
     }
 }
