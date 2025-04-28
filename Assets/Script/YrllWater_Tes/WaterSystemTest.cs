@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class WaterSystemTest : MonoBehaviour
 {
     
-        [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
+   
         [SerializeField] private PlayerWaterState waterState;
         [SerializeField] private Slider waterSlider;
         [SerializeField] private Text percentText;
@@ -28,7 +28,7 @@ public class WaterSystemTest : MonoBehaviour
     {
         // ï¿½ï¿½Ê¼ï¿½ï¿½UI
         UpdateWaterUI(waterState.CurrentWater / waterState.MaxWater);
-<<<<<<< HEAD
+
 
         // °ó¶¨ÊÂ¼þ
         waterState.OnWaterChanged.AddListener(UpdateWaterUI);
@@ -38,21 +38,21 @@ public class WaterSystemTest : MonoBehaviour
             Debug.Log("°´Å¥±»µã»÷£¡", this);
             waterState.ChangeWater(); // µ÷ÓÃÄ¬ÈÏÁ÷Ê§Á¿
 
-=======
+
        
         // ï¿½ï¿½ï¿½Â¼ï¿½
         waterState.OnWaterChanged.AddListener(UpdateWaterUI);
           waterState.OnWaterDepleted.AddListener(ShowGameOver);
         // QTEbutton.onClick.AddListener(() =>
         // {
-        //     Debug.Log("ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", this);
+        //     Debug.Log("ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿?, this);
         //     waterState.ChangeWater(); // ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½
 
         // });
         // WaterBottle.onClick.AddListener(() =>
         // {
         //     waterState.ChangeWater(20f); // ï¿½ï¿½ï¿½ï¿½20ï¿½ï¿½Î»
->>>>>>> main
+
 
         });
         WaterBottle.onClick.AddListener(() =>
@@ -87,7 +87,7 @@ public class WaterSystemTest : MonoBehaviour
     private void OnDestroy()
 {
     waterState.OnWaterChanged.RemoveListener(UpdateWaterUI);
-    // Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¼ï¿½ï¿½ï¿½ï¿½ï¿½
+    // Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¼ï¿½ï¿½ï¿½ï¿½ï¿?
 }
     
 }
