@@ -7,6 +7,9 @@
         _growIntensity ("Growth Intensity", Range(0,5)) = 1.0
         _thershold ("Threshold", Range(0,1)) = 0.5 // 尖端的大小
         _sliceOffset ("Slice Offset", Range(-1,1)) = 0 // 控制切片平面的偏移
+        //生长轴为网格X,Y,Z轴
+        _growAxis ("Growth Axis", Float) = 1 // 0: X轴, 1: Y轴, 2: Z轴
+        _expandScale("Scale", Float) = 1.0 // 缩放因子
     }
  
     SubShader {
@@ -23,6 +26,8 @@
         float _growIntensity;
         float _sliceOffset;
         float _thershold;
+        float _growAxis; // 0: X轴, 1: Y轴, 2: Z轴
+        float _expandScale; // 缩放因子
 
 
         struct Input {
@@ -36,17 +41,53 @@
             
             //转换v.vertex为世界坐标
             // 计算生长值，决定切片位置
-            float vertexHeight = v.vertex.y;
-            //float vertexWidth = abs(v.vertex.x) + abs(v.vertex.z);
-            
-            // 生长因子影响切片位置
-            float sliceHeight = _grow * _growIntensity - _sliceOffset;
-            if(vertexHeight<sliceHeight)
+            float vertexHeight = 0.0f;
+            float sliceHeight = 0.0f;
+            if(_growAxis == 1) // Y轴生长
             {
-                //节点向中心移动
-                float scale = saturate((sliceHeight-vertexHeight)/3);
-                v.vertex.x = v.vertex.x * scale;
-                v.vertex.z = v.vertex.z * scale;
+
+                vertexHeight = v.vertex.y;
+                //float vertexWidth = abs(v.vertex.x) + abs(v.vertex.z);
+                
+                // 生长因子影响切片位置
+                sliceHeight = _grow * _growIntensity - _sliceOffset;
+                if(vertexHeight<sliceHeight)
+                {
+                    //节点向中心移动
+                    float scale = saturate((sliceHeight-vertexHeight)/_expandScale);
+                    v.vertex.x = v.vertex.x * scale;
+                    v.vertex.z = v.vertex.z * scale;
+                }
+            }
+            else if(_growAxis == 0) // X轴生长
+            {
+                vertexHeight = v.vertex.x;
+                //float vertexWidth = abs(v.vertex.y) + abs(v.vertex.z);
+                
+                // 生长因子影响切片位置
+                sliceHeight = _grow * _growIntensity - _sliceOffset;
+                if(vertexHeight<sliceHeight)
+                {
+                    //节点向中心移动
+                    float scale = saturate((sliceHeight-vertexHeight)/_expandScale);
+                    v.vertex.y = v.vertex.y * scale;
+                    v.vertex.z = v.vertex.z * scale;
+                }
+            }
+            else if(_growAxis == 2) // Z轴生长
+            {
+                vertexHeight = v.vertex.z;
+                //float vertexWidth = abs(v.vertex.x) + abs(v.vertex.y);
+                
+                // 生长因子影响切片位置
+                sliceHeight = _grow * _growIntensity - _sliceOffset;
+                if(vertexHeight<sliceHeight)
+                {
+                    //节点向中心移动
+                    float scale = saturate((sliceHeight-vertexHeight)/_expandScale);
+                    v.vertex.x = v.vertex.x * scale;
+                    v.vertex.y = v.vertex.y * scale;
+                }
             }
             // else
             // {

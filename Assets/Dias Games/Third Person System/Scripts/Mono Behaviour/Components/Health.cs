@@ -25,7 +25,6 @@ namespace DiasGames.Components
             _currentHP = MaxHealthPoints;
             OnHealthChanged?.Invoke();
             _playerWaterState = GetComponent<PlayerWaterState>();
-            _playerWaterState.OnWaterDepleted.AddListener(AlotOfDamage);
         }
 
         public void Damage(int damagePoints)
@@ -41,11 +40,6 @@ namespace DiasGames.Components
             }
 
             OnHealthChanged?.Invoke();
-        }
-        public void AlotOfDamage()
-        {
-            Damage(200);
-            Debug.Log("触发了大量伤害！");
         }
         /// <summary>
         /// Restore an amount of health points

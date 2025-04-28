@@ -63,6 +63,7 @@ namespace DiasGames.Abilities
         private ICapsule _capsule;
         private ClimbIK _climbIK;
         private CastDebug _debug;
+        private PlayerWaterState _waterState;
 
         // private internal climbing controller
         [Header("玩家当前攀附的物体")]
@@ -134,7 +135,7 @@ namespace DiasGames.Abilities
             _capsule = GetComponent<ICapsule>();
             _climbIK = GetComponent<ClimbIK>();
             _debug = GetComponent<CastDebug>();
-
+            _waterState = GetComponent<PlayerWaterState>();
             _mainCamera = Camera.main;
 
             CreateTransforms();
@@ -154,7 +155,11 @@ namespace DiasGames.Abilities
 
         public override bool ReadyToRun()
         {
+            if(_waterState._isDepleted) return false;
             if (_mover.IsGrounded()) return false;
+            //如果当前的动画为Air.Falling
+            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Air.Falling")) return false;
+
 
             return HasLedge();
         }

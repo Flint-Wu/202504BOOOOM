@@ -23,6 +23,7 @@ public class PlayerPhysicalStrength : MonoBehaviour
     public float StandRecoverStrength = 5f;
     private Animator animator;
     public bool isRecovering = false;   
+    public bool isInWinZone = false; //是否在风区内
     void Start()
     {
         currentPhysicalStrength = maxPhysicalStrength;
@@ -62,6 +63,9 @@ public class PlayerPhysicalStrength : MonoBehaviour
             currentPhysicalStrength = maxPhysicalStrength;
             stopRecovering();
         }
+    }
+    public void LockPhysicalStrength()
+    {
     }
 
     void ActionChangePhysicalStrength()

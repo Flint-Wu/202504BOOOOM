@@ -16,7 +16,7 @@ public class WindRegion : MonoBehaviour
     public float WindTime = 0;//开始时间
     public Material[] grassMaterial;
     public GlobalGrassRenderer grassRenderer;
-    public bool isPlayerIn;
+    //public bool isPlayerIn;
     private GameObject player;
     void Start()
     {
@@ -37,7 +37,7 @@ public class WindRegion : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerIn = true;
+            player.GetComponent<PlayerPhysicalStrength>().isInWinZone = true;
         }
     }
 
@@ -71,7 +71,8 @@ public class WindRegion : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         //离开风区时，恢复玩家的体力值
-        isPlayerIn = false;
+        player.GetComponent<PlayerPhysicalStrength>().isInWinZone = false;
+        RecoverPlayerPhysical();
 
     }
 
@@ -79,7 +80,7 @@ public class WindRegion : MonoBehaviour
     {
         if (WindTime > WindPeiod)
         {
-            if (IsWindBegin == true)
+            if (IsWindBegin)
             {
                 WindVfx.SetActive(false);
                 IsWindBegin = false;
@@ -90,10 +91,10 @@ public class WindRegion : MonoBehaviour
                 }
                 if(grassRenderer != null)
                     grassRenderer.ForceRefresh();
-                if(!isPlayerIn)return;
+                if(player.GetComponent<PlayerPhysicalStrength>().isInWinZone)return;
                 RecoverPlayerPhysical();
             }
-            else if (IsWindBegin == false)
+            else if (!IsWindBegin)
             {
                 WindVfx.SetActive(true);
                 IsWindBegin = true;
@@ -104,7 +105,7 @@ public class WindRegion : MonoBehaviour
                 }
                 if(grassRenderer != null)
                     grassRenderer.ForceRefresh();
-                if(!isPlayerIn)return;
+                if(!player.GetComponent<PlayerPhysicalStrength>().isInWinZone)return;
                 ReducePlayerPhysical();
             }
         }

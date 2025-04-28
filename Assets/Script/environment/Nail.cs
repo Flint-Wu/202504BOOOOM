@@ -9,6 +9,7 @@ public class Nail : MonoBehaviour
     public GameObject fruitAppearVfx;
     public GameObject immatureFruit; // 预制体
     public GameObject matureFruit; // 预制体
+    public string playerID; // 玩家ID
     public enum NailType
     {
         OnlyVines,
@@ -56,6 +57,7 @@ public class Nail : MonoBehaviour
         GameObject vfx = Instantiate(fruitAppearVfx, immatureFruit.transform.position, Quaternion.identity);
         vfx.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         immatureFruit.SetActive(true);
+        Annotation.Instance.waterFruitContributorJumpOut(playerID); // 显示水果注释UI
     }
     void OnTriggerExit(Collider other)
     {

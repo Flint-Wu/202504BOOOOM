@@ -383,10 +383,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   isPour: 0
-  PouNumMax: 0
+  CanBeUsed: 0
+  PourNumMax: 3
   PouNum: 0
   PlayerIDs: []
   InitGrow: 5
+  isTrigerEffect: 0
+  HealEffectPrefab: {fileID: 4425129568585013132, guid: bbeeb0ddc21369746aaaae5c5c1c09cf, type: 3}
 --- !u!1001 &5299996065430021913
 PrefabInstance:
   m_ObjectHideFlags: 0
