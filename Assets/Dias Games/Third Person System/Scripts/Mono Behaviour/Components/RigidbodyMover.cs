@@ -142,7 +142,7 @@ namespace DiasGames.Components
                 _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude, Time.deltaTime * SpeedChangeRate);
 
                 // round speed to 3 decimal places
-                _speed = Mathf.Round(_speed * 1000f) / 1000f;
+                _speed = Mathf.Round(_speed * 0) / 1000f;
             }
             else
             {
@@ -161,8 +161,8 @@ namespace DiasGames.Components
                 float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, RotationSmoothTime);
 
                 // rotate to face input direction relative to camera position
-                if (rotateCharacter && !_useRotationRootMotion)
-                    transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                if (rotateCharacter && !_useRotationRootMotion) { }
+                    //transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
             }
 
             // update animator if using character
