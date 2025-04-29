@@ -17,7 +17,13 @@ public class BlockState : MonoBehaviour
     void Update()
     {
         GivenValues = ActRecord.givenValues;
-        tmp = GetMaxNumber(GivenValues);//获取GivenValus组中所有数字的最大数值
+
+        if(GivenValues.Length > 0)
+        {
+
+            tmp = GetMaxNumber(GivenValues);//获取GivenValus组中所有数字的最大数值
+        }
+
         ActRecord.LocState = tmp.ToString();//使actrecord中的状态数值等同于作弊码中最大的数值
     }
 

@@ -9,8 +9,6 @@ public class BlockMan : MonoBehaviour
 
     public ActRecord[] actRecords;
 
-    public string strings;
-
     void Start()
     {
         actRecords = FindObjectsOfType<ActRecord>();
@@ -18,12 +16,6 @@ public class BlockMan : MonoBehaviour
 
     public void GiveName()
     {
-        //for (int i = 0; i < CodeGet.LocNums.GetLength(1); i++)
-        //{
-        //    strings = CodeGet.LocNums[0,i];
-        //    Debug.Log(strings);
-        //}
-
         for (int i = 0; i < actRecords.Length; i++)
         {//初始化所有记录仪的数组长度
             actRecords[i].givenNames = new string[CodeGet.LocNums.GetLength(0)];

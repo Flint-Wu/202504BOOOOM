@@ -15,10 +15,6 @@ public class CodeGet : MonoBehaviour
     public string[,] LocStates;
     public string[] names;
 
-    public int aa,bb;
-    public int cc,dd;
-
-
     private void Start()
     {
         
@@ -27,10 +23,7 @@ public class CodeGet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        aa = LocNums.GetLength(0);
-        bb = LocNums.GetLength(1); 
-        cc = LocStates.GetLength(0);
-        dd = LocStates.GetLength(1);
+
     }
 
     public void AllReTrans()
