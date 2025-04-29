@@ -21,23 +21,27 @@ public class PlayerPhysicalStrength : MonoBehaviour
     public float ClimbIdleStrength = 5f;
     [Header("平地站立时每秒恢复的体力")]
     public float StandRecoverStrength = 5f;
-    private Animator animator;
+
     public bool isRecovering = false;   
+    public bool isInWinZone = false; //是否在风区内
     void Start()
     {
         currentPhysicalStrength = maxPhysicalStrength;
-        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        ActionChangePhysicalStrength();
         ExhaustPhysicalStrength();
         RecoverPhysicalStrength(StandRecoverStrength * Time.deltaTime);
     }
     public void ReducePhysicalStrength(float amount)
     {
+        if (isInWinZone) 
+        {
+            currentPhysicalStrength = FindAnyObjectByType<WindRegion>().PlayerEnterWindStrengthPer*maxPhysicalStrength;
+            return;
+        }
         currentPhysicalStrength -= amount;
         if (currentPhysicalStrength <= minPhysicalStrength)
         {
@@ -62,31 +66,6 @@ public class PlayerPhysicalStrength : MonoBehaviour
             currentPhysicalStrength = maxPhysicalStrength;
             stopRecovering();
         }
-    }
-
-    void ActionChangePhysicalStrength()
-    {
-        //如果当前animator的状态机为Grounded的状态
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
-        {
-            //如果当前状态机的变量Motion Speed为0
-            if (animator.GetFloat("Motion Speed") == 0)
-            {
-                //startRecovering();
-            }
-            else
-            {
-                //ReducePhysicalStrength(RunStrength * Time.deltaTime);
-            }
-        }
-        //如果当前状态机为Climb的状态 且 动画为idle
-        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
-        {
-            if(isRecovering) return;
-            //如果当前状态机的变量Motion Speed为0
-            ReducePhysicalStrength(ClimbIdleStrength * Time.deltaTime);
-        }
-
     }
 
     public void ExhaustPhysicalStrength()

@@ -29,8 +29,8 @@ public class CodeGet : MonoBehaviour
     public void AllReTrans()
     {
         names = new string[inputCode.Length];
-        LocNums = new string[inputCode.Length, inputCode[0].text.Count(c => c == ':')];//生成作弊码中行列的二维数组
-        LocStates = new string[inputCode.Length, inputCode[0].text.Count(c => c == ':')];//生成作弊码中行列的二维数组
+        LocNums = new string[inputCode.Length, inputCode[0].text.Count(c => c == ':')];//���������������еĶ�ά����
+        LocStates = new string[inputCode.Length, inputCode[0].text.Count(c => c == ':')];//���������������еĶ�ά����
 
 
         for (int i = 0; i < inputCode.Length; i++)
@@ -38,16 +38,14 @@ public class CodeGet : MonoBehaviour
             ReadCode.CheatCode = inputCode[i].text;
 
             ReMadeID.ReTrans();
-            names[i] = ReMadeID.HelperID.ToString();//获取所有作弊码中名字部分
+            names[i] = ReMadeID.HelperID.ToString();//��ȡ���������������ֲ���
 
             ReMadeLoc.ReTrans();
             for (int j = 0; j < ReMadeLoc.LocunNums.Length; j++)
             {
-                LocNums[i,j] = ReMadeLoc.LocunNums[j];//获取所有作弊码的编码
-                LocStates[i,j] = ReMadeLoc.LocunStates[j];//获取所有作弊码的场景状态
+                LocNums[i,j] = ReMadeLoc.LocunNums[j];//��ȡ����������ı���
+                LocStates[i,j] = ReMadeLoc.LocunStates[j];//��ȡ����������ĳ���״̬
             }
         }
-
-
     }
 }

@@ -45,6 +45,7 @@ namespace DiasGames.Controller
         // Restarts the current level
         public void RestartLevel()
         {
+            Debug.Log("RestartLevel");
             if (!_isRestartingLevel)
                 StartCoroutine(OnRestart());
         }

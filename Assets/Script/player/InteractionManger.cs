@@ -19,6 +19,7 @@ public class InteractionManger : AbstractAbility
     public static event Action UseNail; // Event to notify when the interact action is triggered
     public static event Action PourWater;
     public static event Action GetFruit;
+    public static event Action RecoverPhysicalStrength;
     void Awake()
     {
         scheduler = GetComponent<AbilityScheduler>();
@@ -45,6 +46,11 @@ public class InteractionManger : AbstractAbility
             // }
             // else
             //如果PourWater事件不为空，则调用PourWater事件
+            if(RecoverPhysicalStrength != null)
+            {
+                RecoverPhysicalStrength?.Invoke(); // Invoke the RecoverPhysicalStrength event
+                return; // Exit the method after invoking the event
+            }
             if(PourWater != null)
             {
                 //如果可以浇水就先禁用掉钉子

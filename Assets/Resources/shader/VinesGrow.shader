@@ -9,6 +9,7 @@
         _sliceOffset ("Slice Offset", Range(-1,1)) = 0 // 控制切片平面的偏移
         //生长轴为网格X,Y,Z轴
         _growAxis ("Growth Axis", Float) = 1 // 0: X轴, 1: Y轴, 2: Z轴
+        _expandScale("Scale", Float) = 1.0 // 缩放因子
     }
  
     SubShader {
@@ -26,6 +27,7 @@
         float _sliceOffset;
         float _thershold;
         float _growAxis; // 0: X轴, 1: Y轴, 2: Z轴
+        float _expandScale; // 缩放因子
 
 
         struct Input {
@@ -52,7 +54,7 @@
                 if(vertexHeight<sliceHeight)
                 {
                     //节点向中心移动
-                    float scale = saturate((sliceHeight-vertexHeight)/3);
+                    float scale = saturate((sliceHeight-vertexHeight)/_expandScale);
                     v.vertex.x = v.vertex.x * scale;
                     v.vertex.z = v.vertex.z * scale;
                 }
@@ -67,7 +69,7 @@
                 if(vertexHeight<sliceHeight)
                 {
                     //节点向中心移动
-                    float scale = saturate((sliceHeight-vertexHeight)/3);
+                    float scale = saturate((sliceHeight-vertexHeight)/_expandScale);
                     v.vertex.y = v.vertex.y * scale;
                     v.vertex.z = v.vertex.z * scale;
                 }
@@ -82,7 +84,7 @@
                 if(vertexHeight<sliceHeight)
                 {
                     //节点向中心移动
-                    float scale = saturate((sliceHeight-vertexHeight)/3);
+                    float scale = saturate((sliceHeight-vertexHeight)/_expandScale);
                     v.vertex.x = v.vertex.x * scale;
                     v.vertex.y = v.vertex.y * scale;
                 }

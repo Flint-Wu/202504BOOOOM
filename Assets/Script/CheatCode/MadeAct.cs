@@ -18,6 +18,21 @@ public class MadeAct : MonoBehaviour
     {
         
     }
+    public void GetActRecordNotNull()
+    {
+        actRecords = FindObjectsOfType<ActRecord>();
+        //找出里面所有GiveValues不为空的物体
+        List<ActRecord> actRecordList = new List<ActRecord>();
+        foreach (ActRecord actRecord in actRecords)
+        {
+            if (actRecord.LocState == "1")
+            {
+                actRecordList.Add(actRecord);
+            }
+        }
+        actRecords = actRecordList.ToArray();
+
+    }
 
     public void GiveState()
     {
@@ -34,6 +49,7 @@ public class MadeAct : MonoBehaviour
 
     public void TransLoc()
     {
+        GetActRecordNotNull();
         GiveState();
 
 

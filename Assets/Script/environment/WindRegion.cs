@@ -12,18 +12,21 @@ public class WindRegion : MonoBehaviour
     public bool IsWindBegin = false;//是否开始吹风
     //玩家进入风区的体力的百分比
     [Header("玩家进入风区的体力的消减百分比")]
-    public float PlayerEnterWindStrengthPer;//记录玩家进入风区的的体力,百分比
+    public float PlayerEnterWindStrengthPer = 0.05f;//记录玩家进入风区的的体力,百分比
     public float WindTime = 0;//开始时间
     public Material[] grassMaterial;
     public GlobalGrassRenderer grassRenderer;
-    public bool isPlayerIn;
+    //public bool isPlayerIn;
     private GameObject player;
+    private PlayerPhysicalStrength playerPhysicalStrength;
+    public bool isPlayerIn = false;
     void Start()
     {
         WindTime = 0;
         //设置vfx的边界和风区的大小一致
         //WindVfx.transform.localScale = this.GetComponent<BoxCollider>().size;
         player = GameObject.FindGameObjectWithTag("Player");
+        playerPhysicalStrength = player.GetComponent<PlayerPhysicalStrength>();
     }
 
     // Update is called once per frame
@@ -38,24 +41,21 @@ public class WindRegion : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerIn = true;
+            if(IsWindBegin)
+            {
+                playerPhysicalStrength.isInWinZone = true;
+            }
+            PlayerEnterPhysicalStrength = playerPhysicalStrength.currentPhysicalStrength;
         }
     }
 
-    void ReducePlayerPhysical()
+    void LockPlayerPhysical()
     {
 
-        PlayerEnterPhysicalStrength = player.GetComponent<PlayerPhysicalStrength>().currentPhysicalStrength;
-        float maxPhysicalStrength = player.GetComponent<PlayerPhysicalStrength>().maxPhysicalStrength;
-        player.GetComponent<PlayerPhysicalStrength>().stopRecovering();
-        if (PlayerEnterPhysicalStrength/maxPhysicalStrength >PlayerEnterWindStrengthPer)
-        {
-            player.GetComponent<PlayerPhysicalStrength>().currentPhysicalStrength = PlayerEnterWindStrengthPer * maxPhysicalStrength;
-        }
-        else
-        {
-            //如果玩家的体力值小于风区消减的体力值，则对玩家体力不做任何处理
-            return;
-        }
+        float maxPhysicalStrength = playerPhysicalStrength.maxPhysicalStrength;
+        playerPhysicalStrength.stopRecovering();
+        playerPhysicalStrength.currentPhysicalStrength = PlayerEnterWindStrengthPer * maxPhysicalStrength;
+
         
     }
 
@@ -63,7 +63,7 @@ public class WindRegion : MonoBehaviour
     {
         if (player.CompareTag("Player"))
         {
-            player.GetComponent<PlayerPhysicalStrength>().currentPhysicalStrength = PlayerEnterPhysicalStrength;
+            playerPhysicalStrength.currentPhysicalStrength = PlayerEnterPhysicalStrength;
             //other.GetComponent<PlayerPhysicalStrength>().startRecovering();
         }
     }
@@ -72,6 +72,8 @@ public class WindRegion : MonoBehaviour
     {
         //离开风区时，恢复玩家的体力值
         isPlayerIn = false;
+        playerPhysicalStrength.isInWinZone = false;
+        RecoverPlayerPhysical();
 
     }
 
@@ -79,33 +81,32 @@ public class WindRegion : MonoBehaviour
     {
         if (WindTime > WindPeiod)
         {
-            if (IsWindBegin == true)
+            if (IsWindBegin)
             {
+                //关闭风
                 WindVfx.SetActive(false);
                 IsWindBegin = false;
                 WindTime = 0;
-                for (int i = 0; i < grassMaterial.Length; i++)
+                if(playerPhysicalStrength.isInWinZone)
                 {
-                    grassMaterial[i].SetFloat("_WindSpeed", 2);
+                    RecoverPlayerPhysical();
+                    playerPhysicalStrength.isInWinZone = false;
                 }
-                if(grassRenderer != null)
-                    grassRenderer.ForceRefresh();
-                if(!isPlayerIn)return;
-                RecoverPlayerPhysical();
+
+                
             }
-            else if (IsWindBegin == false)
+            else if (!IsWindBegin)
             {
+                //风区开始
                 WindVfx.SetActive(true);
                 IsWindBegin = true;
                 WindTime = 0;
-                for (int i = 0; i < grassMaterial.Length; i++)
+                if(isPlayerIn)
                 {
-                    grassMaterial[i].SetFloat("_WindSpeed", 12);
+                    playerPhysicalStrength.isInWinZone = true;
                 }
-                if(grassRenderer != null)
-                    grassRenderer.ForceRefresh();
-                if(!isPlayerIn)return;
-                ReducePlayerPhysical();
+                if(!playerPhysicalStrength.isInWinZone)return;
+                LockPlayerPhysical();
             }
         }
     }

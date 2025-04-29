@@ -35,6 +35,8 @@ public class ReMadeLoc : MonoBehaviour
 
             LocunStates[i] = TransTool.BakTransCode(LocunData[1]);
             LocunNums[i] = TransTool.BakTransCode(LocunData[0]);
+            Debug.Log("LocunData: " + LocunData[0] + " " + LocunData[1]);
+            Debug.Log("LocunNums: " + LocunNums[i]+ "LocunStates: " + LocunStates[i]);
         }
     }
 }

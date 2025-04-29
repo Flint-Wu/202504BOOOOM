@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6173903409140121192
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6173903409140121193}
+  - component: {fileID: 6173903409140121194}
+  - component: {fileID: 6173903409140121195}
+  - component: {fileID: 6173903409140121204}
+  - component: {fileID: 6173903409140121205}
+  - component: {fileID: 6173903409140121206}
+  m_Layer: 0
+  m_Name: CodeTrans
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6173903409140121193
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6173903409140121192}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6173903409140121194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6173903409140121192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4e1d5be15facd3488776bdae9455d6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6173903409140121195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6173903409140121192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04490502d6677a547a698f3af650f6cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransTool: {fileID: 6173903409140121194}
+  IdInput: {fileID: 0}
+  IDCount: 
+  ID: 
+  PushID: 
+--- !u!114 &6173903409140121204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6173903409140121192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2eaed938b2886543b8b0aae22c8768b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransTool: {fileID: 6173903409140121194}
+  actRecords:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  LocStates: []
+  LocNums: []
+  TranedAll: []
+  PushLoc: 
+--- !u!114 &6173903409140121205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6173903409140121192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 591959c4bb86d50498e4ecde9b44a8c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MadeAct: {fileID: 6173903409140121204}
+  MadeID: {fileID: 6173903409140121195}
+  CheatCode: 
+--- !u!114 &6173903409140121206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6173903409140121192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2580ab82f1b6cab47b970244b08f49e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

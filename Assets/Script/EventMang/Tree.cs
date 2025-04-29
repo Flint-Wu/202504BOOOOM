@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
+[RequireComponent(typeof(BlockState))]
+[RequireComponent(typeof(ActRecord))]
 public class Tree : MonoBehaviour
 {
     public ActRecord ActRecord;
-    public string[] GivenValues;
+    public List<string> GivenValues;
     public string NowState;
     public int tmp;
 
@@ -20,14 +21,14 @@ public class Tree : MonoBehaviour
     {
         GivenValues = ActRecord.givenValues;
         CountNum();
-        ActRecord.LocState = tmp.ToString();//Ê¹actrecordÖÐµÄ×´Ì¬ÊýÖµµÈÍ¬ÓÚ×÷±×ÂëÖÐ×î´óµÄÊýÖµ
+        ActRecord.LocState = tmp.ToString();//Ê¹actrecordï¿½Ðµï¿½×´Ì¬ï¿½ï¿½Öµï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
         StateChange();
     }
 
-    public void CountNum()//¼ÆËã×÷±×ÂëÖÐ³¡¾°×´Ì¬ÓÐ¶àÉÙ¸ö1
+    public void CountNum()//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð³ï¿½ï¿½ï¿½×´Ì¬ï¿½Ð¶ï¿½ï¿½Ù¸ï¿½1
     {
         tmp = 0;
-        for (int i = 0; i < GivenValues.Length; i++)
+        for (int i = 0; i < GivenValues.Count; i++)
         {
             GivenValues[i] = "1";
             tmp++;
@@ -38,7 +39,7 @@ public class Tree : MonoBehaviour
     {
         if (ActRecord.LocState == "5") 
         {
-            Debug.Log("±¾µØ¿é³¡¾°×´Ì¬ÇÐ»»Îª" + tmp);
+            Debug.Log("ï¿½ï¿½ï¿½Ø¿é³¡ï¿½ï¿½×´Ì¬ï¿½Ð»ï¿½Îª" + tmp);
         }
     }
 

@@ -153,7 +153,7 @@ Material:
     - _WaveAmp: 1.2
     - _WaveSpeed: 7
     - _WindDensity: 0.39
-    - _WindSpeed: 12
+    - _WindSpeed: 2
     - _WindStrength: 0.6
     - _WorkflowMode: 1
     - _YOffset: 0
