@@ -5,7 +5,7 @@ using UnityEngine;
 public class GenerateCheatCode : MonoBehaviour
 {
     // Start is called before the first frame update
-    public void GenerateCheetCode()
+    public void GenCheatCode()
     {
         GetComponent<MadeID>().TransID();
         GetComponent<MadeAct>().TransLoc();

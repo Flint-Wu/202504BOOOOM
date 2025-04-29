@@ -35,7 +35,7 @@ public class Annotation : MonoBehaviour
         //遍历所有材质球
         annotationText.text = "press E to pick up the fruit"; // 更新UI文本
     }
-    public void TreePouContributorJumpOut(string [] playerIDs)
+    public void TreePouContributorJumpOut(List<string> playerIDs)
     {
         //遍历所有材质球
         string playerID = string.Join(",", playerIDs); // 将玩家ID数组转换为字符串

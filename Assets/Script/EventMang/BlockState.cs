@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ public class BlockState : MonoBehaviour
         nail,
     }
     public ActRecord ActRecord;
-    public string[] GivenValues;
+    public List<string> GivenValues;
     public string NowState;
     public int tmp;
 
@@ -33,7 +34,7 @@ public class BlockState : MonoBehaviour
         tmp = GetMaxNumber(GivenValues);//获取GivenValus组中所有数字的最大数值
         ActRecord.LocState = tmp.ToString();//使actrecord中的状态数值等同于作弊码中最大的数值
     }
-    static int GetMaxNumber(string[] numbers)//获取string组中所有数字的最大数值方法
+    static int GetMaxNumber(List<string> numbers)//获取string组中所有数字的最大数值方法
     {
         return numbers.Select(int.Parse).Max();
     }

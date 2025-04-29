@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DiasGames.Climbing;
 using UnityEditor;
 using UnityEngine;
 
@@ -25,12 +26,12 @@ public class BlockMan : MonoBehaviour
         for (int i = 0; i < actRecords.Length; i++)
         {
             //如果其transform挂载有Tree，LocNum以2xx+1为准
-            if (actRecords[i].gameObject.GetComponent<Tree>() != null)
+            if (actRecords[i].gameObject.GetComponent<GrowUpController>() != null)
             {
                 TreeNum +=1;
                 actRecords[i].LocNum = "20" + TreeNum.ToString();
             }
-            else if (actRecords[i].gameObject.GetComponent<RelaxLoc>() != null)
+            else if (actRecords[i].gameObject.GetComponent<Ledge>() != null)
             {
                 RelaxNum += 1;
                 actRecords[i].LocNum = RelaxNum.ToString();
@@ -68,13 +69,13 @@ public class BlockMan : MonoBehaviour
 
         for (int i = 0; i < actRecords.Length; i++)
         {//初始化所有记录仪的数组长度
-            actRecords[i].givenNames = new string[CodeGet.LocNums.GetLength(0)];
-            actRecords[i].givenValues = new string[CodeGet.LocStates.GetLength(0)];
+            actRecords[i].givenNames = new List<string>(CodeGet.LocNums.GetLength(0));
+            actRecords[i].givenValues = new List<string>(CodeGet.LocStates.GetLength(0));
         }
 
         for (int i = 0; i < actRecords.Length; i++)//遍历场景地块
         {
-            actRecords[i].givenNames = CodeGet.names;//给予所有状态作弊码主人名字
+            actRecords[i].givenNames = new List<string>(CodeGet.names);//给予所有状态作弊码主人名字
             for (int j = 0; j < CodeGet.LocNums.GetLength(1); j++)//遍历作弊码长度
             {
                 if (actRecords[i].gameObject.name.Substring(3) == CodeGet.LocNums[0,j])

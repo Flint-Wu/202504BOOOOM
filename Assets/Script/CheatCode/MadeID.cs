@@ -12,7 +12,15 @@ public class MadeID : MonoBehaviour
 
     public void TransID()
     {
-        ID = IdInput.text;
+        if(IdInput!= null)
+        {
+            ID = IdInput.text;
+        }
+        else
+        {
+            Debug.LogWarning("IdInput is null or empty. Please assign a value.");
+        }
+        
         IDCount = ID.Length.ToString();
 
         int randomIndex = Random.Range(0, sign.Length);

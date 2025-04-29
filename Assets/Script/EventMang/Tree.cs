@@ -7,7 +7,7 @@ using UnityEngine;
 public class Tree : MonoBehaviour
 {
     public ActRecord ActRecord;
-    public string[] GivenValues;
+    public List<string> GivenValues;
     public string NowState;
     public int tmp;
 
@@ -28,7 +28,7 @@ public class Tree : MonoBehaviour
     public void CountNum()//�����������г���״̬�ж��ٸ�1
     {
         tmp = 0;
-        for (int i = 0; i < GivenValues.Length; i++)
+        for (int i = 0; i < GivenValues.Count; i++)
         {
             GivenValues[i] = "1";
             tmp++;

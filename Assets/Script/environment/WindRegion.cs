@@ -54,7 +54,6 @@ public class WindRegion : MonoBehaviour
 
         float maxPhysicalStrength = playerPhysicalStrength.maxPhysicalStrength;
         playerPhysicalStrength.stopRecovering();
-
         playerPhysicalStrength.currentPhysicalStrength = PlayerEnterWindStrengthPer * maxPhysicalStrength;
 
         
@@ -97,6 +96,7 @@ public class WindRegion : MonoBehaviour
                 // }
                 // if(grassRenderer != null)
                 //     grassRenderer.ForceRefresh();
+                if(!playerPhysicalStrength.isInWinZone)return;
                 RecoverPlayerPhysical();
             }
             else if (!IsWindBegin)

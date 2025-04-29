@@ -15,7 +15,7 @@ public class InventoryManager : MonoBehaviour
     public TextMeshProUGUI nailCountText; // 显示钉子数量的UI文本
     public GameObject nailUI; // 钉子UI
     public GameObject nailUIIconPrefab; // 钉子图标UI
-    public string PlayerID;
+
     private void Awake()
     {
         Instance = this;
@@ -68,7 +68,8 @@ public class InventoryManager : MonoBehaviour
             nailUI.transform.GetChild(currentNailCount).gameObject.transform.GetChild(0).gameObject.SetActive(false); // 隐藏钉子图标
         }); // 动画缩放钉子图标
         PlayerPhysicalStrength.Instance.startRecovering(); // 开始恢复体力
-
+        GetComponent<ClimbAbility>()._currentCollider.GetComponent<ActRecord>().LocState = "1"; // 设置记录仪的状态为钉子
+        GetComponent<ClimbAbility>()._currentCollider.GetComponent<ActRecord>().givenNames.Add(FindAnyObjectByType<MadeID>().ID); // 添加玩家名字到记录仪的给定名字列表中
     }
     public bool CanBuild()
     {
@@ -86,6 +87,10 @@ public class InventoryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.F1))
+        {
+            Debug.Log("F1被按下了！"); // 输出按下F1的提示
+            FindAnyObjectByType<GenerateCheatCode>().GenCheatCode(); // 生成作弊码
+        }
     }
 }

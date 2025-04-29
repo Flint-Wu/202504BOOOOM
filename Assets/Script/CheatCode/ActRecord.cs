@@ -7,8 +7,8 @@ public class ActRecord : MonoBehaviour
     public string LocState;
     public string LocNum;
 
-    public string[] givenNames;
-    public string[] givenValues;
+    public List<string> givenNames;
+    public List<string> givenValues;
 
     void Start()
     {
@@ -21,6 +21,5 @@ public class ActRecord : MonoBehaviour
             Debug.LogWarning("ActRecord: " + e.Message);
         }
     }
-
     
 }

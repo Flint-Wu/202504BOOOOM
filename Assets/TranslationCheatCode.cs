@@ -7,7 +7,7 @@ public class TranslationCheatCode : MonoBehaviour
     public MadeConcateAll madeConcateAll;
     public void TranslateCheatCode()
     {
-        GetComponent<ReadCode>().SetCheatCode(madeConcateAll.CheatCode);
+        // GetComponent<ReadCode>().SetCheatCode();
         GetComponent<ReadCode>().SplitCC();
         GetComponent<ReMadeID>().ReTrans();
         GetComponent<ReMadeLoc>().ReTrans();

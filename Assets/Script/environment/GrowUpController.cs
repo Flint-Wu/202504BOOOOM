@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using DiasGames.Abilities;
+using System;
 //[ExecuteInEditMode]
 public class GrowUpController : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class GrowUpController : MonoBehaviour
     public bool CanBeUsed;
     public int PourNumMax = 0;
     public int PouNum = 0;
-    public string[] PlayerIDs ;
+    public List<string> PlayerIDs ;
     public float InitGrow = 5f;
     public bool isTrigerEffect = false;
     public GameObject HealEffectPrefab;
@@ -103,6 +104,7 @@ public class GrowUpController : MonoBehaviour
         InteractionManger.PourWater -= PourWater; // 取消事件订阅
         Annotation.Instance.Reset(); // 显示注释
         Annotation.Instance.TreePouContributorJumpOut(PlayerIDs); // 显示注释
+        GetComponent<ActRecord>().LocState = "1"; // 设置记录仪的状态为钉子
 
     }
 

@@ -68,8 +68,6 @@ public class PlayerPhysicalStrength : MonoBehaviour
         }
     }
 
-
-
     public void ExhaustPhysicalStrength()
     {
         //如果当前状态机的变量Motion Speed为0

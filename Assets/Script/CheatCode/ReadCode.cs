@@ -19,6 +19,7 @@ public class ReadCode : MonoBehaviour
         {
             // Debug.LogError("InputField is not assigned in the inspector.");
             // return;
+            Debug.Log("InputField is null, using" + CheatCode);
         }
         else
         {
