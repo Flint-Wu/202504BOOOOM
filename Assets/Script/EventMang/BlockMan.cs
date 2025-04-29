@@ -10,13 +10,16 @@ public class BlockMan : MonoBehaviour
 
     public ActRecord[] actRecords;
 
-<<<<<<< HEAD
+
     void Start()
-=======
+    {
+
+    }
+
+
     public string strings;
 
     void Awake()
->>>>>>> main
     {
         actRecords = FindObjectsOfType<ActRecord>();
         SortAllLocation();
