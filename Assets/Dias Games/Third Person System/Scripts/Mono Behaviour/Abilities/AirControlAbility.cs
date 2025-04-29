@@ -124,7 +124,6 @@ namespace DiasGames.Abilities
                     //     _damage.Damage((int)(200 * ratio));
                     // }
 
-                    return;
                 }
                 if(_waterState._isDepleted)
                 {
