@@ -785,8 +785,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocState: 3
   LocNum: 
-  givenNames: []
-  givenValues: []
+  givenNames:
+  - Dtorm
+  givenValues:
+  - 1
 --- !u!65 &511814795
 BoxCollider:
   m_ObjectHideFlags: 0

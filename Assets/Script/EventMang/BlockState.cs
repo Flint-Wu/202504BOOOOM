@@ -3,6 +3,11 @@ using UnityEngine;
 
 public class BlockState : MonoBehaviour
 {
+    public enum BlockType
+    {
+        tree,
+        nail,
+    }
     public ActRecord ActRecord;
     public string[] GivenValues;
     public string NowState;
@@ -21,6 +26,13 @@ public class BlockState : MonoBehaviour
         ActRecord.LocState = tmp.ToString();//使actrecord中的状态数值等同于作弊码中最大的数值
     }
 
+    public void GiveBackDataToActRecord()
+    {
+        //将actrecord中的状态数值等同于作弊码中最大的数值
+        GivenValues = ActRecord.givenValues;
+        tmp = GetMaxNumber(GivenValues);//获取GivenValus组中所有数字的最大数值
+        ActRecord.LocState = tmp.ToString();//使actrecord中的状态数值等同于作弊码中最大的数值
+    }
     static int GetMaxNumber(string[] numbers)//获取string组中所有数字的最大数值方法
     {
         return numbers.Select(int.Parse).Max();

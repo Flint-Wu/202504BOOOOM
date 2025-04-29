@@ -47,7 +47,5 @@ public class CodeGet : MonoBehaviour
                 LocStates[i,j] = ReMadeLoc.LocunStates[j];//��ȡ����������ĳ���״̬
             }
         }
-
-
     }
 }

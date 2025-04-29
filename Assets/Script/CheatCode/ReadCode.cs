@@ -15,7 +15,16 @@ public class ReadCode : MonoBehaviour
 
     public void SplitCC()
     {
-        CheatCode = InputField.text;
+        if(InputField == null)
+        {
+            // Debug.LogError("InputField is not assigned in the inspector.");
+            // return;
+        }
+        else
+        {
+            CheatCode = InputField.text;
+        }
+        
 
         CheatCodeSplit = CheatCode.Split(":");
         LocunRe = new string[CheatCodeSplit.Length -1];
@@ -27,5 +36,10 @@ public class ReadCode : MonoBehaviour
             LocunRe[i-1] = CheatCodeSplit[i];
         
         }
+    }
+
+    public void SetCheatCode(string code)
+    {
+        CheatCode = code;
     }
 }

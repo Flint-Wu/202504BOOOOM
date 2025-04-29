@@ -12,7 +12,14 @@ public class ActRecord : MonoBehaviour
 
     void Start()
     {
-        LocNum = gameObject.name.Substring(3);
+        try
+        {
+            //LocState = gameObject.name.Substring(0, 2);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogWarning("ActRecord: " + e.Message);
+        }
     }
 
     

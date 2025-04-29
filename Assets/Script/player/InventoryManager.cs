@@ -15,6 +15,7 @@ public class InventoryManager : MonoBehaviour
     public TextMeshProUGUI nailCountText; // 显示钉子数量的UI文本
     public GameObject nailUI; // 钉子UI
     public GameObject nailUIIconPrefab; // 钉子图标UI
+    public string PlayerID;
     private void Awake()
     {
         Instance = this;
