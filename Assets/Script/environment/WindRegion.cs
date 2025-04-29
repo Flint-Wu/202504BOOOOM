@@ -83,33 +83,24 @@ public class WindRegion : MonoBehaviour
         {
             if (IsWindBegin)
             {
+                //关闭风
                 WindVfx.SetActive(false);
                 IsWindBegin = false;
                 WindTime = 0;
                 if(playerPhysicalStrength.isInWinZone)
                 {
+                    RecoverPlayerPhysical();
                     playerPhysicalStrength.isInWinZone = false;
                 }
-                // for (int i = 0; i < grassMaterial.Length; i++)
-                // {
-                //     grassMaterial[i].SetFloat("_WindSpeed", 2);
-                // }
-                // if(grassRenderer != null)
-                //     grassRenderer.ForceRefresh();
-                if(!playerPhysicalStrength.isInWinZone)return;
-                RecoverPlayerPhysical();
+
+                
             }
             else if (!IsWindBegin)
             {
+                //风区开始
                 WindVfx.SetActive(true);
                 IsWindBegin = true;
                 WindTime = 0;
-                // for (int i = 0; i < grassMaterial.Length; i++)
-                // {
-                //     grassMaterial[i].SetFloat("_WindSpeed", 12);
-                // }
-                // if(grassRenderer != null)
-                //     grassRenderer.ForceRefresh();
                 if(isPlayerIn)
                 {
                     playerPhysicalStrength.isInWinZone = true;

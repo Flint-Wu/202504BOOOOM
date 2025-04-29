@@ -116,7 +116,7 @@ public class GrowUpController : MonoBehaviour
         GameObject healEffect = Instantiate(HealEffectPrefab, player.transform.position, Quaternion.identity);
         player.GetComponent<PlayerPhysicalStrength>().currentPhysicalStrength = player.GetComponent<PlayerPhysicalStrength>().maxPhysicalStrength;
         isTrigerEffect = true;
-
+        Annotation.Instance.Reset(); // 显示注释
     }
 
     void JudgeIsGrowUp()

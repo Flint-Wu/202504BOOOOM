@@ -81,19 +81,19 @@ Material:
     - _b_influence: 1
     - _branches_disp: 0.3
     - _expandScale: 0.7
-    - _grow: 10.78
-    - _growAxis: 2
-    - _growIntensity: 0.24
+    - _grow: 20
+    - _growAxis: 0
+    - _growIntensity: 0.01
     - _growOffset: 0
     - _growVariation: 0
     - _leaves_wiggle_disp: 0.07
     - _leaves_wiggle_speed: 0.002
     - _r_influence: 1
-    - _sliceOffset: 1
+    - _sliceOffset: -0.51
     - _spiralDirection: 1
     - _spiralRadius: 0.1
     - _spiralTightness: 3
-    - _thershold: 0.1
+    - _thershold: 0.077
     - _tree_sway_disp: 0.3
     - _tree_sway_speed: 1
     - _tree_sway_stutter: 1.5

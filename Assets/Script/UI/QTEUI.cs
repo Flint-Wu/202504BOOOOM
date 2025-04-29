@@ -161,7 +161,7 @@ namespace DiasGames.Abilities
 
 
             float QTEAccuracy = characterStrength.currentPhysicalStrength / characterStrength.maxPhysicalStrength*BaseQTEAccuracy;
-            QTEAccuracy = Mathf.Clamp(QTEAccuracy, 0.1f, BaseQTEAccuracy);
+            QTEAccuracy = Mathf.Clamp(QTEAccuracy, 0.05f, BaseQTEAccuracy);
 
             QTECorretBarHeightRange[0] = Random.Range(QTEBaseBarHeight*StartPercentage, QTEBaseBarHeight * (1 - QTEAccuracy));
             QTECorretBarHeightRange[1] = QTECorretBarHeightRange[0] + QTEBaseBarHeight * QTEAccuracy;

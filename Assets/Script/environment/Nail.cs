@@ -35,6 +35,7 @@ public class Nail : MonoBehaviour
                 }
             }
         }
+        playerID = FindAnyObjectByType<MadeID>().ID; // 获取玩家ID
         //遍历所有材质球
     }
     void OnEnable()
