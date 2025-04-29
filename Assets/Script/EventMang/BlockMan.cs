@@ -12,7 +12,7 @@ public class BlockMan : MonoBehaviour
 
     public string strings;
 
-    void Start()
+    void Awake()
     {
         actRecords = FindObjectsOfType<ActRecord>();
         SortAllLocation();

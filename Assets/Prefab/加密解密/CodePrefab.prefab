@@ -112,6 +112,10 @@ PrefabInstance:
       value: ReCodeTrans
       objectReference: {fileID: 0}
     - target: {fileID: 7592854018538409773, guid: 156a54d2f088e934ba2269abc2c24917, type: 3}
+      propertyPath: CheatCode
+      value: y#V9k3h:iw^w:up*w
+      objectReference: {fileID: 0}
+    - target: {fileID: 7592854018538409773, guid: 156a54d2f088e934ba2269abc2c24917, type: 3}
       propertyPath: InputField
       value: 
       objectReference: {fileID: 0}
@@ -220,6 +224,10 @@ PrefabInstance:
     - target: {fileID: 6173903409140121193, guid: 9730c607afa7c6543a85af293279b472, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6173903409140121195, guid: 9730c607afa7c6543a85af293279b472, type: 3}
+      propertyPath: ID
+      value: Dtorm
       objectReference: {fileID: 0}
     - target: {fileID: 6173903409140121195, guid: 9730c607afa7c6543a85af293279b472, type: 3}
       propertyPath: IdInput

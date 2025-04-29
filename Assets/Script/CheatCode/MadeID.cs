@@ -28,4 +28,12 @@ public class MadeID : MonoBehaviour
 
         PushID = TransTool.StrTransCode(IDCount) + randomElement + TransTool.StrTransCode(ID);
     }
+
+    void Update()
+    {
+        if(IdInput != null && !string.IsNullOrEmpty(IdInput.text))
+        {
+            ID = IdInput.text;
+        }
+    }
 }

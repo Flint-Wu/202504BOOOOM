@@ -28,7 +28,7 @@ public class LevelInit : MonoBehaviour
             }
             else if (ChangeActPrefabIndex.Contains(actRecords[i].LocNum)&&int.Parse(actRecords[i].LocNum) < 200)
             {
-                Ray ray = new Ray( actRecords[i].transform.position - actRecords[i].transform.right+actRecords[i].transform.forward, -actRecords[i].transform.forward); // 射线从玩家位置发出
+                Ray ray = new Ray( actRecords[i].transform.position - actRecords[i].transform.right*Random.Range(0.8f,1.2f)+actRecords[i].transform.forward, -actRecords[i].transform.forward); // 射线从玩家位置发出
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, 100f)) // 射线检测
                 {

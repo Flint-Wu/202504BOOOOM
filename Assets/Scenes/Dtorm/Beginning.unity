@@ -123,6 +123,23 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &525186153 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3705539243895724814, guid: 8d63d4a54a477ad44952cd1f2092b0bf, type: 3}
+  m_PrefabInstance: {fileID: 3705539244598277328}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &525186154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525186153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab5f39c8582481b48a697ac1de54934f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &531535257
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,6 +1549,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4678409944108415267, guid: 8d63d4a54a477ad44952cd1f2092b0bf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6499684713616691817, guid: 8d63d4a54a477ad44952cd1f2092b0bf, type: 3}
+      propertyPath: CheatCode
+      value: y@V9k3h:yq&w:tu$w:tt$w
+      objectReference: {fileID: 0}
     - target: {fileID: 6499684713616691817, guid: 8d63d4a54a477ad44952cd1f2092b0bf, type: 3}
       propertyPath: InputField
       value: 
@@ -1539,6 +1564,6 @@ PrefabInstance:
     - target: {fileID: 7404661331940986660, guid: 8d63d4a54a477ad44952cd1f2092b0bf, type: 3}
       propertyPath: IdInput
       value: 
-      objectReference: {fileID: 781647013}
+      objectReference: {fileID: 679817888}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d63d4a54a477ad44952cd1f2092b0bf, type: 3}
