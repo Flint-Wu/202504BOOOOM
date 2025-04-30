@@ -80,7 +80,7 @@ public class GrowUpController : MonoBehaviour
                 break;
             case 2:
                 int blendShapeIndex5= smrs[0].sharedMesh.GetBlendShapeIndex("blendShape1.pCube4");
-                int blendShapeIndex6 = smrs[1].sharedMesh.GetBlendShapeIndex("blendShape2.pCub3");
+                int blendShapeIndex6 = smrs[1].sharedMesh.GetBlendShapeIndex("blendShape2.pCube3");
                 InitSetBlendShape(smrs[0], blendShapeIndex5); // 设置BlendShape索引为2
                 InitSetBlendShape(smrs[1], blendShapeIndex6); // 设置BlendShape索引为3
                 break;

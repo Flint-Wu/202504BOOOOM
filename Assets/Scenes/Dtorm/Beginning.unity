@@ -274,7 +274,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 605730884}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -622,7 +622,7 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 781647014}
-  m_TextComponent: {fileID: 1693809400}
+  m_TextComponent: {fileID: 0}
   m_Placeholder: {fileID: 605730886}
   m_ContentType: 0
   m_InputType: 0
@@ -644,7 +644,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: y!V9k3h:q&w:w^r:w$e
+  m_Text: 
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -1476,7 +1476,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
@@ -2008,7 +2008,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6499684713616691817, guid: 8d63d4a54a477ad44952cd1f2092b0bf, type: 3}
       propertyPath: CheatCode
-      value: y@V9k3h:yq&w:tu$w:tt$w
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6499684713616691817, guid: 8d63d4a54a477ad44952cd1f2092b0bf, type: 3}
       propertyPath: InputField

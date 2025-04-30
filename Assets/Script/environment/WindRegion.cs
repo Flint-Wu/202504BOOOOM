@@ -44,8 +44,8 @@ public class WindRegion : MonoBehaviour
             if(IsWindBegin)
             {
                 playerPhysicalStrength.isInWinZone = true;
+                PlayerEnterPhysicalStrength = playerPhysicalStrength.currentPhysicalStrength;
             }
-            PlayerEnterPhysicalStrength = playerPhysicalStrength.currentPhysicalStrength;
         }
     }
 
@@ -106,6 +106,7 @@ public class WindRegion : MonoBehaviour
                 if(isPlayerIn)
                 {
                     playerPhysicalStrength.isInWinZone = true;
+                    PlayerEnterPhysicalStrength = playerPhysicalStrength.currentPhysicalStrength;
                 }
                 if(!playerPhysicalStrength.isInWinZone)return;
                 LockPlayerPhysical();
