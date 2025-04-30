@@ -6,7 +6,7 @@ namespace DiasGames.IK
 {
     public class IKScheduler : MonoBehaviour
     {
-        private Animator _animator = null;
+        public Animator _animator = null;
         private List<IKPass> _ikPassList = new List<IKPass>();
 
         [SerializeField] private float IKSmoothTime = 0.12f;
@@ -15,7 +15,7 @@ namespace DiasGames.IK
 
         private void Awake()
         {
-            _animator = GetComponent<Animator>();
+            //_animator = GetComponent<Animator>();
         }
 
         private void Update()

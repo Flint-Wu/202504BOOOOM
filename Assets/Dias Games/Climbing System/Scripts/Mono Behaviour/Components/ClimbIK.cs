@@ -14,7 +14,7 @@ namespace DiasGames.Climbing
         public bool applyIK = true;
 
         // components
-        private Animator _animator;
+        public Animator _animator;
 
         // parameters from climbing
         private LayerMask _climbMask;
@@ -52,6 +52,12 @@ namespace DiasGames.Climbing
         {
             _animator = GetComponent<Animator>();
             _climbAbility = GetComponent<ClimbAbility>();
+            //取消所有的CharacterJoint
+            // CharacterJoint[] joints = GetComponentsInChildren<CharacterJoint>();
+            // foreach (var joint in joints)
+            // {
+            //     Destroy(joint);
+            // }
 
             CreateGameObjectEffectors();
         }

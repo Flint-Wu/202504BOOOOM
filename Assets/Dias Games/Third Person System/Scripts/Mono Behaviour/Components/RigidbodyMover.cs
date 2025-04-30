@@ -42,7 +42,7 @@ namespace DiasGames.Components
         private int _animIDSpeed;
         private int _animIDMotionSpeed;
 
-        private Animator _animator;
+        public Animator _animator;
         private Rigidbody _rigidbody;
         private CapsuleCollider _capsule;
         private GameObject _mainCamera;
@@ -63,7 +63,7 @@ namespace DiasGames.Components
 
         private void Start()
         {
-            _hasAnimator = TryGetComponent(out _animator);
+            //_hasAnimator = TryGetComponent(out _animator);
             AssignAnimationIDs();
         }
 
