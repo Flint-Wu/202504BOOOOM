@@ -569,7 +569,7 @@ Material:
     - GeometryShader_Enabled: 1
     - Instancing: 0
     - Tessellation_Enabled: 1
-    - _1st2nd_Shades_Feather: 1
+    - _1st2nd_Shades_Feather: 0.0001
     - _1stShadeMapMask_Inverse: 0
     - _1st_ShadeMapUV: 0
     - _2ndShadeMapMask_Inverse: 0
@@ -821,8 +821,8 @@ Material:
     - _BacklightNormalStrength: 1
     - _BacklightReceiveShadow: 1
     - _BacklightViewStrength: 1
-    - _BaseColor_Step: 0.725
-    - _BaseShade_Feather: 0.318
+    - _BaseColor_Step: 0.5
+    - _BaseShade_Feather: 0.0001
     - _BlackLightMasking0GlobalMaskBlendType: 0
     - _BlackLightMasking0GlobalMaskIndex: 0
     - _BlackLightMasking0Key: 1
@@ -1307,7 +1307,7 @@ Material:
     - _EmissionScrollingVertexColor1: 0
     - _EmissionScrollingVertexColor2: 0
     - _EmissionScrollingVertexColor3: 0
-    - _EmissionStrength: 0.15
+    - _EmissionStrength: 0.1
     - _EmissionStrength1: 0
     - _EmissionStrength2: 0
     - _EmissionStrength3: 0
@@ -2495,7 +2495,7 @@ Material:
     - _Set_Rim2LightMaskUV: 0
     - _Set_RimLightMaskChannel: 1
     - _Set_RimLightMaskUV: 0
-    - _ShadeColor_Step: 0.319
+    - _ShadeColor_Step: 0
     - _ShaderOptimizerEnabled: 0
     - _ShaderUIWarning0: -0
     - _ShaderUIWarning1: -0
@@ -2925,7 +2925,7 @@ Material:
     - m_mainCategory: 1
     - m_modifierCategory: 0
     - m_renderingCategory: 0
-    - m_specialFXCategory: 1
+    - m_specialFXCategory: 0
     - m_start_ALDecalSpectrum: 0
     - m_start_ALVolumeColor: 0
     - m_start_Alpha: 0
@@ -3036,7 +3036,7 @@ Material:
     - m_start_emission1Options: 0
     - m_start_emission2Options: 0
     - m_start_emission3Options: 0
-    - m_start_emissionOptions: 1
+    - m_start_emissionOptions: 0
     - m_start_flipBook: 0
     - m_start_glitter: 0
     - m_start_internalparallax: 0
@@ -3472,9 +3472,9 @@ Material:
     - shader_locale: 0
     - shader_master_label: 0
     m_Colors:
-    - _1st_ShadeColor: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
+    - _1st_ShadeColor: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
     - _1st_ShadeMapPan: {r: 0, g: 0, b: 0, a: 0}
-    - _2nd_ShadeColor: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
+    - _2nd_ShadeColor: {r: 1, g: 1, b: 1, a: 1}
     - _2nd_ShadeMapPan: {r: 0, g: 0, b: 0, a: 0}
     - _ALDecalColorMaskPan: {r: 0, g: 0, b: 0, a: 0}
     - _ALDecalVolumeColorHigh: {r: 1, g: 0, b: 0, a: 1}

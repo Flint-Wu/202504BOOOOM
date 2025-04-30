@@ -14,7 +14,7 @@ namespace DiasGames.Climbing
         public bool applyIK = true;
 
         // components
-        private Animator _animator;
+        public Animator _animator;
 
         // parameters from climbing
         private LayerMask _climbMask;
@@ -50,7 +50,7 @@ namespace DiasGames.Climbing
 
         private void Awake()
         {
-            _animator = GetComponent<Animator>();
+            //_animator = GetComponent<Animator>();
             _climbAbility = GetComponent<ClimbAbility>();
 
             CreateGameObjectEffectors();

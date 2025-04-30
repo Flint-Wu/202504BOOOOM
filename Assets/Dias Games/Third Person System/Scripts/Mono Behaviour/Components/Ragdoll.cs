@@ -7,7 +7,7 @@ namespace DiasGames.Components
     public class Ragdoll : MonoBehaviour
     {
         private Health _health;          // reference to health component to know when character dies and turn on ragdoll
-        private Animator _animator;      // reference to animator. It must be deactivated in order to ragdoll works
+        public Animator _animator;      // reference to animator. It must be deactivated in order to ragdoll works
 
         // ragdoll rigidbodies
         private List<Rigidbody> _ragdollRigidbodies = new List<Rigidbody>();
@@ -16,7 +16,7 @@ namespace DiasGames.Components
         private void Awake()
         {
             _health = GetComponent<Health>();
-            _animator = GetComponent<Animator>();
+            //_animator = GetComponent<Animator>();
 
             GetRagdollReferences();
         }
