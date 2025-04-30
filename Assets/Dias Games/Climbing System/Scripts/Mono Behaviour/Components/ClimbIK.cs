@@ -50,8 +50,14 @@ namespace DiasGames.Climbing
 
         private void Awake()
         {
-            //_animator = GetComponent<Animator>();
+            _animator = GetComponent<Animator>();
             _climbAbility = GetComponent<ClimbAbility>();
+            //取消所有的CharacterJoint
+            // CharacterJoint[] joints = GetComponentsInChildren<CharacterJoint>();
+            // foreach (var joint in joints)
+            // {
+            //     Destroy(joint);
+            // }
 
             CreateGameObjectEffectors();
         }
