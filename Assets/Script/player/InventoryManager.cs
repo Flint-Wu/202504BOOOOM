@@ -21,7 +21,6 @@ public class InventoryManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        InteractionManger.UseNail += CostNail; // 取消事件订阅
         for (int i = 0; i < maxNailCout; i++)
         {
             GameObject nailUIIcon = Instantiate(nailUIIconPrefab, nailUI.transform.position, Quaternion.identity); // 在钉子UI图标位置生成钉子
@@ -31,7 +30,6 @@ public class InventoryManager : MonoBehaviour
     }
     private void OnDestroy()
     {
-        InteractionManger.UseNail -= CostNail; // 取消事件订阅
     }
     void Start()
     {

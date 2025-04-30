@@ -12,9 +12,11 @@ public class Annotation : MonoBehaviour
     public TextMeshProUGUI annotationText; // 显示注释的UI文本
     public GameObject waterFruitAnnotationUI; // 水果注释UI
     public GameObject treePourAnnotationUI; // 倒水注释UI
+    public TextMeshProUGUI playerIDtext;
     void Start()
     {
         annotationText = GetComponent<TextMeshProUGUI>(); // 获取UI文本组件
+        playerIDtext.text = FindAnyObjectByType<MadeID>().GetComponent<MadeID>().ID;
     }
     private void Awake()
     {

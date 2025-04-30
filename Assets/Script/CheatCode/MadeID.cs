@@ -41,15 +41,6 @@ public class MadeID : MonoBehaviour
     void Awake()
     {
         //找到名字为头像＆ID的物体
-        GameObject obj = GameObject.Find("头像＆ID");
-        if (obj != null)
-        {
-            //获取物体上的Image组件
-            obj.GetComponentInChildren<TextMeshProUGUI>().text = ID;
-        }
-        else
-        {
-            Debug.LogWarning("头像＆ID object not found in the scene,无法赋值ID");
-        }
+
     }
 }

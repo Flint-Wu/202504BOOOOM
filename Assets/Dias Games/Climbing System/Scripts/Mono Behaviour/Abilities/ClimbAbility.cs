@@ -187,6 +187,7 @@ namespace DiasGames.Abilities
             //设置动画状态为“Climb.Start Climb”，表示角色正在开始攀爬动作。
             SetAnimationState("Climb.Start Climb");
             PlayerPhysicalStrength.Instance.ReducePhysicalStrength(PlayerPhysicalStrength.Instance.JumpStrength);
+            EffectSoundController.Instance.PlayClimbAudioClip();
             QTEUI.Instance.StartClick();
             QTEUI.Instance.isGapTime = true;
             _timeWithoutLedge = 0;
@@ -957,11 +958,10 @@ namespace DiasGames.Abilities
             {
                 if(Mathf.Approximately(_localCoordMove.x, 0) || _localCoordMove.y > 0.5f)
                     ClimbUp();
-                    EffectSoundController.Instance.PlayClimbAudioClip();
 
                 if (_localCoordMove != Vector2.zero)
                     Jump();
-                    EffectSoundController.Instance.PlayClimbAudioClip();
+
 
             }
 
