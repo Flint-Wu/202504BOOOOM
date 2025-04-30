@@ -45,6 +45,7 @@ public class WaterBottleFruit : MonoBehaviour
             InteractionManger.GetFruit -= GetFruit; // 订阅事件
             Annotation.Instance.Reset(); // 显示注释 
             Annotation.Instance.waterFruitContributorJumpOut(PlayerID); // 显示水果注释
+            EffectSoundController.Instance.PlayRecoverWaterAudioClip(); // 播放获取水音效
             CharacterAudioPlayer.Instance.PlayUseFruitAudioClip(); // 播放获取水果音效
             this.GetComponent<Collider>().enabled = false; // 禁用碰撞器
         }

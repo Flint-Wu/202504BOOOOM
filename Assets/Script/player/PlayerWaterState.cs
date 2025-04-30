@@ -124,6 +124,7 @@ public class PlayerWaterState : MonoBehaviour
             if (IsInCritical)
                 OnWaterCritical?.Invoke();
                 CharacterAudioPlayer.Instance.PlayWaterIsDepletedAudioClip(); // ??????????????
+                EffectSoundController.Instance.PlayWarningAudioClip(); // ??????????????
         }
     }
 

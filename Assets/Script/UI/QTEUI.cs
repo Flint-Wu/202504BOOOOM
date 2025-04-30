@@ -261,6 +261,7 @@ namespace DiasGames.Abilities
             CorrectSprite.color = new Color(CorrectSprite.color.r, CorrectSprite.color.g, CorrectSprite.color.b, 1);
             CorrectSprite.transform.DOShakeScale(0.5f, 0.2f, 10, 0, false).SetEase(Ease.OutSine);
             isQTEfail = false;
+            EffectSoundController.Instance.PlayUISuccessAudioClip();
         }
         void TriggerFail()
         {
@@ -275,7 +276,8 @@ namespace DiasGames.Abilities
             ClimbAbility climbAbility = GameObject.FindGameObjectWithTag("Player").GetComponent<ClimbAbility>();
             //climbAbility.StopAbility();
             climbAbility.ForceDrop();
-            CharacterAudioPlayer.Instance.PlaySlipAudioClip();
+            
+            EffectSoundController.Instance.PlayUIFailAudioClip();
             playerWaterState.ChangeWater();
             // if(playerWaterState.IsInCritical)
             // {

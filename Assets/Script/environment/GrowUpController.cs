@@ -107,6 +107,7 @@ public class GrowUpController : MonoBehaviour
         Annotation.Instance.TreePouContributorJumpOut(PlayerIDs); // 显示注释
         GetComponent<ActRecord>().LocState = "1"; // 设置记录仪的状态为钉子
         CharacterAudioPlayer.Instance.PlayPourWaterAudioClip(); // 播放浇水的音效
+        EffectSoundController.Instance.PlayPourTreeAudioClip(PouNum); // 播放浇水的音效
     }
 
     public void RecoverAllPhysicalStrength()

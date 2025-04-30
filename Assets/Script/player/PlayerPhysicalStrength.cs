@@ -55,6 +55,7 @@ public class PlayerPhysicalStrength : MonoBehaviour
     public void startRecovering()
     {
         isRecovering = true;
+        EffectSoundController.Instance.PlayResetPhysicalAudioClip();
     }
     public void RecoverPhysicalStrength(float amount)
     {

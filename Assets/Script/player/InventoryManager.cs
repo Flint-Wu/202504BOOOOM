@@ -70,6 +70,7 @@ public class InventoryManager : MonoBehaviour
         }); // 动画缩放钉子图标
         PlayerPhysicalStrength.Instance.startRecovering(); // 开始恢复体力
         CharacterAudioPlayer.Instance.PlayUseNailAudioClip(); // 播放使用钉子的音效
+        EffectSoundController.Instance.PlayUsePinAudioClip(); // 播放使用钉子的音效
         GetComponent<ClimbAbility>()._currentCollider.GetComponent<ActRecord>().LocState = "1"; // 设置记录仪的状态为钉子
         GetComponent<ClimbAbility>()._currentCollider.GetComponent<ActRecord>().givenNames.Add(FindAnyObjectByType<MadeID>().ID); // 添加玩家名字到记录仪的给定名字列表中
     }

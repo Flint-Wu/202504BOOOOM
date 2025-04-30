@@ -957,11 +957,11 @@ namespace DiasGames.Abilities
             {
                 if(Mathf.Approximately(_localCoordMove.x, 0) || _localCoordMove.y > 0.5f)
                     ClimbUp();
-                    
-
+                    EffectSoundController.Instance.PlayClimbAudioClip();
 
                 if (_localCoordMove != Vector2.zero)
                     Jump();
+                    EffectSoundController.Instance.PlayClimbAudioClip();
 
             }
 
@@ -1152,6 +1152,8 @@ namespace DiasGames.Abilities
             if (IsAbilityRunning && _context != null && _context.CurrentClimbState != null)
             {
                 _context.CurrentClimbState.Drop(_context);
+                CharacterAudioPlayer.Instance.PlaySlipAudioClip();
+                EffectSoundController.Instance.PlayDropAudioClip();
             }
         }
         private void OnDrawGizmos()

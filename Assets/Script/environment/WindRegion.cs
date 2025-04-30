@@ -87,6 +87,7 @@ public class WindRegion : MonoBehaviour
                 WindVfx.SetActive(false);
                 IsWindBegin = false;
                 WindTime = 0;
+                GetComponent<AudioSource>().Stop();
                 if(playerPhysicalStrength.isInWinZone)
                 {
                     RecoverPlayerPhysical();
@@ -101,6 +102,7 @@ public class WindRegion : MonoBehaviour
                 WindVfx.SetActive(true);
                 IsWindBegin = true;
                 WindTime = 0;
+                GetComponent<AudioSource>().Play();
                 if(isPlayerIn)
                 {
                     playerPhysicalStrength.isInWinZone = true;
