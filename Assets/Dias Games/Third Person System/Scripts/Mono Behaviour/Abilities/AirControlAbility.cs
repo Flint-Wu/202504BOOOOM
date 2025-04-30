@@ -129,6 +129,7 @@ namespace DiasGames.Abilities
                 {
                     // apply root motion
                     Debug.Log("restart level");
+                    CharacterAudioPlayer.Instance.PlayFallenAudioClip();
                     _levelController.RestartLevel();
                 }
                 StopAbility();

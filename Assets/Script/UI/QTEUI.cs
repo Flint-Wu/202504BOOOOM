@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System.Collections;
+using DiasGames.Components;
 namespace DiasGames.Abilities
 {
     public class QTEUI : AbstractAbility
@@ -274,7 +275,7 @@ namespace DiasGames.Abilities
             ClimbAbility climbAbility = GameObject.FindGameObjectWithTag("Player").GetComponent<ClimbAbility>();
             //climbAbility.StopAbility();
             climbAbility.ForceDrop();
-            
+            CharacterAudioPlayer.Instance.PlaySlipAudioClip();
             playerWaterState.ChangeWater();
             // if(playerWaterState.IsInCritical)
             // {
