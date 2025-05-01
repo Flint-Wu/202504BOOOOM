@@ -32,6 +32,7 @@ public class EndGame : MonoBehaviour
         // 检查是否是玩家触发
         if (other.CompareTag("Player") && !isGameOver)
         {
+                Debug.Log("ENd!");
             ShowGameOverUI(other.gameObject);
         }
     }
