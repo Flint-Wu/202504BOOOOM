@@ -829,7 +829,7 @@ Material:
     - _BacklightNormalStrength: 1
     - _BacklightReceiveShadow: 1
     - _BacklightViewStrength: 1
-    - _BaseColor_Step: 0.671
+    - _BaseColor_Step: 1
     - _BaseShade_Feather: 0.0001
     - _BendPower: 2
     - _BlackLightMasking0GlobalMaskBlendType: 0
@@ -2818,7 +2818,7 @@ Material:
     - footer_twitter: 0
     - footer_youtube: 0
     - m_AudioLinkCategory: 0
-    - m_OutlineCategory: 1
+    - m_OutlineCategory: 0
     - m_end_ALDecalSpectrum: 0
     - m_end_ALVolumeColor: 0
     - m_end_Alpha: 0
@@ -2959,8 +2959,8 @@ Material:
     - m_end_videoEffects: 0
     - m_end_voronoi: 0
     - m_end_voronoiRandom: 0
-    - m_lightingCategory: 0
-    - m_mainCategory: 0
+    - m_lightingCategory: 1
+    - m_mainCategory: 1
     - m_modifierCategory: 0
     - m_renderingCategory: 0
     - m_specialFXCategory: 0
@@ -3035,7 +3035,7 @@ Material:
     - m_start_PoiGlobalCategory: 0
     - m_start_PoiLightData: 0
     - m_start_PoiPostProcessingCategory: 0
-    - m_start_PoiShading: 0
+    - m_start_PoiShading: 1
     - m_start_PoiUVCategory: 0
     - m_start_RGBMask: 0
     - m_start_Rim2AudioLink: 0
@@ -3511,7 +3511,7 @@ Material:
     - shader_locale: 0
     - shader_master_label: 0
     m_Colors:
-    - _1st_ShadeColor: {r: 0.08643137, g: 0.45490196, b: 0.36892548, a: 1}
+    - _1st_ShadeColor: {r: 0.23437501, g: 0.26708198, b: 0.3, a: 1}
     - _1st_ShadeMapPan: {r: 0, g: 0, b: 0, a: 0}
     - _2nd_ShadeColor: {r: 1, g: 1, b: 1, a: 1}
     - _2nd_ShadeMapPan: {r: 0, g: 0, b: 0, a: 0}
@@ -3615,7 +3615,7 @@ Material:
     - _ClearCoatReflectionTint: {r: 1, g: 1, b: 1, a: 1}
     - _ClearCoatSpecularTint: {r: 1, g: 1, b: 1, a: 1}
     - _ClothMetallicSmoothnessMapPan: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 0.45597625, g: 0.76, b: 0.18771999, a: 1}
+    - _Color: {r: 0.2941177, g: 0.4705882, b: 0.6, a: 1}
     - _Color1: {r: 0.891, g: 0.75275445, b: 0.398277, a: 1}
     - _ColorInner: {r: 0, g: 0, b: 0, a: 0}
     - _ColorOuter: {r: 0, g: 0.62264144, b: 0.12524784, a: 1}
