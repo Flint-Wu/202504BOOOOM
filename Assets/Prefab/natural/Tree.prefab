@@ -275,7 +275,7 @@ SkinnedMeshRenderer:
   m_Bones: []
   m_BlendShapeWeights:
   - 100
-  - 0
+  - 1.2
   - 0
   m_RootBone: {fileID: 0}
   m_AABB:

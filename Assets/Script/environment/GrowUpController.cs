@@ -122,13 +122,33 @@ public class GrowUpController : MonoBehaviour
     }
     public void DotweenBlendShape(SkinnedMeshRenderer smr, int blendShapeIndex)
     {
+        // 先设置目标 BlendShape 为 100
         DOTween.To(() => smr.GetBlendShapeWeight(blendShapeIndex), x => smr.SetBlendShapeWeight(blendShapeIndex, x), 100, 2f);
-        //其他所有blendshape都设置为0
+        Debug.Log("BlendShape索引为" + blendShapeIndex + "的权重值将变为100");
+        
+        // 处理所有其他 BlendShape
         for (int i = 0; i < smr.sharedMesh.blendShapeCount; i++)
         {
-            if (i != blendShapeIndex)
+            if (i != blendShapeIndex && smr.GetBlendShapeWeight(i) > 0)
             {
-                smr.SetBlendShapeWeight(i, 0f); // 设置初始值为0
+                // 创建局部变量，解决闭包问题
+                int index = i;
+                float currentWeight = smr.GetBlendShapeWeight(index);
+                
+                // 只有当当前权重大于 0 时才执行动画
+                if (currentWeight > 0)
+                {
+                    DOTween.To(
+                        () => smr.GetBlendShapeWeight(index), 
+                        x => smr.SetBlendShapeWeight(index, x), 
+                        0, 
+                        2f
+                    ).OnStart(() => {
+                        Debug.Log("开始动画：BlendShape索引 " + index + " 从 " + currentWeight + " 到 0");
+                    }).OnComplete(() => {
+                        Debug.Log("完成动画：BlendShape索引 " + index + " 现在值为 " + smr.GetBlendShapeWeight(index));
+                    });
+                }
             }
         }
     }
