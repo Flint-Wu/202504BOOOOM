@@ -4,6 +4,8 @@ using DiasGames.Abilities;
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
+using System;
+using DiasGames.Components;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -19,7 +21,6 @@ public class InventoryManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        InteractionManger.UseNail += CostNail; // 取消事件订阅
         for (int i = 0; i < maxNailCout; i++)
         {
             GameObject nailUIIcon = Instantiate(nailUIIconPrefab, nailUI.transform.position, Quaternion.identity); // 在钉子UI图标位置生成钉子
@@ -29,7 +30,6 @@ public class InventoryManager : MonoBehaviour
     }
     private void OnDestroy()
     {
-        InteractionManger.UseNail -= CostNail; // 取消事件订阅
     }
     void Start()
     {
@@ -62,12 +62,13 @@ public class InventoryManager : MonoBehaviour
         }
         currentNailCount--;
         nailCountText.text = currentNailCount.ToString(); // 更新UI文本
-    
         nailUI.transform.GetChild(currentNailCount).gameObject.transform.GetChild(0).gameObject.transform.DOScale(new Vector3(0f, 0f, 0f), 0.5f).OnComplete(() =>
         {
             nailUI.transform.GetChild(currentNailCount).gameObject.transform.GetChild(0).gameObject.SetActive(false); // 隐藏钉子图标
         }); // 动画缩放钉子图标
         PlayerPhysicalStrength.Instance.startRecovering(); // 开始恢复体力
+        CharacterAudioPlayer.Instance.PlayUseNailAudioClip(); // 播放使用钉子的音效
+        EffectSoundController.Instance.PlayUsePinAudioClip(); // 播放使用钉子的音效
         GetComponent<ClimbAbility>()._currentCollider.GetComponent<ActRecord>().LocState = "1"; // 设置记录仪的状态为钉子
         GetComponent<ClimbAbility>()._currentCollider.GetComponent<ActRecord>().givenNames.Add(FindAnyObjectByType<MadeID>().ID); // 添加玩家名字到记录仪的给定名字列表中
     }

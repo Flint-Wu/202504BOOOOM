@@ -22,6 +22,7 @@ public class Beginnig : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             SceneManager.LoadScene("Cavebottom");
+            EffectSoundController.Instance.PlayUIConfirmAudioClip();
         }    
     }
 }

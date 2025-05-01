@@ -44,8 +44,8 @@ public class WindRegion : MonoBehaviour
             if(IsWindBegin)
             {
                 playerPhysicalStrength.isInWinZone = true;
+                PlayerEnterPhysicalStrength = playerPhysicalStrength.currentPhysicalStrength;
             }
-            PlayerEnterPhysicalStrength = playerPhysicalStrength.currentPhysicalStrength;
         }
     }
 
@@ -87,6 +87,7 @@ public class WindRegion : MonoBehaviour
                 WindVfx.SetActive(false);
                 IsWindBegin = false;
                 WindTime = 0;
+                GetComponentInChildren<AudioSource>().Stop();
                 if(playerPhysicalStrength.isInWinZone)
                 {
                     RecoverPlayerPhysical();
@@ -101,9 +102,11 @@ public class WindRegion : MonoBehaviour
                 WindVfx.SetActive(true);
                 IsWindBegin = true;
                 WindTime = 0;
+                GetComponentInChildren<AudioSource>().Play();
                 if(isPlayerIn)
                 {
                     playerPhysicalStrength.isInWinZone = true;
+                    PlayerEnterPhysicalStrength = playerPhysicalStrength.currentPhysicalStrength;
                 }
                 if(!playerPhysicalStrength.isInWinZone)return;
                 LockPlayerPhysical();

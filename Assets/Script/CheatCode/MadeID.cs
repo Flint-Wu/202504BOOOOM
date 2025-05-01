@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,5 +36,11 @@ public class MadeID : MonoBehaviour
         {
             ID = IdInput.text;
         }
+    }
+
+    void Awake()
+    {
+        //找到名字为头像＆ID的物体
+
     }
 }

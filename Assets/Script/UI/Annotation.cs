@@ -12,9 +12,11 @@ public class Annotation : MonoBehaviour
     public TextMeshProUGUI annotationText; // 显示注释的UI文本
     public GameObject waterFruitAnnotationUI; // 水果注释UI
     public GameObject treePourAnnotationUI; // 倒水注释UI
+    public TextMeshProUGUI playerIDtext;
     void Start()
     {
         annotationText = GetComponent<TextMeshProUGUI>(); // 获取UI文本组件
+        playerIDtext.text = FindAnyObjectByType<MadeID>().GetComponent<MadeID>().ID;
     }
     private void Awake()
     {
@@ -38,6 +40,7 @@ public class Annotation : MonoBehaviour
     public void TreePouContributorJumpOut(List<string> playerIDs)
     {
         //遍历所有材质球
+        EffectSoundController.Instance.PlaySpecailAudioClip();
         string playerID = string.Join(",", playerIDs); // 将玩家ID数组转换为字符串
         //treePourAnnotationUI.SetActive(true); // 隐藏水果注释UI
         RectTransform rectTransform = treePourAnnotationUI.GetComponent<RectTransform>();
@@ -54,6 +57,7 @@ public class Annotation : MonoBehaviour
     public void waterFruitContributorJumpOut(string playerID)
     {
         // 获取UI原始位置
+        EffectSoundController.Instance.PlaySpecailAudioClip();
         RectTransform rectTransform = waterFruitAnnotationUI.GetComponent<RectTransform>();
         float originalPosX = rectTransform.anchoredPosition.x;
         // 杀死之前的动画，避免重叠

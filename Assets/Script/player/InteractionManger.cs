@@ -16,59 +16,107 @@ public class InteractionManger : AbstractAbility
     public AbilityScheduler scheduler;
     public LayerMask NotBuildingLayerMask; // Layer mask for the building layer
     public bool isBuilding = false; // Flag to check if the building is being placed
-    public static event Action UseNail; // Event to notify when the interact action is triggered
-    public static event Action PourWater;
-    public static event Action GetFruit;
-    public static event Action RecoverPhysicalStrength;
+    public BoxCollider InteractZone; // 交互范围
+    public GameObject currentInteractableObject; //当前可互动的物体
     void Awake()
     {
         scheduler = GetComponent<AbilityScheduler>();
                 // 手动设置 action 引用
         SetActionReference(ref scheduler.characterActions);
-        // CurrentBuildingPrefab = Instantiate(BuildingPrefabs, Vector3.zero, Quaternion.identity);
-        // //关闭建筑物的碰撞体
-        // CurrentBuildingPrefab.GetComponent<Collider>().enabled = false;
-        // CurrentBuildingPrefab.GetComponent<Ledge>().enabled = false;
-        // CurrentBuildingPrefab.layer = LayerMask.NameToLayer("BuildingShadow"); // Set the layer of the building prefab
-        // //设置材质球的颜色为透明
-        // CurrentBuildingPrefab.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.5f); // Set the color to transparent
-        // //NotBuildingLayerMask = LayerMask.GetMask("ClimbLayer");
     }
 
-    // Update is called once per frame
+        // Update is called once per frame
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red; // Set the gizmo color to red
+        Gizmos.DrawWireCube(InteractZone.transform.position, InteractZone.size); // Draw a wireframe cube to represent the interaction zone
+        //文字注释DectZone
+        Gizmos.color = Color.white; // Set the gizmo color to white
+
+    }
     void Update()
     {
+        //检测InteractDistance所有挂载CanBeInteract脚本的物体
+        Collider[] colliders = Physics.OverlapBox(InteractZone.transform.position, InteractZone.size, Quaternion.identity); // Get all colliders in the interaction zone
+
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            if (colliders[i].GetComponent<CanBeInteract>() != null)
+            {
+                if (colliders[i].GetComponent<CanBeInteract>().BeInteract) continue; // Skip if the object is not interactable
+                currentInteractableObject = colliders[i].gameObject; //获取当前可互动的物体
+                Debug.Log("当前可互动的物体: " + currentInteractableObject.name); // Log the name of the interactable object
+                break; // Exit the loop after finding the first interactable object
+            }
+        }
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            InventoryManager.Instance.CostNail(); // Add the building prefab to the inventory
+        }
+        if (currentInteractableObject == null) 
+        {
+            Annotation.Instance.Reset(); // Reset the annotation if no interactable object is found
+            return; // Exit if no interactable object is found
+        }
+        else
+        {
+            if (currentInteractableObject.GetComponent<GrowUpController>() != null)
+            {
+                if(currentInteractableObject.GetComponent<GrowUpController>().CanBeUsed)
+                {
+                    Annotation.Instance.AnnotationRecoverOnTree(); // Show the annotation for the interactable object
+                }
+                else
+                {
+                    Annotation.Instance.AnnotationPourWater(); // Show the annotation for the interactable object
+                }
+            }
+            else if(currentInteractableObject.GetComponentInChildren<WaterBottleFruit>() != null)
+            {
+                Annotation.Instance.AnnotationFruit(); // Show the annotation for the interactable object
+            }
+        }
+
+
         if(_action.interact)
         {
-            // if(isBuilding)
-            // {
-            //     StopBuilding(); // Stop building when interact is pressed again
-            // }
-            // else
-            //如果PourWater事件不为空，则调用PourWater事件
-            if(RecoverPhysicalStrength != null)
+            if(currentInteractableObject == null) return; // Exit if no interactable object is found
+            
+
+            if(currentInteractableObject.GetComponent<GrowUpController>() != null)
             {
-                RecoverPhysicalStrength?.Invoke(); // Invoke the RecoverPhysicalStrength event
-                return; // Exit the method after invoking the event
+                if(currentInteractableObject.GetComponent<GrowUpController>().CanBeUsed)
+                {
+                    currentInteractableObject.GetComponent<GrowUpController>().RecoverAllPhysicalStrength(); // Call the Interact method on the interactable object
+                    currentInteractableObject.GetComponent<CanBeInteract>().BeInteract = true; // Set the object to not interactable
+                    currentInteractableObject = null; // Reset the current interactable object
+                }
+                else
+                {
+                    currentInteractableObject.GetComponent<GrowUpController>().PourWater(); // Call the Interact method on the interactable object
+                    currentInteractableObject.GetComponent<CanBeInteract>().BeInteract = true; // Set the object to not interactable}
+                    currentInteractableObject = null; // Reset the current interactable object
+                }
             }
-            if(PourWater != null)
+            else if(currentInteractableObject.GetComponentInChildren<WaterBottleFruit>() != null)
             {
-                //如果可以浇水就先禁用掉钉子
-                PourWater?.Invoke(); // Invoke the PourWater event
-                return; // Exit the method after invoking the event
+                currentInteractableObject.GetComponentInChildren<WaterBottleFruit>().GetFruit(); // Call the Interact method on the interactable object
+                currentInteractableObject.GetComponent<CanBeInteract>().BeInteract = true; // Set the object to not interactable
+                currentInteractableObject = null; // Reset the current interactable object
             }
-            if(GetFruit != null)
+            else
             {
-                GetFruit?.Invoke(); // Invoke the GetFruit event
-                return; // Exit the method after invoking the event
+                Debug.LogError("当前可互动的物体: " + currentInteractableObject.name+ " 不能互动"); // Log the name of the interactable object
+
             }
-            UseNail?.Invoke(); // Invoke the Interact event
+
+            //UseNail?.Invoke(); // Invoke the Interact event
             // {
             //     StartBuilding(); // Start building when interact is pressed
             // }
         }
-        // if(!isBuilding) return;
-        // PlaceBuildingPrefab();
+
+
     }
     public override bool ReadyToRun()
     {
@@ -102,53 +150,5 @@ public class InteractionManger : AbstractAbility
             CurrentBuildingPrefab.SetActive(false); // Hide the building prefab
         }
     }
-    // public Transform PlaceBuildingPrefab(bool isOffsetY = false)
-    // {
-        
-    //     //从屏幕中点发射射线(新输入系统)
-    //     Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-    //     RaycastHit hit;
-    //     //排除所有Climb Layer层的物体
-    //     LayerMask buildingLayerMask = ~NotBuildingLayerMask;
-    //     if (Physics.Raycast(ray, out hit, Mathf.Infinity, buildingLayerMask))
-    //     {
-    //         //Debug.Log("Hit: " + hit.collider.name);
-    //         //在射线碰撞点生成建筑物
-    //         CurrentBuildingPrefab.transform.position = hit.point;
-    //         if(isOffsetY)
-    //         {
-    //             CurrentBuildingPrefab.transform.position += Vector3.down * 1f; // 在下落时偏移建筑物位置，放置与原攀附点冲突
-    //         }
-    //         //根据碰撞点的法线设置建筑物的旋转
-    //         CurrentBuildingPrefab.transform.rotation = Quaternion.LookRotation(hit.normal);
-    //         if(_action.fire)
-    //         {
-    //             // Instantiate the building prefab at the hit point
-    //             if(InventoryManager.Instance != null)
-    //             {
-    //                 if(InventoryManager.Instance.CanBuild())
-    //                 {
-    //                     InventoryManager.Instance.CostNail(); // 扣除钉子数量
-    //                     GameObject building = Instantiate(BuildingPrefabs, hit.point, Quaternion.LookRotation(hit.normal));
-    //                     building.transform.rotation = Quaternion.LookRotation(hit.normal);
-    //                     // Optionally, you can set the parent of the building to the character or another object
-    //                     // building.transform.SetParent(transform); // Uncomment if needed
-    //                     StopBuilding();
-    //                     return building.transform; // Return the transform of the instantiated building
-    //                 }
-    //                 else
-    //                 {
-    //                     Debug.Log("没有足够的钉子！");
-    //                 }
-    //             }
-    //         }
-    //         _action.fire = false;
-
-    //     }
-    //     return null;
-    // }
-    /// <summary>
-    /// 在QTE失败时调用，执行紧急建筑操作
-    /// </summary>
 }
 }

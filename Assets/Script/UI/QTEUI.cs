@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System.Collections;
+using DiasGames.Components;
 namespace DiasGames.Abilities
 {
     public class QTEUI : AbstractAbility
@@ -260,6 +261,7 @@ namespace DiasGames.Abilities
             CorrectSprite.color = new Color(CorrectSprite.color.r, CorrectSprite.color.g, CorrectSprite.color.b, 1);
             CorrectSprite.transform.DOShakeScale(0.5f, 0.2f, 10, 0, false).SetEase(Ease.OutSine);
             isQTEfail = false;
+            EffectSoundController.Instance.PlayUISuccessAudioClip();
         }
         void TriggerFail()
         {
@@ -275,6 +277,7 @@ namespace DiasGames.Abilities
             //climbAbility.StopAbility();
             climbAbility.ForceDrop();
             
+            EffectSoundController.Instance.PlayUIFailAudioClip();
             playerWaterState.ChangeWater();
             // if(playerWaterState.IsInCritical)
             // {

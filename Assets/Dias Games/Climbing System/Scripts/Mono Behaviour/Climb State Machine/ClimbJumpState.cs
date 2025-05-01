@@ -230,6 +230,7 @@ namespace DiasGames.Climbing
                     PlayerPhysicalStrength.Instance.ReducePhysicalStrength(PlayerPhysicalStrength.Instance.JumpStrength);
                     QTEUI.Instance.StartClick();
                     QTEUI.Instance.isGapTime = true;
+                    EffectSoundController.Instance.PlayClimbAudioClip();
                     SetRightHandIK(context);
                 }
                 else
@@ -238,6 +239,7 @@ namespace DiasGames.Climbing
                     PlayerPhysicalStrength.Instance.ReducePhysicalStrength(PlayerPhysicalStrength.Instance.JumpStrength);
                     QTEUI.Instance.StartClick();
                     QTEUI.Instance.isGapTime = true;
+                    EffectSoundController.Instance.PlayClimbAudioClip();
                     SetLefttHandIK(context);
                 }
 
@@ -249,6 +251,7 @@ namespace DiasGames.Climbing
                 {
                     context.animator.CrossFadeInFixedTime(hopUpState, 0.1f);
                     PlayerPhysicalStrength.Instance.ReducePhysicalStrength(PlayerPhysicalStrength.Instance.JumpStrength);
+                    EffectSoundController.Instance.PlayClimbAudioClip();
                     QTEUI.Instance.StartClick();
                     QTEUI.Instance.isGapTime = true;
                     _targetDuration = HopUpDuration;

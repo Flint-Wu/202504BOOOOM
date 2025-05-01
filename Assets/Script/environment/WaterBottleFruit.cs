@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DiasGames.Abilities;
+using DiasGames.Components;
 using UnityEngine;
 
 public class WaterBottleFruit : MonoBehaviour
@@ -26,10 +27,9 @@ public class WaterBottleFruit : MonoBehaviour
         if (isGet) return; // 如果已经被获取，则不再执行
         //可以拾取水果的物体
         Debug.Log("Player entered the trigger area.");
-        InteractionManger.GetFruit += GetFruit; // 订阅事件
         Annotation.Instance.AnnotationFruit(); // 显示注释
     }
-    void GetFruit()
+    public void GetFruit()
     {
         // 获取玩家的 PlayerWaterState 组件
         PlayerWaterState playerWaterState = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerWaterState>();
@@ -41,23 +41,15 @@ public class WaterBottleFruit : MonoBehaviour
             Debug.Log("Player water increased by " + waterAmount);
             // 销毁水果对象
             fruitPrefab.SetActive(false); // 隐藏水果对象
-            InteractionManger.GetFruit -= GetFruit; // 订阅事件
             Annotation.Instance.Reset(); // 显示注释 
             Annotation.Instance.waterFruitContributorJumpOut(PlayerID); // 显示水果注释
-            this.GetComponent<Collider>().enabled = false; // 禁用碰撞器
+            EffectSoundController.Instance.PlayRecoverWaterAudioClip(); // 播放获取水音效
+            CharacterAudioPlayer.Instance.PlayUseFruitAudioClip(); // 播放获取水果音效
+            this.gameObject.SetActive(false); // 隐藏水果对象
         }
         
     }
-    void OnTriggerExit(Collider other)
-    {
-        if (isGet) return; // 如果已经被获取，则不再执行
-        InteractionManger.GetFruit -= GetFruit; // 取消订阅事件
-        Annotation.Instance.Reset(); // 重置注释
-    }
 
-    void OnDestroy()
-    {
-        InteractionManger.GetFruit -= GetFruit; // 取消订阅事件
-        Annotation.Instance.Reset(); // 重置注释
-    }
+
+
 }

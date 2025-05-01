@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using DiasGames.Abilities;
 using System;
+using DiasGames.Components;
 //[ExecuteInEditMode]
 public class GrowUpController : MonoBehaviour
 {
@@ -16,30 +17,15 @@ public class GrowUpController : MonoBehaviour
     public int PourNumMax = 0;
     public int PouNum = 0;
     public List<string> PlayerIDs ;
-    public float InitGrow = 5f;
+
     public bool isTrigerEffect = false;
     public GameObject HealEffectPrefab;
     public SkinnedMeshRenderer[] smrs;
+    public GameObject matureTreePrefab;
+    public GameObject[] unmatureTreePrefab;
     void Start()
     {
-        // //得到所有子物体的材质球
-        // materials.Clear();
-        // Renderer[] renderers = GetComponentsInChildren<Renderer>();
-        // foreach (Renderer renderer in renderers)
-        // {
-        //     //获取材质球
-        //     Material[] mats = renderer.materials;
-        //     foreach (Material mat in mats)
-        //     {
-        //         if (!materials.Contains(mat))
-        //         {
-        //             materials.Add(mat);
-        //             mat.SetFloat("_grow", InitGrow); // 初始化GrowUp属性
-        //         }
-        //     }
-        // }
-        //遍历所有材质球
-        
+        UpdateInitState(); // 初始化状态
     }
 
     void Awake()
@@ -48,9 +34,22 @@ public class GrowUpController : MonoBehaviour
         // {
         //     materials[i].SetFloat("_grow", InitGrow+ PouNum * 5f); // 初始化GrowUp属性
         // }
-        if(PouNum == PourNumMax)
+        //限制最大值
+
+    }
+
+    // Update is called once per frame
+    public void UpdateInitState()
+    {
+        PouNum = Mathf.Clamp(PouNum, 0, PourNumMax);
+        if(PouNum >= PourNumMax)
         {
             CanBeUsed = true; // 可以使用
+            matureTreePrefab.SetActive(true); // 显示成熟树预制体
+            for (int i = 0; i < unmatureTreePrefab.Length; i++)
+            {
+                unmatureTreePrefab[i].SetActive(false); // 隐藏未成熟树预制体
+            }
         }
         else
         {
@@ -58,54 +57,37 @@ public class GrowUpController : MonoBehaviour
         }
         switch (PouNum)
         {
-            // case 1:
-            //     // 通过名称查找BlendShape索引
-            //     // 通过名称查找第一个BlendShape索引
-            //     //smrs[0]下所有的blendshape都设置为0
-            //     string blendShapeName1 = "blendShape1.pCube5";
-            //     int blendShapeIndex1 = smrs[0].sharedMesh.GetBlendShapeIndex(blendShapeName1);
-                
-            //     break;
-            // case 2:
-            //     // 通过名称查找BlendShape索引
-            //     blendShapeName1 = "blendShape2.pCube4"; // 替换为您的BlendShape名称
-            //     blendShapeIndex1 = smrs[1].sharedMesh.GetBlendShapeIndex(blendShapeName1);
-            //         // 使用DOTween实现平滑过渡
-                
-            //     blendShapeName2 = "blendShape2.pCube3"; // 替换为您的BlendShape名称
-            //     blendShapeIndex2 = smrs[1].sharedMesh.GetBlendShapeIndex(blendShapeName2);
-            //         // 使用DOTween实现平滑过渡
-            //     smrs[1].SetBlendShapeWeight(blendShapeIndex1, 0f); // 设置初始值为0
-            //     smrs[1].SetBlendShapeWeight(blendShapeIndex2, 100f); // 设置初始值为100
-            //     break;
-            // case 3:
-            //     // 通过名称查找BlendShape索引
-            //     blendShapeName1 = "blendShape1.pCube4"; // 替换为您的BlendShape名称
-            //     blendShapeIndex1 = smrs[0].sharedMesh.GetBlendShapeIndex(blendShapeName1);
-                                
-            //     blendShapeName2 = "blendShape1.pCube3"; // 替换为您的BlendShape名称
-            //     blendShapeIndex2 = smrs[0].sharedMesh.GetBlendShapeIndex(blendShapeName2);
-            //         // 使用DOTween实现平滑过渡
-            //     smrs[0].SetBlendShapeWeight(blendShapeIndex1, 0f); // 设置初始值为0
-            //     smrs[0].SetBlendShapeWeight(blendShapeIndex2, 100f); // 设置初始值为100
-            //     break;
+            case 0:
+                int blendShapeIndex = smrs[0].sharedMesh.GetBlendShapeIndex("blendShape1.pCube5");
+                int blendShapeIndex2 = smrs[1].sharedMesh.GetBlendShapeIndex("blendShape2.pCube4");
+                InitSetBlendShape(smrs[0], blendShapeIndex); // 设置BlendShape索引为0
+                InitSetBlendShape(smrs[1], blendShapeIndex2); // 设置BlendShape索引为1
+                break;
+            case 1:
+                int blendShapeIndex3= smrs[0].sharedMesh.GetBlendShapeIndex("blendShape1.pCube4");
+                int blendShapeIndex4 = smrs[1].sharedMesh.GetBlendShapeIndex("blendShape2.pCube4");
+                InitSetBlendShape(smrs[0], blendShapeIndex3); // 设置BlendShape索引为2
+                InitSetBlendShape(smrs[1], blendShapeIndex4); // 设置BlendShape索引为3
+                break;
+            case 2:
+                int blendShapeIndex5= smrs[0].sharedMesh.GetBlendShapeIndex("blendShape1.pCube4");
+                int blendShapeIndex6 = smrs[1].sharedMesh.GetBlendShapeIndex("blendShape2.pCube3");
+                InitSetBlendShape(smrs[0], blendShapeIndex5); // 设置BlendShape索引为2
+                InitSetBlendShape(smrs[1], blendShapeIndex6); // 设置BlendShape索引为3
+                break;
         }
     }
-
-    // Update is called once per frame
-
     public void PourWater()
     {
         if(isPour) return;
         PouNum++;
         isPour = true;
-        Debug.Log("浇水了！");
-        JudgeIsGrowUp(); // 判断是否可以生长
-        InteractionManger.PourWater -= PourWater; // 取消事件订阅
+        TreeGrowUp(); // 判断是否可以生长
         Annotation.Instance.Reset(); // 显示注释
         Annotation.Instance.TreePouContributorJumpOut(PlayerIDs); // 显示注释
         GetComponent<ActRecord>().LocState = "1"; // 设置记录仪的状态为钉子
-
+        CharacterAudioPlayer.Instance.PlayPourWaterAudioClip(); // 播放浇水的音效
+        EffectSoundController.Instance.PlayPourTreeAudioClip(PouNum); // 播放浇水的音效
     }
 
     public void RecoverAllPhysicalStrength()
@@ -117,92 +99,49 @@ public class GrowUpController : MonoBehaviour
         player.GetComponent<PlayerPhysicalStrength>().currentPhysicalStrength = player.GetComponent<PlayerPhysicalStrength>().maxPhysicalStrength;
         isTrigerEffect = true;
         Annotation.Instance.Reset(); // 显示注释
+        CharacterAudioPlayer.Instance.PlayUseTreeAudioClip(); // 播放使用树的音效
     }
 
-    void JudgeIsGrowUp()
-    {
-
-        TreeGrowUp(InitGrow + PouNum * 5f); // 设置材质球的GrowUp属性
-        
-    }
-    public void TreeGrowUp(float grow)
+    public void TreeGrowUp()
     {
         switch (PouNum)
         {
             case 1:
-                
-                // 通过名称查找BlendShape索引
-                // 通过名称查找第一个BlendShape索引
-                string blendShapeName1 = "blendShape1.pCube5";
-                int blendShapeIndex1 = smrs[0].sharedMesh.GetBlendShapeIndex(blendShapeName1);
-
-                // 通过名称查找第二个BlendShape索引
-                string blendShapeName2 = "blendShape1.pCube4";
-                int blendShapeIndex2 = smrs[0].sharedMesh.GetBlendShapeIndex(blendShapeName2);
-
-                // 同时启动两个DOTween动画，它们会并行执行
-                DOTween.To(() => smrs[0].GetBlendShapeWeight(blendShapeIndex1), 
-                        x => smrs[0].SetBlendShapeWeight(blendShapeIndex1, x), 
-                        0f, 3f);
-
-                DOTween.To(() => smrs[0].GetBlendShapeWeight(blendShapeIndex2), 
-                        x => smrs[0].SetBlendShapeWeight(blendShapeIndex2, x), 
-                        100f, 3f);
+                int blendShapeIndex = smrs[0].sharedMesh.GetBlendShapeIndex("blendShape1.pCube4");
+                DotweenBlendShape(unmatureTreePrefab[0].GetComponent<SkinnedMeshRenderer>(), blendShapeIndex); // 设置BlendShape索引为0
                 break;
             case 2:
-                // 通过名称查找BlendShape索引
-                blendShapeName1 = "blendShape2.pCube4"; // 替换为您的BlendShape名称
-                blendShapeIndex1 = smrs[1].sharedMesh.GetBlendShapeIndex(blendShapeName1);
-                    // 使用DOTween实现平滑过渡
-                
-                blendShapeName2 = "blendShape2.pCube3"; // 替换为您的BlendShape名称
-                blendShapeIndex2 = smrs[1].sharedMesh.GetBlendShapeIndex(blendShapeName2);
-                    // 使用DOTween实现平滑过渡
-                DOTween.To(() => smrs[1].GetBlendShapeWeight(blendShapeIndex1), x => smrs[1].SetBlendShapeWeight(blendShapeIndex1, x), 0f, 3f);
-                DOTween.To(() => smrs[1].GetBlendShapeWeight(blendShapeIndex2), x => smrs[1].SetBlendShapeWeight(blendShapeIndex2, x), 100f, 3f);
-                break;  
+                int blendShapeIndex2 = smrs[1].sharedMesh.GetBlendShapeIndex("blendShape2.pCube3");
+                DotweenBlendShape(unmatureTreePrefab[1].GetComponent<SkinnedMeshRenderer>(), blendShapeIndex2); // 设置BlendShape索引为1
+                break;
             case 3:
-                // 通过名称查找BlendShape索引
-                blendShapeName1 = "blendShape1.pCube4"; // 替换为您的BlendShape名称
-                blendShapeIndex1 = smrs[0].sharedMesh.GetBlendShapeIndex(blendShapeName1);
-                                
-                blendShapeName2 = "blendShape1.pCube3"; // 替换为您的BlendShape名称
-                blendShapeIndex2 = smrs[0].sharedMesh.GetBlendShapeIndex(blendShapeName2);
-                    // 使用DOTween实现平滑过渡
-                DOTween.To(() => smrs[0].GetBlendShapeWeight(blendShapeIndex1), x => smrs[0].SetBlendShapeWeight(blendShapeIndex1, x), 0f, 3f);
-
-                    // 使用DOTween实现平滑过渡
-                DOTween.To(() => smrs[0].GetBlendShapeWeight(blendShapeIndex2), x => smrs[0].SetBlendShapeWeight(blendShapeIndex2, x), 100f, 3f);
-                break;   
-
+                int blendShapeIndex3 = smrs[0].sharedMesh.GetBlendShapeIndex("blendShape1.pCube3");
+                DotweenBlendShape(unmatureTreePrefab[0].GetComponent<SkinnedMeshRenderer>(), blendShapeIndex3); // 设置BlendShape索引为2
+                break;
         }
     }
-
-    void OnTriggerEnter(Collider other)
+    public void DotweenBlendShape(SkinnedMeshRenderer smr, int blendShapeIndex)
     {
-        if(CanBeUsed) 
-        {    // 其他逻辑
-            Annotation.Instance.AnnotationRecoverOnTree();
-            InteractionManger.RecoverPhysicalStrength += RecoverAllPhysicalStrength; // 订阅事件
-            return;
-        }
-        if(isPour) return;
-        InteractionManger.PourWater += PourWater; // 订阅事件
-        Annotation.Instance.AnnotationPourWater(); // 显示注释
-        Debug.Log("可以浇水了！");
-
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        try
+        DOTween.To(() => smr.GetBlendShapeWeight(blendShapeIndex), x => smr.SetBlendShapeWeight(blendShapeIndex, x), 100, 2f);
+        //其他所有blendshape都设置为0
+        for (int i = 0; i < smr.sharedMesh.blendShapeCount; i++)
         {
-            InteractionManger.RecoverPhysicalStrength -= RecoverAllPhysicalStrength; // 取消事件订阅
+            if (i != blendShapeIndex)
+            {
+                smr.SetBlendShapeWeight(i, 0f); // 设置初始值为0
+            }
         }
-        catch {}
-        
-        InteractionManger.PourWater -= PourWater; // 取消事件订阅
-        Annotation.Instance.Reset(); // 显示注释
-
     }
+    public void InitSetBlendShape(SkinnedMeshRenderer smr, int blendShapeIndex)
+    {
+        smr.SetBlendShapeWeight(blendShapeIndex, 100);
+        for (int i = 0; i < smr.sharedMesh.blendShapeCount; i++)
+        {
+            if (i != blendShapeIndex)
+            {
+                smr.SetBlendShapeWeight(i, 0f); // 设置初始值为0
+            }
+        }
+    }
+
 }
