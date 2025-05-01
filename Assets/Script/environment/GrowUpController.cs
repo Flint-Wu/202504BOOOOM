@@ -25,32 +25,7 @@ public class GrowUpController : MonoBehaviour
     public GameObject[] unmatureTreePrefab;
     void Start()
     {
-        // //得到所有子物体的材质球
-        // materials.Clear();
-        // Renderer[] renderers = GetComponentsInChildren<Renderer>();
-        // foreach (Renderer renderer in renderers)
-        // {
-        //     //获取材质球
-        //     Material[] mats = renderer.materials;
-        //     foreach (Material mat in mats)
-        //     {
-        //         if (!materials.Contains(mat))
-        //         {
-        //             materials.Add(mat);
-        //             mat.SetFloat("_grow", InitGrow); // 初始化GrowUp属性
-        //         }
-        //     }
-        // }
-        //遍历所有材质球
-        
-    }
-
-    void Awake()
-    {
-        // for (int i = 0; i < materials.Count; i++)
-        // {
-        //     materials[i].SetFloat("_grow", InitGrow+ PouNum * 5f); // 初始化GrowUp属性
-        // }
+        PouNum = Mathf.Clamp(PouNum, 0, PourNumMax);
         if(PouNum >= PourNumMax)
         {
             CanBeUsed = true; // 可以使用
@@ -85,6 +60,16 @@ public class GrowUpController : MonoBehaviour
                 InitSetBlendShape(smrs[1], blendShapeIndex6); // 设置BlendShape索引为3
                 break;
         }
+    }
+
+    void Awake()
+    {
+        // for (int i = 0; i < materials.Count; i++)
+        // {
+        //     materials[i].SetFloat("_grow", InitGrow+ PouNum * 5f); // 初始化GrowUp属性
+        // }
+        //限制最大值
+
     }
 
     // Update is called once per frame
