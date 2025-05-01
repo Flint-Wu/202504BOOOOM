@@ -16,6 +16,7 @@ public class Annotation : MonoBehaviour
     void Start()
     {
         annotationText = GetComponent<TextMeshProUGUI>(); // 获取UI文本组件
+        if(FindAnyObjectByType<MadeID>().GetComponent<MadeID>().ID != null)
         playerIDtext.text = FindAnyObjectByType<MadeID>().GetComponent<MadeID>().ID;
     }
     private void Awake()

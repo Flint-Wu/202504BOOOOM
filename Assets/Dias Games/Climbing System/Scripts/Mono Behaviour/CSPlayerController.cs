@@ -212,12 +212,12 @@ namespace DiasGames.Controller
             Look.x = Input.GetAxis("Mouse X");
             Look.y = Input.GetAxis("Mouse Y");
 
-            Walk = Input.GetButton("Walk");
+            Walk = Input.GetButton("Fire2");
             Jump = Input.GetButtonDown("Jump");
-            Roll = Input.GetButtonDown("Roll");
-            Crouch = Input.GetButton("Crouch");
-            Crawl = Input.GetButtonDown("Crawl");
-            Zoom = Input.GetButtonDown("Zoom");
+            Roll = Input.GetButtonDown("Fire2");
+            Crouch = Input.GetButton("Fire2");
+            Crawl = Input.GetButtonDown("Fire2");
+            Zoom = Input.GetButtonDown("Fire2");
             Interact = Input.GetButtonDown("Interact");
 
             // special actions for climbing
