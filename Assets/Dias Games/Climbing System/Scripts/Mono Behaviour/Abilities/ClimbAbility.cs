@@ -170,12 +170,13 @@ namespace DiasGames.Abilities
             _mover.StopMovement();
             _mover.DisableGravity();
             //启动IK（反向运动学）系统，并更新其参考点。IK系统用于调整角色的手和脚，让它们准确地对齐到攀爬表面。
-            _climbIK.RunIK();
-            _climbIK.UpdateIKReferences(climbMask, footMask,_currentHorizontalHit);
+            // _climbIK.RunIK();
+            // _climbIK.UpdateIKReferences(climbMask, footMask,_currentHorizontalHit);
             //检查是否有墙面支撑脚部。如果有墙面，_hangWeight为0（表示有支撑）；如果没有墙面，则为1（表示悬挂状态）。
             // 这个值会传递给动画器，影响角色的悬挂姿势。
             _hangWeight = HasWall() ? 0 : 1;
-            _animator.SetFloat("HangWeight", _hangWeight);
+            //_animator.SetFloat("HangWeight", _hangWeight);
+            _animator.SetFloat("HangWeight", 0f);
             //重置角色的相关状态
             _waitingAnimation = false;
             _matchTarget = false;
