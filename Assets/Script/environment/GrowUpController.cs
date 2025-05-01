@@ -25,6 +25,22 @@ public class GrowUpController : MonoBehaviour
     public GameObject[] unmatureTreePrefab;
     void Start()
     {
+        UpdateInitState(); // 初始化状态
+    }
+
+    void Awake()
+    {
+        // for (int i = 0; i < materials.Count; i++)
+        // {
+        //     materials[i].SetFloat("_grow", InitGrow+ PouNum * 5f); // 初始化GrowUp属性
+        // }
+        //限制最大值
+
+    }
+
+    // Update is called once per frame
+    public void UpdateInitState()
+    {
         PouNum = Mathf.Clamp(PouNum, 0, PourNumMax);
         if(PouNum >= PourNumMax)
         {
@@ -61,19 +77,6 @@ public class GrowUpController : MonoBehaviour
                 break;
         }
     }
-
-    void Awake()
-    {
-        // for (int i = 0; i < materials.Count; i++)
-        // {
-        //     materials[i].SetFloat("_grow", InitGrow+ PouNum * 5f); // 初始化GrowUp属性
-        // }
-        //限制最大值
-
-    }
-
-    // Update is called once per frame
-
     public void PourWater()
     {
         if(isPour) return;

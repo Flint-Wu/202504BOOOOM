@@ -993,6 +993,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1651717479, guid: b792c38e1a6812b42bf86cc10a995424, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1831482929, guid: b792c38e1a6812b42bf86cc10a995424, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 855457812701893051, guid: b792c38e1a6812b42bf86cc10a995424, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 855457812905791937, guid: b792c38e1a6812b42bf86cc10a995424, type: 3}
       propertyPath: m_RootOrder
       value: 7

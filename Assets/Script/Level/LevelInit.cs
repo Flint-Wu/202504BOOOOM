@@ -73,6 +73,7 @@ public class LevelInit : MonoBehaviour
                         {
                             growController.PlayerIDs.Add(totalLocunNums[j].PlayerID);
                             growController.PouNum += 1;
+                            growController.UpdateInitState();
                             Debug.Log("树木ID为" + actRecords[i].LocNum + "的玩家ID为" + totalLocunNums[j].PlayerID + "浇水次数为" + growController.PouNum);
                         }
                     }
