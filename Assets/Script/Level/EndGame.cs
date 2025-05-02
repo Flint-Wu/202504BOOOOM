@@ -4,15 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DiasGames.Abilities;
+using DG.Tweening;
 namespace DiasGames.Controller
 {
 public class EndGame : MonoBehaviour
 {
     [Header("结算UI设置")]
     [SerializeField] private GameObject endGamePanel;
+    [SerializeField] private GameObject endGameAnimation;
+    [SerializeField] private Light RockLight;
     [SerializeField] private TextMeshProUGUI shareCodeText;
     [SerializeField] private Button copyButton;
-    
+
+    [SerializeField] private AudioClip EndBgm;
+    [SerializeField] private AudioSource BgmPlayer;
+
     [Header("可选设置")]
     [SerializeField] private string gameOverMessage = "GameOver!Share the Cheet Code To Your Friends:";
     
@@ -32,28 +38,42 @@ public class EndGame : MonoBehaviour
         // 检查是否是玩家触发
         if (other.CompareTag("Player") && !isGameOver)
         {
-                Debug.Log("ENd!");
-            ShowGameOverUI(other.gameObject);
+            Debug.Log("ENd!");
+            StopPlayerMovement(other.gameObject);
+
+            
+
+            RockLight.gameObject.SetActive(false);
+            StartCoroutine(ShowGameOverUI(other.gameObject));
         }
     }
     
-    void ShowGameOverUI(GameObject player)
+    void StopPlayerMovement(GameObject player)
     {
-        isGameOver = true;
-        
-        // 冻结玩家
-        // if (freezePlayerOnGameOver)
-        // {
+        // 停止玩家的移动和其他操作
         var playerController = player.GetComponent<CSPlayerController>();
         if (playerController)
             playerController.enabled = false;
-                
-        //     var rigidbody = player.GetComponent<Rigidbody>();
-        //     if (rigidbody)
-        //         rigidbody.isKinematic = true;
-        // }
-        //tIMESCALE = 0;
-        //Time.timeScale = 0;
+        
+        // 其他停止操作
+    }
+    void PlayEndBgm()
+    {
+        if (BgmPlayer && EndBgm)
+        {
+            // Fade out audio over 1 second
+            DOTween.To(() => BgmPlayer.volume, x => BgmPlayer.volume = x, 0, 1f)
+                .OnComplete(() => BgmPlayer.Stop());
+            BgmPlayer.clip = EndBgm;
+            BgmPlayer.Play();
+        }
+    }
+    IEnumerator ShowGameOverUI(GameObject player)
+    {
+        yield return new WaitForSeconds(30f);
+        isGameOver = true;
+        
+
         //显示鼠标
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
