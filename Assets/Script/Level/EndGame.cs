@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using DiasGames.Abilities;
 using DG.Tweening;
+using UnityEngine.Playables;
 namespace DiasGames.Controller
 {
 public class EndGame : MonoBehaviour
@@ -16,8 +17,12 @@ public class EndGame : MonoBehaviour
     [SerializeField] private TextMeshProUGUI shareCodeText;
     [SerializeField] private Button copyButton;
 
-    [SerializeField] private AudioClip EndBgm;
-    [SerializeField] private AudioSource BgmPlayer;
+    // [SerializeField] private AudioClip EndBgm;
+    // [SerializeField] private AudioSource BgmPlayer;
+    //[SerializeField] private Cinemachine.CinemachineVirtualCamera[] otherCameras;
+    //通过playableDirector控制的虚拟相机终场动画
+    [SerializeField] private PlayableDirector endGameAnimationDirector;
+
 
     [Header("可选设置")]
     [SerializeField] private string gameOverMessage = "GameOver!Share the Cheet Code To Your Friends:";
@@ -40,10 +45,20 @@ public class EndGame : MonoBehaviour
         {
             Debug.Log("ENd!");
             StopPlayerMovement(other.gameObject);
-
-            
-
             RockLight.gameObject.SetActive(false);
+            other.gameObject.SetActive(false);
+            endGameAnimation.SetActive(true);
+            AudioSource[] audioSources = FindObjectsOfType<AudioSource>();
+            foreach (AudioSource audioSource in audioSources)
+            {
+                if (audioSource != null && audioSource != endGameAnimationDirector.GetComponent<AudioSource>())
+                {
+                    audioSource.Stop();
+                }
+            }
+            endGameAnimationDirector.Play();
+            //PlayEndBgm();
+
             StartCoroutine(ShowGameOverUI(other.gameObject));
         }
     }
@@ -57,17 +72,17 @@ public class EndGame : MonoBehaviour
         
         // 其他停止操作
     }
-    void PlayEndBgm()
-    {
-        if (BgmPlayer && EndBgm)
-        {
-            // Fade out audio over 1 second
-            DOTween.To(() => BgmPlayer.volume, x => BgmPlayer.volume = x, 0, 1f)
-                .OnComplete(() => BgmPlayer.Stop());
-            BgmPlayer.clip = EndBgm;
-            BgmPlayer.Play();
-        }
-    }
+    // void PlayEndBgm()
+    // {
+    //     if (BgmPlayer && EndBgm)
+    //     {
+    //         // Fade out audio over 1 second
+    //         DOTween.To(() => BgmPlayer.volume, x => BgmPlayer.volume = x, 0, 1f)
+    //             .OnComplete(() => BgmPlayer.Stop());
+    //         // BgmPlayer.clip = EndBgm;
+    //         // BgmPlayer.Play();
+    //     }
+    // }
     IEnumerator ShowGameOverUI(GameObject player)
     {
         yield return new WaitForSeconds(30f);
