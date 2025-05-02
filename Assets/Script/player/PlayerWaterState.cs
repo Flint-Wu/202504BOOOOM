@@ -116,7 +116,7 @@ public class PlayerWaterState : MonoBehaviour
     private void CheckCriticalState()
     {
         float currentPercent = CurrentWater / MaxWater;
-        bool isNowCritical = currentPercent <= criticalThreshold;
+        bool isNowCritical = currentPercent <= criticalThreshold+Mathf.Epsilon; // ???????????????
 
         if (isNowCritical != IsInCritical)
         {
