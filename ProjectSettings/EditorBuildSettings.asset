@@ -23,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dtorm/CaveBottom.unity
     guid: 2cb8097a90a634a45abdc4690289c843
+  - enabled: 1
+    path: Assets/Scenes/Dtorm/Beginning.unity
+    guid: 484a82ba6f7dee84c9fd2e3c60251bfe
+  - enabled: 1
+    path: Assets/Scenes/Dtorm/CaveBottom2.unity
+    guid: f5499e9675c782a4abf6553041b8f131
   m_configObjects: {}

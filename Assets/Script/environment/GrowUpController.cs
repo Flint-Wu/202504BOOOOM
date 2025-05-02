@@ -5,6 +5,7 @@ using DG.Tweening;
 using DiasGames.Abilities;
 using System;
 using DiasGames.Components;
+using Microsoft.Unity.VisualStudio.Editor;
 //[ExecuteInEditMode]
 public class GrowUpController : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class GrowUpController : MonoBehaviour
     public SkinnedMeshRenderer[] smrs;
     public GameObject matureTreePrefab;
     public GameObject[] unmatureTreePrefab;
+    public GameObject annoationImage; // 注释图片
     void Start()
     {
         UpdateInitState(); // 初始化状态
@@ -83,7 +85,7 @@ public class GrowUpController : MonoBehaviour
         PouNum++;
         isPour = true;
         TreeGrowUp(); // 判断是否可以生长
-        Annotation.Instance.Reset(); // 显示注释
+        Annotation.Instance.Reset(transform.gameObject); // 显示注释
         Annotation.Instance.TreePouContributorJumpOut(PlayerIDs); // 显示注释
         Annotation.Instance.singleContributorJumpOut(FindAnyObjectByType<MadeID>().ID, "pourSeed"); // 显示水果注释
         GetComponent<ActRecord>().LocState = "1"; // 设置记录仪的状态为钉子

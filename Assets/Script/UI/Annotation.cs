@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
+using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 
@@ -30,6 +30,15 @@ public class Annotation : MonoBehaviour
     void Update()
     {
         
+    }
+    public void Reset(GameObject selfObject)
+    {
+        annotationText.text = ""; // 重置UI文本
+        if(selfObject.GetComponentInChildren<Image>() != null)
+        {
+            Image image = selfObject.GetComponent<GrowUpController>().annoationImage.GetComponent<Image>();
+            image.gameObject.SetActive(false); // 显示UI
+        }
     }
     public void Reset()
     {
@@ -94,10 +103,13 @@ public class Annotation : MonoBehaviour
         rectTransform.GetComponentInChildren<TextMeshProUGUI>().text = playerID;
     }
 
-    public void AnnotationPourWater()
+    public void AnnotationPourWater(GameObject selfObject)
     {
         //遍历所有材质球
         annotationText.text = "press E to pour water"; // 更新UI文本
+        Image image = selfObject.GetComponent<GrowUpController>().annoationImage.GetComponent<Image>();
+        image.gameObject.SetActive(true); // 显示UI
+        
     }
 
     public void AnnotationRecoverOnTree()

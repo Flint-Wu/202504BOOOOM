@@ -68,7 +68,7 @@ public class InteractionManger : AbstractAbility
                 }
                 else
                 {
-                    Annotation.Instance.AnnotationPourWater(); // Show the annotation for the interactable object
+                    Annotation.Instance.AnnotationPourWater(currentInteractableObject); // Show the annotation for the interactable object
                 }
             }
             else if(currentInteractableObject.GetComponentInChildren<WaterBottleFruit>() != null)
