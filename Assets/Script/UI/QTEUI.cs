@@ -34,6 +34,8 @@ namespace DiasGames.Abilities
         public float PlayerPointPeiod = 3f;
         [Header("QTE条出现的初始位置限制")]
         public float StartPercentage = 0.2f;
+        public float EndPercentage = 0.2f;
+
         public bool isPlayerJudge = false;
         public float _clicktime = 0f;
         public bool isClicking = false;
@@ -164,7 +166,7 @@ namespace DiasGames.Abilities
             float QTEAccuracy = characterStrength.currentPhysicalStrength / characterStrength.maxPhysicalStrength*BaseQTEAccuracy;
             QTEAccuracy = Mathf.Clamp(QTEAccuracy, 0.05f, BaseQTEAccuracy);
 
-            QTECorretBarHeightRange[0] = Random.Range(QTEBaseBarHeight*StartPercentage, QTEBaseBarHeight * (1 - QTEAccuracy));
+            QTECorretBarHeightRange[0] = Random.Range(QTEBaseBarHeight*StartPercentage, QTEBaseBarHeight * (1 - QTEAccuracy-EndPercentage));
             QTECorretBarHeightRange[1] = QTECorretBarHeightRange[0] + QTEBaseBarHeight * QTEAccuracy;
             CorretBar.rectTransform.anchoredPosition = new Vector2(CorretBar.rectTransform.anchoredPosition.x,QTECorretBarHeightRange[0]);
             CorretBar.rectTransform.sizeDelta = new Vector2(CorretBar.rectTransform.sizeDelta.x,QTEAccuracy*BaseBar.rectTransform.sizeDelta.y);
