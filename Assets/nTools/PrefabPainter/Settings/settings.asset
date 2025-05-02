@@ -1699,8 +1699,8 @@ MonoBehaviour:
       customPreviewImage: {fileID: 0}
     - name: grass
       settings:
-        brushRadius: 8
-        brushSpacing: 3
+        brushRadius: 0.1
+        brushSpacing: 0.25
         brushOverlapCheckMode: 0
         brushOverlapDistance: 0.5
         brushOverlapCheckObjects: 1
@@ -1733,13 +1733,13 @@ MonoBehaviour:
         throwVelocity: 0
         throwRandomRotation: {x: 0, y: 0, z: 0}
         throwScaleMinMax: {x: 1, y: 1}
-        multibrushEnabled: 0
+        multibrushEnabled: 1
         multibrushSlots:
         - enabled: 1
           raiting: 1
           position: {x: 0, y: 0, z: 0}
           rotation: {x: 0, y: 0, z: 0}
-          scale: {x: 1, y: 1, z: 1}
+          scale: {x: 0.2, y: 0.2, z: 0.2}
           pivotMode: 0
           pivotOffset: {x: 0, y: 0, z: 0}
         - enabled: 1
@@ -1822,11 +1822,11 @@ MonoBehaviour:
         gridNormal: {x: 0, y: 1, z: 0}
         gridAngle: 0
       prefabSlots:
-      - gameObject: {fileID: 112622, guid: 061faed207d7a4b52b09b4f68119bae4, type: 3}
-      - gameObject: {fileID: 0}
-      - gameObject: {fileID: 0}
-      - gameObject: {fileID: 0}
-      - gameObject: {fileID: 0}
+      - gameObject: {fileID: 7041524894723146511, guid: 47d875f05ed0b4844aa13056ae90a3ab, type: 3}
+      - gameObject: {fileID: 8437445496621860718, guid: 30c0241b9729d25449abe5b25163c31f, type: 3}
+      - gameObject: {fileID: 6484868739537162789, guid: 6ac0ef05ff646f34a8d50930926ed6c6, type: 3}
+      - gameObject: {fileID: 6665402085105312324, guid: b062743571cdc2e4c8cd3f49b3d7302a, type: 3}
+      - gameObject: {fileID: 859628028721909410, guid: 6a1de65e23f578e448b9fc6ccbee1783, type: 3}
       - gameObject: {fileID: 0}
       - gameObject: {fileID: 0}
       - gameObject: {fileID: 0}
@@ -2118,7 +2118,7 @@ MonoBehaviour:
       - gameObject: {fileID: 0}
       - gameObject: {fileID: 0}
       selectedSlot: 0
-      selected: 0
+      selected: 1
       colorTag: 0
       customPreviewImage: {fileID: 0}
     - name: box
@@ -3008,7 +3008,7 @@ MonoBehaviour:
     brushes:
     - name: PatchTulip02
       settings:
-        brushRadius: 1
+        brushRadius: 0.2
         brushSpacing: 0.5
         brushOverlapCheckMode: 0
         brushOverlapDistance: 0.5
@@ -3026,8 +3026,8 @@ MonoBehaviour:
         randomizeOrientationZ: 0
         scaleTransformMode: 0
         scaleMode: 0
-        scaleUniformMin: 1
-        scaleUniformMax: 1
+        scaleUniformMin: 0.2
+        scaleUniformMax: 0.2
         scalePerAxisMin: {x: 1, y: 1, z: 1}
         scalePerAxisMax: {x: 1, y: 1, z: 1}
         pinFixedRotation: 0
@@ -3055,7 +3055,7 @@ MonoBehaviour:
           raiting: 1
           position: {x: 0, y: 0, z: 0}
           rotation: {x: 0, y: 0, z: 0}
-          scale: {x: 1, y: 1, z: 1}
+          scale: {x: 0.2, y: 0.2, z: 0.2}
           pivotMode: 0
           pivotOffset: {x: 1, y: 1, z: 1}
         - enabled: 1
@@ -3330,10 +3330,10 @@ MonoBehaviour:
   paintOnSelected: 0
   paintLayers:
     serializedVersion: 2
-    m_Bits: 1015859
+    m_Bits: 2064435
   ignoreLayers:
     serializedVersion: 2
-    m_Bits: 4
+    m_Bits: 6
   placeUnder: 2
   overwritePrefabLayer: 0
   prefabPlaceLayer: 0

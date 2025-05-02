@@ -108,8 +108,8 @@ public class Annotation : MonoBehaviour
         //遍历所有材质球
         annotationText.text = "press E to pour water"; // 更新UI文本
         Image image = selfObject.GetComponent<GrowUpController>().annoationImage.GetComponent<Image>();
-        image.gameObject.SetActive(true); // 显示UI
-        
+        if(image.gameObject.activeSelf == false)
+            image.gameObject.SetActive(true); // 显示UI        
     }
 
     public void AnnotationRecoverOnTree()
