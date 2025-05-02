@@ -93,6 +93,6 @@ Material:
     - _ReflectionTint: {r: 0.5893166, g: 0.8005236, b: 0.8014706, a: 1}
     - _ShoreColor: {r: 0.39716026, g: 0.64705884, b: 0, a: 1}
     - _SpecColor: {r: 0.28676468, g: 0.28676468, b: 0.28676468, a: 1}
-    - _SurfaceColor: {r: 0, g: 0.1619168, b: 0.22794116, a: 1}
+    - _SurfaceColor: {r: 0.18689923, g: 0.29262075, b: 0.4245283, a: 1}
     - _WavesSpeed: {r: 0.3, g: 0.2, b: -0.1, a: -0.25}
   m_BuildTextureStacks: []
