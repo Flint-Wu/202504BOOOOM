@@ -218,10 +218,10 @@ namespace DiasGames.Controller
             Crouch = Input.GetButton("Fire2");
             Crawl = Input.GetButtonDown("Fire2");
             Zoom = Input.GetButtonDown("Fire2");
-            Interact = Input.GetButtonDown("Interact");
+            //Interact = Input.GetButtonDown("Interact");
 
             // special actions for climbing
-            Drop = Input.GetButtonDown("Drop");
+            //Drop = Input.GetButtonDown("Drop");
             Fire = Input.GetButtonDown("Fire");
 
             /*
