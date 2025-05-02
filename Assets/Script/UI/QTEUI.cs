@@ -13,7 +13,7 @@ namespace DiasGames.Abilities
         [Header("QTE条的基础条")]
         [SerializeField] private Image BaseBar;
         [Header("QTE条的正确条")]
-        // [SerializeField] private Image[] OtherImage;
+        [SerializeField] private Image[] OtherImage;
         [SerializeField] private Image CorretBar;
         [Header("正确QTE跳出的精灵")]
         [SerializeField] private Image CorrectSprite;
@@ -104,7 +104,7 @@ namespace DiasGames.Abilities
             // 停止所有协程（包括正在运行的DisableBar协程）
         StopAllCoroutines();
 
-        Image[] uiElements = { BaseBar, CorretBar, Playerpoint};
+        Image[] uiElements = { BaseBar, CorretBar, Playerpoint, OtherImage[0], OtherImage[1]};
             
             foreach (Image uiElement in uiElements)
             {
@@ -133,8 +133,8 @@ namespace DiasGames.Abilities
             if (!isBarVisible) yield break;
             
             // 应用淡出效果
-            // OtherImage[0].DOFade(0, 0.5f).SetEase(Ease.OutSine).OnComplete(() => OtherImage[0].gameObject.SetActive(false));
-            // OtherImage[1].DOFade(0, 0.5f).SetEase(Ease.OutSine).OnComplete(() => OtherImage[1].gameObject.SetActive(false));
+            OtherImage[0].DOFade(0, 0.5f).SetEase(Ease.OutSine).OnComplete(() => OtherImage[0].gameObject.SetActive(false));
+            OtherImage[1].DOFade(0, 0.5f).SetEase(Ease.OutSine).OnComplete(() => OtherImage[1].gameObject.SetActive(false));
             BaseBar.DOFade(0, 0.5f).SetEase(Ease.OutSine).OnComplete(() => BaseBar.gameObject.SetActive(false));
             CorretBar.DOFade(0, 0.5f).SetEase(Ease.OutSine).OnComplete(() => CorretBar.gameObject.SetActive(false));
             //如果CorrectSprite active,就隐藏
