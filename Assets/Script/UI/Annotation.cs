@@ -10,8 +10,10 @@ public class Annotation : MonoBehaviour
     // Start is called before the first frame update
     public static Annotation Instance;
     public TextMeshProUGUI annotationText; // 显示注释的UI文本
-    public GameObject waterFruitAnnotationUI; // 水果注释UI
-    public GameObject treePourAnnotationUI; // 倒水注释UI
+    public GameObject waterFruitAnnotationUI; // 拿取水果注释UI
+    public GameObject nailAnnotationUI; // 钉子注释UI
+    public GameObject pourSeedAnnotationUI; // 水果注释UI
+    public GameObject recoverOnTreeAnnotationUI; // 恢复到树上的注释UI
     public TextMeshProUGUI playerIDtext;
     void Start()
     {
@@ -40,11 +42,11 @@ public class Annotation : MonoBehaviour
     }
     public void TreePouContributorJumpOut(List<string> playerIDs)
     {
-        //遍历所有材质球
+        //显示所有给树浇水的玩家ID
         EffectSoundController.Instance.PlaySpecailAudioClip();
         string playerID = string.Join(",", playerIDs); // 将玩家ID数组转换为字符串
         //treePourAnnotationUI.SetActive(true); // 隐藏水果注释UI
-        RectTransform rectTransform = treePourAnnotationUI.GetComponent<RectTransform>();
+        RectTransform rectTransform = recoverOnTreeAnnotationUI.GetComponent<RectTransform>();
         float originalPosX = rectTransform.anchoredPosition.x; // 获取UI原始位置
         rectTransform.DOKill(true); // 杀死之前的动画，避免重叠
         Sequence sequence = DOTween.Sequence(); // 创建序列
@@ -52,14 +54,31 @@ public class Annotation : MonoBehaviour
         sequence.AppendInterval(2.0f); // 2. 停留2秒
         sequence.Append(rectTransform.DOAnchorPosX(originalPosX, 0.5f).SetEase(Ease.InBack)); // 3. 返回原始位置
         // 设置文本
-        treePourAnnotationUI.GetComponentInChildren<TextMeshProUGUI>().text = playerID; // 更新UI文本
+        recoverOnTreeAnnotationUI.GetComponentInChildren<TextMeshProUGUI>().text = playerID; // 更新UI文本
     }
 
-    public void waterFruitContributorJumpOut(string playerID)
+    public void singleContributorJumpOut(string playerID,string type)
     {
         // 获取UI原始位置
         EffectSoundController.Instance.PlaySpecailAudioClip();
-        RectTransform rectTransform = waterFruitAnnotationUI.GetComponent<RectTransform>();
+        RectTransform rectTransform;
+        if (type == "waterFruit")
+        {
+            rectTransform = waterFruitAnnotationUI.GetComponent<RectTransform>();
+        }
+        else if (type == "nail")
+        {
+            rectTransform = nailAnnotationUI.GetComponent<RectTransform>();
+        }
+        else if (type == "pourSeed")
+        {
+            rectTransform = pourSeedAnnotationUI.GetComponent<RectTransform>();
+        }
+        else
+        {
+            Debug.LogError("Invalid type: " + type);
+            return;
+        }
         float originalPosX = rectTransform.anchoredPosition.x;
         // 杀死之前的动画，避免重叠
         rectTransform.DOKill(true);
@@ -72,7 +91,7 @@ public class Annotation : MonoBehaviour
         // 3. 返回原始位置
         sequence.Append(rectTransform.DOAnchorPosX(originalPosX, 0.5f).SetEase(Ease.InBack));
         // 设置文本
-        waterFruitAnnotationUI.GetComponentInChildren<TextMeshProUGUI>().text = playerID;
+        rectTransform.GetComponentInChildren<TextMeshProUGUI>().text = playerID;
     }
 
     public void AnnotationPourWater()

@@ -85,6 +85,7 @@ public class GrowUpController : MonoBehaviour
         TreeGrowUp(); // 判断是否可以生长
         Annotation.Instance.Reset(); // 显示注释
         Annotation.Instance.TreePouContributorJumpOut(PlayerIDs); // 显示注释
+        Annotation.Instance.singleContributorJumpOut(FindAnyObjectByType<MadeID>().ID, "pourSeed"); // 显示水果注释
         GetComponent<ActRecord>().LocState = "1"; // 设置记录仪的状态为钉子
         CharacterAudioPlayer.Instance.PlayPourWaterAudioClip(); // 播放浇水的音效
         EffectSoundController.Instance.PlayPourTreeAudioClip(PouNum); // 播放浇水的音效
@@ -99,6 +100,7 @@ public class GrowUpController : MonoBehaviour
         player.GetComponent<PlayerPhysicalStrength>().currentPhysicalStrength = player.GetComponent<PlayerPhysicalStrength>().maxPhysicalStrength;
         isTrigerEffect = true;
         Annotation.Instance.Reset(); // 显示注释
+        Annotation.Instance.TreePouContributorJumpOut(PlayerIDs); // 显示注释
         CharacterAudioPlayer.Instance.PlayUseTreeAudioClip(); // 播放使用树的音效
     }
 

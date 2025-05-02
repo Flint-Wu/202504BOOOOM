@@ -42,7 +42,7 @@ public class WaterBottleFruit : MonoBehaviour
             // 销毁水果对象
             fruitPrefab.SetActive(false); // 隐藏水果对象
             Annotation.Instance.Reset(); // 显示注释 
-            Annotation.Instance.waterFruitContributorJumpOut(PlayerID); // 显示水果注释
+            Annotation.Instance.singleContributorJumpOut(PlayerID,"waterFruit"); // 显示水果注释
             EffectSoundController.Instance.PlayRecoverWaterAudioClip(); // 播放获取水音效
             CharacterAudioPlayer.Instance.PlayUseFruitAudioClip(); // 播放获取水果音效
             this.gameObject.SetActive(false); // 隐藏水果对象

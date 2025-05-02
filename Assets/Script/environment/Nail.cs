@@ -66,7 +66,7 @@ public class Nail : MonoBehaviour
         GameObject vfx = Instantiate(fruitAppearVfx, immatureFruit.transform.position, Quaternion.identity);
         vfx.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         immatureFruit.SetActive(true);
-        Annotation.Instance.waterFruitContributorJumpOut(playerID); // 显示水果注释UI
+        //Annotation.Instance.waterFruitContributorJumpOut(playerID); // 显示水果注释UI
     }
     void OnTriggerExit(Collider other)
     {
