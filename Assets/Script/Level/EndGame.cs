@@ -13,6 +13,8 @@ public class EndGame : MonoBehaviour
     [Header("结算UI设置")]
     [SerializeField] private GameObject endGamePanel;
     [SerializeField] private GameObject endGameAnimation;
+    [SerializeField] private GameObject playercanvas;
+    [SerializeField] private Liquid waterComponent;
     [SerializeField] private Light RockLight;
     [SerializeField] private TextMeshProUGUI shareCodeText;
     [SerializeField] private Button copyButton;
@@ -22,6 +24,7 @@ public class EndGame : MonoBehaviour
     //[SerializeField] private Cinemachine.CinemachineVirtualCamera[] otherCameras;
     //通过playableDirector控制的虚拟相机终场动画
     [SerializeField] private PlayableDirector endGameAnimationDirector;
+    public GameObject endGameBlackScreen;
 
 
     [Header("可选设置")]
@@ -38,6 +41,22 @@ public class EndGame : MonoBehaviour
         // 添加复制按钮事件监听
     }
     
+
+    void SetWaterAmount(GameObject player)
+    {
+        //找到active的液体对象并设置水量
+    // 找到激活的Water组件并设置水量
+        if (waterComponent != null)
+        {
+            
+            float currentPercent = player.GetComponentInChildren<Liquid>().fillAmount;
+            waterComponent.SetFillAmount(currentPercent); // 设置水量
+        }
+        else
+        {
+            Debug.LogWarning("没有找到激活的Water组件");
+        }
+    }
     void OnTriggerEnter(Collider other)
     {
         // 检查是否是玩家触发
@@ -45,18 +64,39 @@ public class EndGame : MonoBehaviour
         {
             Debug.Log("ENd!");
             StopPlayerMovement(other.gameObject);
-            RockLight.gameObject.SetActive(false);
-            other.gameObject.SetActive(false);
-            endGameAnimation.SetActive(true);
+            
+            
+            
+            //黑屏Dofade
+            endGameBlackScreen.gameObject.SetActive(true);
+            endGameBlackScreen.GetComponent<Image>().DOColor(new Color(0, 0, 0, 1), 1.5f).SetEase(Ease.Linear).OnComplete(() =>
+            {
+                RockLight.gameObject.SetActive(false);
+                playercanvas.SetActive(false);
+                endGameAnimation.SetActive(true);
+                SetWaterAmount(other.gameObject);
+                other.gameObject.SetActive(false);
+                endGameBlackScreen.GetComponent<Image>().DOColor(new Color(0, 0, 0, 0), 2f).SetEase(Ease.Linear).OnComplete(() =>
+                {
+
+                    endGameBlackScreen.gameObject.SetActive(false);
+                });
+            });
+            //播放结算动画
             AudioSource[] audioSources = FindObjectsOfType<AudioSource>();
             foreach (AudioSource audioSource in audioSources)
             {
                 if (audioSource != null && audioSource != endGameAnimationDirector.GetComponent<AudioSource>())
                 {
-                    audioSource.Stop();
+                    //音量渐变到0
+                    audioSource.DOFade(0, 2f).OnComplete(() =>
+                    {
+                        audioSource.Stop();
+                        audioSource.volume = 1f; // 恢复音量
+                        endGameAnimationDirector.Play();
+                    });
                 }
             }
-            endGameAnimationDirector.Play();
             //PlayEndBgm();
 
             StartCoroutine(ShowGameOverUI(other.gameObject));

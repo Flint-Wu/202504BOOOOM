@@ -28,7 +28,7 @@ public class BottleOutLine : MonoBehaviour
     
     void OnDestroy()
     {
-        // 移除监听器，避免内存泄漏
+        // 移除监听器，避免内存泄漏wwwwwww
         if (playerWaterState != null)
         {
             playerWaterState.OnWaterCritical.RemoveListener(WarningOutline);
