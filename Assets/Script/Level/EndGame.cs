@@ -176,5 +176,16 @@ public class EndGame : MonoBehaviour
         
         copyButton.GetComponentInChildren<TextMeshProUGUI>().text = originalText;
     }
+
+    public void ExitGame()
+    {
+        // 退出游戏
+        Application.Quit();
+        
+        // 如果在编辑器中运行，则停止播放
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+    }
 }
 }

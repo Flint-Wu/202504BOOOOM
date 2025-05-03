@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Dtorm/LevelTest2.unity
     guid: 63937bb22cb9fdf478a2928d088a31ad
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Dtorm/CaveBottom.unity
     guid: 2cb8097a90a634a45abdc4690289c843
   - enabled: 1

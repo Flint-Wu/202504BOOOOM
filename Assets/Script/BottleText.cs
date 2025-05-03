@@ -38,7 +38,7 @@ public class BottleText : MonoBehaviour
 
         if(LocunNums.Count() < Bottles.Count())
         {
-            string[] Member = new string[] {"HajimaSian","Dtorm", "Enoch", "Fish" };
+            string[] Member = new string[] {"HajimaSian","Dtorm", "Enoch", "Fish","LIN","yrll","Fuyu","Luyan","nidaye","JinYue"};
             List<string> Members = new List<string> ();
 
             for (int i = 0; i < Member.Length; i++)
