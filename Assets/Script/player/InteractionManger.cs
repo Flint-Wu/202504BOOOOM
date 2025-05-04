@@ -37,14 +37,23 @@ public class InteractionManger : AbstractAbility
     void Update()
     {
         //检测InteractDistance所有挂载CanBeInteract脚本的物体
+        currentInteractableObject = null; // Reset the current interactable object
         Collider[] colliders = Physics.OverlapBox(InteractZone.transform.position, InteractZone.size, Quaternion.identity); // Get all colliders in the interaction zone
-
+        Annotation.Instance.Reset(); // Reset the annotation if no interactable object is found
+        
+        //所有挂载CanBeInteract脚本的物体BeSelect为false
+        CanBeInteract[] canBeInteracts = FindObjectsOfType<CanBeInteract>(); // Get all CanBeInteract components in the scene
+        for (int i = 0; i < canBeInteracts.Length; i++)
+        {
+            canBeInteracts[i].BeSelect = false; // Set all CanBeInteract objects to not selectable
+        }
         for (int i = 0; i < colliders.Length; i++)
         {
             if (colliders[i].GetComponent<CanBeInteract>() != null)
             {
                 if (colliders[i].GetComponent<CanBeInteract>().BeInteract) continue; // Skip if the object is not interactable
                 currentInteractableObject = colliders[i].gameObject; //获取当前可互动的物体
+                currentInteractableObject.GetComponent<CanBeInteract>().BeSelect = true; // Set the object to be selectable
                 Debug.Log("当前可互动的物体: " + currentInteractableObject.name); // Log the name of the interactable object
                 break; // Exit the loop after finding the first interactable object
             }
@@ -55,7 +64,6 @@ public class InteractionManger : AbstractAbility
         }
         if (currentInteractableObject == null) 
         {
-            Annotation.Instance.Reset(); // Reset the annotation if no interactable object is found
             return; // Exit if no interactable object is found
         }
         else

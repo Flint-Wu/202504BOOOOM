@@ -18,6 +18,8 @@ public class EndGame : MonoBehaviour
     [SerializeField] private Light RockLight;
     [SerializeField] private TextMeshProUGUI shareCodeText;
     [SerializeField] private Button copyButton;
+    [SerializeField] private GameObject PostProcess;
+
 
     // [SerializeField] private AudioClip EndBgm;
     // [SerializeField] private AudioSource BgmPlayer;
@@ -71,6 +73,7 @@ public class EndGame : MonoBehaviour
             endGameBlackScreen.gameObject.SetActive(true);
             endGameBlackScreen.GetComponent<Image>().DOColor(new Color(0, 0, 0, 1), 1.5f).SetEase(Ease.Linear).OnComplete(() =>
             {
+                PostProcess.SetActive(false);
                 RockLight.gameObject.SetActive(false);
                 playercanvas.SetActive(false);
                 endGameAnimation.SetActive(true);

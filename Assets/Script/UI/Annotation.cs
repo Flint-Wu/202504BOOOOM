@@ -34,11 +34,7 @@ public class Annotation : MonoBehaviour
     public void Reset(GameObject selfObject)
     {
         annotationText.text = ""; // 重置UI文本
-        if(selfObject.GetComponentInChildren<Image>() != null)
-        {
-            Image image = selfObject.GetComponent<GrowUpController>().annoationImage.GetComponent<Image>();
-            image.gameObject.SetActive(false); // 显示UI
-        }
+
     }
     public void Reset()
     {
@@ -47,7 +43,7 @@ public class Annotation : MonoBehaviour
     public void AnnotationFruit()
     {
         //遍历所有材质球
-        annotationText.text = "press E to pick up the fruit"; // 更新UI文本
+        annotationText.text = "按 E 拾取回水果实"; // 更新UI文本
     }
     public void TreePouContributorJumpOut(List<string> playerIDs)
     {
@@ -106,7 +102,7 @@ public class Annotation : MonoBehaviour
     public void AnnotationPourWater(GameObject selfObject)
     {
         //遍历所有材质球
-        annotationText.text = "press E to pour water"; // 更新UI文本
+        annotationText.text = "按 E 给树浇水"; // 更新UI文本
         Image image = selfObject.GetComponent<GrowUpController>().annoationImage.GetComponent<Image>();
         if(image.gameObject.activeSelf == false)
             image.gameObject.SetActive(true); // 显示UI        
@@ -115,6 +111,6 @@ public class Annotation : MonoBehaviour
     public void AnnotationRecoverOnTree()
     {
         //遍历所有材质球
-        annotationText.text = "press E to Recover On Tree"; // 更新UI文本
+        annotationText.text = "按 E 在树上恢复体力"; // 更新UI文本
     }
 }
